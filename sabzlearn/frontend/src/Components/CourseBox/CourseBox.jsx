@@ -2,20 +2,20 @@ import React from 'react'
 
 import './CourseBox.css'
 
-export default function CourseBox() {
+export default function CourseBox({img,title,instructor,participants,price}) {
   return (
     <div class="col-12 col-sm-4">
               <div class="course-box">
                 <a href="#">
-                  <img src="images/courses/fareelancer.png" alt="Course img" class="course-box__img" />
+                  <img src={img} alt="Course img" class="course-box__img" />
                 </a>
                 <div class="course-box__main">
-                  <a href="#" class="course-box__title">دوره پروژه محور متخصص جنگو</a>
+                  <a href="#" class="course-box__title">{title}</a>
 
                   <div class="course-box__rating-teacher">
                     <div class="course-box__teacher">
                       <i class="fas fa-chalkboard-teacher course-box__teacher-icon"></i>
-                      <a href="#" class="course-box__teacher-link">رضا دولتی</a>
+                      <a href="#" class="course-box__teacher-link">{instructor}</a>
                     </div>
                     <div class="course-box__rating">
                       <img src="images/svgs/star.svg" alt="rating" class="course-box__star"/>
@@ -29,9 +29,9 @@ export default function CourseBox() {
                   <div class="course-box__status">
                     <div class="course-box__users">
                       <i class="fas fa-users course-box__users-icon"></i>
-                      <span class="course-box__users-text">500</span>
+                      <span class="course-box__users-text">{participants}</span>
                     </div>
-                    <span class="course-box__price">1,000,000</span>
+                    <span class="course-box__price">{price}</span>
                   </div>
                 </div>
 

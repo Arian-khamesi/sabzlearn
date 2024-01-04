@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import './LastCourses.css';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import CourseBox from '../CourseBox/CourseBox';
 
+import prototypeData from '../../prototypeData/prototypeData';
+
+
 export default function LastCourses() {
+
     return (
         <div class="courses">
             <div class="container">
@@ -16,12 +20,16 @@ export default function LastCourses() {
                 <div class="courses-content">
                     <div class="container">
                         <div class="row">
-                            <CourseBox/>
-                            <CourseBox/>
-                            <CourseBox/>
-                            <CourseBox/>
-                            <CourseBox/>
-                            <CourseBox/>
+                            {prototypeData.map((data) => 
+                                <CourseBox
+                                    img={data.img}
+                                    title={data.title}
+                                    instructor={data.instructor}
+                                    participants={data.participants}
+                                    price={data.price}
+                                    key={data.id}
+                                />
+                            )}
                         </div>
                     </div>
                 </div>
