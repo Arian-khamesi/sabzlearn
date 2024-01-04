@@ -17,10 +17,18 @@ export default function AboutUs() {
             </div>
             <div class="container">
                 <div class="row">
-                    <AboutUsBox/>
-                    <AboutUsBox/>
-                    <AboutUsBox/>
-                    <AboutUsBox/>
+                    <AboutUsBox
+                        title={"دوره های اختصاصی"}
+                        descrip={'با پشتیبانی و کیفیت بالا ارائه میده !'} />
+                    <AboutUsBox
+                        title={'اجازه تدریس'}
+                        descrip={'به هر مدرسی رو نمیده . چون کیفیت براش مهمه !'} />
+                    <AboutUsBox
+                        title={'دوره پولی و رایگان'}
+                        descrip={'براش مهم نیست. به مدرسینش حقوق میده تا نهایت کیفیت رو در پشتیبانی و اپدیت دوره ارائه بده'} />
+                    <AboutUsBox
+                        title={'اهمیت به کاربر'}
+                        descrip={'اولویت اول و آخر آکادمی آموزش برنامه نویسی سبزلرن اهمیت به کاربرها رفع نیاز های آموزشی و رسوندن اونها به بازار کار هست'} />
                 </div>
             </div>
         </>
