@@ -9,7 +9,7 @@ export default function SectionHeader({ title, descrip, btnTitle }) {
                 <span class="courses-header__title title">{title}</span>
                 <span class="courses-header__text">{descrip}</span>
             </div>
-            {btnTitle.length ? (<div class="courses-header__left">
+            {btnTitle ? (<div class="courses-header__left">
                 <a href="#" class="courses-header__link">
                     <span>{btnTitle}</span>
                     <i class="fas fa-arrow-left courses-header__icon"></i>
