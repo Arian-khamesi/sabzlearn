@@ -16,9 +16,22 @@ export default function LastArticles() {
 
                 <div class="articles__content">
                     <div class="row">
-                        <ArticleBox />
-                        <ArticleBox />
-                        <ArticleBox />
+                        <ArticleBox
+                            title={'نحوه نصب کتابخانه در پایتون | آموزش نصب کتابخانه پایتون'}
+                            descrip={'زبان پایتون هم مانند دیگر زبان­های برنامه نویسی رایج، دارای کتابخانه های مختلفی برای تسریع...'}
+                            cover={'images/blog/3.jpg'}
+                        />
+                        <ArticleBox
+                            title={'نحوه نصب کتابخانه در پایتون | آموزش نصب کتابخانه پایتون'}
+                            descrip={'زبان پایتون هم مانند دیگر زبان­های برنامه نویسی رایج، دارای کتابخانه های مختلفی برای تسریع...'}
+                            cover={'images/blog/3.jpg'}
+                        />
+                        <ArticleBox
+                            title={'نحوه نصب کتابخانه در پایتون | آموزش نصب کتابخانه پایتون'}
+                            descrip={'زبان پایتون هم مانند دیگر زبان­های برنامه نویسی رایج، دارای کتابخانه های مختلفی برای تسریع...'}
+                            cover={'images/blog/3.jpg'}
+                        />
+
                     </div>
                 </div>
 
