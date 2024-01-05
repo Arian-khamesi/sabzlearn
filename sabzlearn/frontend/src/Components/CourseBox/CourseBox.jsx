@@ -18,11 +18,11 @@ export default function CourseBox({img,title,instructor,participants,price}) {
                       <a href="#" class="course-box__teacher-link">{instructor}</a>
                     </div>
                     <div class="course-box__rating">
-                      <img src="images/svgs/star.svg" alt="rating" class="course-box__star"/>
-                      <img src="images/svgs/star_fill.svg" alt="rating" class="course-box__star"/>
-                      <img src="images/svgs/star_fill.svg" alt="rating" class="course-box__star"/>
-                      <img src="images/svgs/star_fill.svg" alt="rating" class="course-box__star"/>
-                      <img src="images/svgs/star_fill.svg" alt="rating" class="course-box__star"/>
+                      <img src="/images/svgs/star.svg" alt="rating" class="course-box__star"/>
+                      <img src="/images/svgs/star_fill.svg" alt="rating" class="course-box__star"/>
+                      <img src="/images/svgs/star_fill.svg" alt="rating" class="course-box__star"/>
+                      <img src="/images/svgs/star_fill.svg" alt="rating" class="course-box__star"/>
+                      <img src="/images/svgs/star_fill.svg" alt="rating" class="course-box__star"/>
                     </div>
                   </div>
 
