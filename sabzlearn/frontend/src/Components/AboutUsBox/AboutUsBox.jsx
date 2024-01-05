@@ -4,7 +4,7 @@ import './AboutUsBox.css'
 
 export default function AboutUsBox({title,descrip}) {
   return (
-    <div class="col-6">
+    <div class="col-12 col-sm-6">
             <div class="about-us__box">
               <div class="about-us__box-right">
                 <i class="far fa-copyright about-us__icon"></i>
