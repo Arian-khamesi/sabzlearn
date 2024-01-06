@@ -5,6 +5,7 @@ import TopBar from '../../Components/TopBar/TopBar'
 import NavBar from '../../Components/NavBar/NavBar'
 import Footer from '../../Components/Footer/Footer'
 import BreadCrumb from '../../Components/BreadCrumb/BreadCrumb'
+import CourseMainInfo from '../../Components/CourseMainInfo/CourseMainInfo'
 
 export default function CourseInfo() {
   return (
@@ -19,6 +20,8 @@ export default function CourseInfo() {
         {id:3,title:'دوره متخصص جاوااسکریپت',to:'/course-info/js-expert'},
       ]
     }/>
+
+    <CourseMainInfo/>
     
     <Footer/>
     </>
