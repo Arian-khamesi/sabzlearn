@@ -32,12 +32,31 @@ export default function CourseInfo() {
                 <div class="course-boxes">
                   <div class="row">
 
-                    <CourseDetailsBox />
-                    <CourseDetailsBox />
-                    <CourseDetailsBox />
-                    <CourseDetailsBox />
-                    <CourseDetailsBox />
-                    <CourseDetailsBox />
+                    <CourseDetailsBox
+                    title={'وضعیت دوره'}
+                    text={'به اتمام رسیده'}
+                    icon={'-graduation-cap'} />
+                    <CourseDetailsBox
+                    title={'مدت زمان دوره'}
+                    text={'19 ساعت'}
+                    icon={'-clock'} />
+                    <CourseDetailsBox
+                    title={'آخرین بروزرسانی:'}
+                    text={'1401/03/02'}
+                    icon={'-calendar-alt'} />
+                    <CourseDetailsBox
+                    title={'روش پشتیبانی'}
+                    text={'آنلاین'}
+                    icon={'-user-alt'} />
+                    <CourseDetailsBox
+                    title={'پیش نیاز :'}
+                    text={'HTML / CSS'}
+                    icon={'-info-circle'} />
+                    <CourseDetailsBox
+                    title={':نوع مشاهده'}
+                    text={'ضبط شده / آنلاین'}
+                    icon={'-play'} />
+                   
 
                   </div>
                 </div>
