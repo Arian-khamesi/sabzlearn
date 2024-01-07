@@ -6,6 +6,7 @@ import TopBar from '../../Components/TopBar/TopBar'
 import NavBar from '../../Components/NavBar/NavBar'
 import Footer from '../../Components/Footer/Footer'
 import BreadCrumb from '../../Components/BreadCrumb/BreadCrumb'
+import ArticleInfoSideBar from '../../Components/ArticleInfoSideBar/ArticleInfoSideBar'
 
 export default function ArticleInfo() {
   return (
@@ -170,6 +171,7 @@ export default function ArticleInfo() {
               </div>
 
             </div>
+            <ArticleInfoSideBar/>
           </div>
         </div>
       </main>
