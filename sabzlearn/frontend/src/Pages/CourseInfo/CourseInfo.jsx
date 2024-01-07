@@ -8,6 +8,7 @@ import BreadCrumb from '../../Components/BreadCrumb/BreadCrumb'
 import CourseMainInfo from '../../Components/CourseMainInfo/CourseMainInfo'
 import CourseDetailsBox from '../../Components/CourseDetailsBox/CourseDetailsBox'
 import CourseInfoSideBar from '../../Components/CourseInfoSideBar/CourseInfoSideBar'
+import CommentsTextArea from '../../Components/CommentsTextArea/CommentsTextArea'
 
 export default function CourseInfo() {
   return (
@@ -222,6 +223,8 @@ export default function CourseInfo() {
                 </div>
 
                 {/* Finish Teacher Details  */}
+
+                <CommentsTextArea/>
 
               </div>
             </div>
