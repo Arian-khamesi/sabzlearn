@@ -7,7 +7,7 @@ export default function CourseMainInfo() {
     <section class="course-info">
       <div class="container">
         <div class="row">
-          <div class="col-6">
+          <div class="col-12 col-md-6">
             <a href="#" class="course-info__link">
               آموزش برنامه نویسی فرانت اند
             </a>
@@ -30,7 +30,7 @@ export default function CourseMainInfo() {
             </div>
           </div>
 
-          <div class="col-6">
+          <div class="col-12 col-md-6 ">
             <video src="" poster="/images/courses/js_project.png" class="course-info__video" controls></video>
           </div>
         </div>
