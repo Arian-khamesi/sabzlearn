@@ -33,33 +33,48 @@ export default function CourseInfo() {
                   <div class="row">
 
                     <CourseDetailsBox
-                    title={'وضعیت دوره'}
-                    text={'به اتمام رسیده'}
-                    icon={'-graduation-cap'} />
+                      title={'وضعیت دوره'}
+                      text={'به اتمام رسیده'}
+                      icon={'-graduation-cap'} />
                     <CourseDetailsBox
-                    title={'مدت زمان دوره'}
-                    text={'19 ساعت'}
-                    icon={'-clock'} />
+                      title={'مدت زمان دوره'}
+                      text={'19 ساعت'}
+                      icon={'-clock'} />
                     <CourseDetailsBox
-                    title={'آخرین بروزرسانی:'}
-                    text={'1401/03/02'}
-                    icon={'-calendar-alt'} />
+                      title={'آخرین بروزرسانی :'}
+                      text={'1401/03/02'}
+                      icon={'-calendar-alt'} />
                     <CourseDetailsBox
-                    title={'روش پشتیبانی'}
-                    text={'آنلاین'}
-                    icon={'-user-alt'} />
+                      title={'روش پشتیبانی'}
+                      text={'آنلاین'}
+                      icon={'-user-alt'} />
                     <CourseDetailsBox
-                    title={'پیش نیاز :'}
-                    text={'HTML / CSS'}
-                    icon={'-info-circle'} />
+                      title={'پیش نیاز :'}
+                      text={'HTML / CSS'}
+                      icon={'-info-circle'} />
                     <CourseDetailsBox
-                    title={':نوع مشاهده'}
-                    text={'ضبط شده / آنلاین'}
-                    icon={'-play'} />
-                   
+                      title={'نوع مشاهده :'}
+                      text={'ضبط شده / آنلاین'}
+                      icon={'-play'} />
+
 
                   </div>
                 </div>
+
+                {/*<!-- Start Course Progress -->*/}
+                <div class="course-progress">
+                  <div class="course-progress__header">
+                    <i class="fas fa-chart-line course-progress__icon"></i>
+                    <span class="course-progress__title">
+                      درصد پیشرفت دوره: 100%
+                    </span>
+                  </div>
+                  <div class="progress course-progress__bar">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={{width: '75%'}}></div>
+                  </div>
+                </div>
+               { /*<!-- Finish Course Progress -->*/}
+
               </div>
             </div>
           </div>
