@@ -7,6 +7,7 @@ import NavBar from '../../Components/NavBar/NavBar'
 import Footer from '../../Components/Footer/Footer'
 import BreadCrumb from '../../Components/BreadCrumb/BreadCrumb'
 import ArticleInfoSideBar from '../../Components/ArticleInfoSideBar/ArticleInfoSideBar'
+import CommentsTextArea from '../../Components/CommentsTextArea/CommentsTextArea'
 
 export default function ArticleInfo() {
   return (
@@ -150,28 +151,9 @@ export default function ArticleInfo() {
                   </div>
                 </div>
               </div>
-
-              <div class="comments">
-                <span class="comments__title">
-                  دیدگاهتان را بنویسید
-                </span>
-                <span class="comments__text">
-                  <a href="#">
-                    با عنوان محمدامین سعیدی راد
-                    وارد شده اید.
-                  </a>
-                  <a href="#">خارج میشوید? </a>
-                  بخش های موردنیاز علامت گذاری شده اند *
-                </span>
-                <div class="comments_content">
-                  <span class="comments__content-title">دیدگاه *</span>
-                  <textarea class="comments__content-textarea"></textarea>
-                </div>
-                <button type="submit" class="comments__button">فرستادن دیدگاه</button>
-              </div>
-
+              <CommentsTextArea />
             </div>
-            <ArticleInfoSideBar/>
+            <ArticleInfoSideBar />
           </div>
         </div>
       </main>
