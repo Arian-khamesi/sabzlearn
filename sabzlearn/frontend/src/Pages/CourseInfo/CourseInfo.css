@@ -220,3 +220,111 @@
 }
 
 /* Finish Teacher Details Styles */
+
+
+/* Start Sidebar Styles */
+
+.course-info__register {
+    text-align: center;
+    background-color: #1fbd50;
+    padding: 1.5rem 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 12px rgba(31, 189, 80, 36%);
+}
+
+.course-info__register-title {
+    font-size: 1.7rem;
+    color: var(--white-color);
+    font-weight: bold;
+}
+
+.course-info__register-icon {
+    font-size: 2rem;
+}
+
+.course-info__top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 2px solid #f0f2f7;
+}
+
+.course-info__total-sale-icon {
+    color: #555555;
+    font-size: 2.7rem;
+    margin-left: 1rem;
+}
+
+.course-info__total-sale-text {
+    color: #7f8187;
+    margin-left: 1rem;
+
+}
+
+.course-info__total-sale-number {
+    color: var(--white-color);
+    background-color: #c4c7cf;
+    border-radius: 0.5rem;
+    padding: 0.3rem 1.2rem;
+}
+
+.course-info__bottom {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 2rem;
+    color: #7b868a;
+}
+
+.course-info__total-comment, .course-info__total-view {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.course-info__total-comment::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 1px;
+    background-color: #e5e5e5;
+    left: -3rem;
+}
+
+.course-info__total-comment-icon, .course-info__total-view-icon {
+    font-size: 2.2rem;
+}
+
+.course-info__total-comment-text, .course-info__total-view-text {
+    font-size: 1.4rem;
+    margin-right: 1rem;
+}
+
+.course-info__header-short-url {
+    display: flex;
+    align-items: center;
+    color: #7b868a;
+}
+
+.course-info__short-url-icon {
+    font-size: 2rem;
+}
+
+.course-info__short-url-text {
+    font-size: 1.7rem;
+    margin-right: 0.5rem;
+}
+
+.course-info__short-url {
+    display: block;
+    margin: 1rem 0;
+    border: 1px solid #dcdcdc;
+    color: #a7a7a7;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.4rem;
+}
+
+
+/* Finish Sidebar Styles */

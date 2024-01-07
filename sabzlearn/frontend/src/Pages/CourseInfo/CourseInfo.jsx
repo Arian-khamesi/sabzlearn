@@ -7,6 +7,7 @@ import Footer from '../../Components/Footer/Footer'
 import BreadCrumb from '../../Components/BreadCrumb/BreadCrumb'
 import CourseMainInfo from '../../Components/CourseMainInfo/CourseMainInfo'
 import CourseDetailsBox from '../../Components/CourseDetailsBox/CourseDetailsBox'
+import CourseInfoSideBar from '../../Components/CourseInfoSideBar/CourseInfoSideBar'
 
 export default function CourseInfo() {
   return (
@@ -224,6 +225,9 @@ export default function CourseInfo() {
 
               </div>
             </div>
+
+            <CourseInfoSideBar />
+
           </div>
         </div>
       </main>
