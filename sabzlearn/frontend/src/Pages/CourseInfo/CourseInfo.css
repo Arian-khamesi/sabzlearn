@@ -114,7 +114,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 1.25rem;
+    width: 100%;
+    padding: 0px;
 }
 
 .introduction__accordion-right {
@@ -328,3 +329,11 @@
 
 
 /* Finish Sidebar Styles */
+
+
+/*Accordion style*/
+
+.accordion-body{
+    display: flex;
+    justify-content: space-between;
+}
