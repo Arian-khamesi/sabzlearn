@@ -7,17 +7,25 @@ import CircleSpinner from '../CircleSpinner/CircleSpinner'
 export default function CourseBox({ img, title, instructor, participants, price }) {
 
   const [isImgLoad, setIsImgLoad] = useState(false)
+  // const [hrefimg, sethrefimg] = useState(null)
 
   const loaderImg = () => {
+
     setIsImgLoad(true)
+
   }
+
+  // setTimeout(()=>{
+  //   sethrefimg(img)
+  // },2000)
 
   return (
     <div class="col-12 col-sm-4">
       <div class="course-box">
         <a href="#">
-          <img src={img} alt="Course img" class="course-box__img" onLoad={loaderImg} />
-          {!isImgLoad && <CircleSpinner/>}
+          <img src={img}
+            alt="Course img" class="course-box__img" onLoad={loaderImg} />
+          {!isImgLoad && <CircleSpinner />}
         </a>
         <div class="course-box__main">
           <a href="#" class="course-box__title">{title}</a>
