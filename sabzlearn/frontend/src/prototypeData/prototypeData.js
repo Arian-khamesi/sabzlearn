@@ -47,6 +47,22 @@ const prototypeData = [
         participants:500,
         price:1000000,
     },
+    {
+        id:7,
+        img:'/images/courses/fareelancer.png',
+        title:'دوره پروژه محور متخصص جنگو',
+        instructor:'رضا دولتی',
+        participants:500,
+        price:1000000,
+    },
+    {
+        id:8,
+        img:'/images/courses/jango.png',
+        title:'دوره پروژه محور متخصص جنگو',
+        instructor:'رضا دولتی',
+        participants:500,
+        price:1000000,
+    }
    
 ]
 

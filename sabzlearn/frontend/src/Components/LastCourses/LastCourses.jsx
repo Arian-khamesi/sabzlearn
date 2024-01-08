@@ -16,19 +16,25 @@ export default function LastCourses() {
                     title='جدیدترین دوره ها'
                     descrip='سکوی پرتاب شما به سمت موفقیت'
                     btnTitle='تمامی دوره ها'
+                    btnHref={'/courses'}
                 />
                 <div class="courses-content">
                     <div class="container">
                         <div class="row">
-                            {prototypeData.map((data) => 
-                                <CourseBox
-                                    img={data.img}
-                                    title={data.title}
-                                    instructor={data.instructor}
-                                    participants={data.participants}
-                                    price={data.price}
-                                    key={data.id}
-                                />
+                            {prototypeData.map((data) => {
+                                if (data.id < 7) {
+                                    return (
+                                        <CourseBox
+                                            img={data.img}
+                                            title={data.title}
+                                            instructor={data.instructor}
+                                            participants={data.participants}
+                                            price={data.price}
+                                            key={data.id}
+                                        />
+                                    )
+                                }
+                            }
                             )}
                         </div>
                     </div>
