@@ -9,6 +9,12 @@ import Input from '../../Components/Form/Input'
 import Button from '../../Components/Form/Button'
 
 export default function Register() {
+
+    const registerUserHandler = (event) => {
+        event.preventDefault()
+        console.log('user register');
+    }
+
     return (
         <>
             <TopBar />
@@ -53,7 +59,7 @@ export default function Register() {
                             />
                             <i class="login-form__password-icon fa fa-lock-open"></i>
                         </div>
-                        <Button className="login-form__btn" type="submit">
+                        <Button className="login-form__btn" type="submit" onClick={registerUserHandler}>
                         <i class="login-form__btn-icon fa fa-user-plus"></i>
                             <span class="login-form__btn-text">عضویت</span>
                         </Button>

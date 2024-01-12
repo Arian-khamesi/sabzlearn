@@ -10,6 +10,12 @@ import Input from '../../Components/Form/Input'
 import Button from '../../Components/Form/Button'
 
 export default function Login() {
+
+    const loginUserHandler = (event) => {
+        event.preventDefault()
+        console.log('user login');
+    }
+
     return (
         <>
             <TopBar />
@@ -46,9 +52,7 @@ export default function Login() {
                             />
                             <i class="login-form__password-icon fa fa-lock-open"></i>
                         </div>
-                        <Button
-                            className="login-form__btn" type="submit"
-                        >
+                        <Button className="login-form__btn" type="submit" onClick={loginUserHandler}>
                             <i class="login-form__btn-icon fas fa-sign-out-alt"></i>
                             <span class="login-form__btn-text">ورود</span>
                         </Button>
