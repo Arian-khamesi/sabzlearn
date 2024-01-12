@@ -6,6 +6,7 @@ import TopBar from '../../Components/TopBar/TopBar'
 import NavBar from '../../Components/NavBar/NavBar'
 import Footer from '../../Components/Footer/Footer'
 import Input from '../../Components/Form/Input'
+import Button from '../../Components/Form/Button'
 
 export default function Register() {
     return (
@@ -52,10 +53,10 @@ export default function Register() {
                             />
                             <i class="login-form__password-icon fa fa-lock-open"></i>
                         </div>
-                        <button class="login-form__btn" type="submit">
-                            <i class="login-form__btn-icon fa fa-user-plus"></i>
+                        <Button className="login-form__btn" type="submit">
+                        <i class="login-form__btn-icon fa fa-user-plus"></i>
                             <span class="login-form__btn-text">عضویت</span>
-                        </button>
+                        </Button>
                     </form>
                     <div class="login__des">
                         <span class="login__des-title">سلام کاربر محترم:</span>

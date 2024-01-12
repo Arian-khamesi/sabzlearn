@@ -7,6 +7,7 @@ import Footer from '../../Components/Footer/Footer'
 
 import { Link } from 'react-router-dom'
 import Input from '../../Components/Form/Input'
+import Button from '../../Components/Form/Button'
 
 export default function Login() {
     return (
@@ -45,10 +46,12 @@ export default function Login() {
                             />
                             <i class="login-form__password-icon fa fa-lock-open"></i>
                         </div>
-                        <button class="login-form__btn" type="submit">
+                        <Button
+                            className="login-form__btn" type="submit"
+                        >
                             <i class="login-form__btn-icon fas fa-sign-out-alt"></i>
                             <span class="login-form__btn-text">ورود</span>
-                        </button>
+                        </Button>
                         <div class="login-form__password-setting">
                             <label class="login-form__password-remember">
                                 <input class="login-form__password-checkbox" type="checkbox" />
