@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom'
 import TopBar from '../../Components/TopBar/TopBar'
 import NavBar from '../../Components/NavBar/NavBar'
 import Footer from '../../Components/Footer/Footer'
+
 import Input from '../../Components/Form/Input'
 import Button from '../../Components/Form/Button'
+import { requiredValidator, minValidator, maxValidator, emailValidator } from '../../validators/rules'
 
 export default function Register() {
 
@@ -59,8 +61,15 @@ export default function Register() {
                             />
                             <i class="login-form__password-icon fa fa-lock-open"></i>
                         </div>
-                        <Button className="login-form__btn" type="submit" onClick={registerUserHandler}>
-                        <i class="login-form__btn-icon fa fa-user-plus"></i>
+                        <Button className="login-form__btn" type="submit" onClick={registerUserHandler}
+                            validations={[
+                                requiredValidator(),
+                                minValidator(8),
+                                maxValidator(20),
+                                emailValidator()
+                            ]}
+                        >
+                            <i class="login-form__btn-icon fa fa-user-plus"></i>
                             <span class="login-form__btn-text">عضویت</span>
                         </Button>
                     </form>
