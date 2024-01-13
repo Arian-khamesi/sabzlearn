@@ -39,6 +39,12 @@ export default function Register() {
                                 type="text"
                                 placeholder="نام کاربری"
                                 element='input'
+                                validations={[
+                                    requiredValidator(),
+                                    minValidator(8),
+                                    maxValidator(20),
+                                    emailValidator()
+                                ]}
                             />
                             <i class="login-form__username-icon fa fa-user"></i>
                         </div>
@@ -48,6 +54,12 @@ export default function Register() {
                                 type="text"
                                 placeholder="آدرس ایمیل"
                                 element='input'
+                                validations={[
+                                    requiredValidator(),
+                                    minValidator(8),
+                                    maxValidator(20),
+                                    emailValidator()
+                                ]}
                             />
 
                             <i class="login-form__password-icon fa fa-envelope"></i>
@@ -58,17 +70,16 @@ export default function Register() {
                                 type="text"
                                 placeholder="رمز عبور"
                                 element='input'
+                                validations={[
+                                    requiredValidator(),
+                                    minValidator(8),
+                                    maxValidator(20),
+                                    emailValidator()
+                                ]}
                             />
                             <i class="login-form__password-icon fa fa-lock-open"></i>
                         </div>
-                        <Button className="login-form__btn" type="submit" onClick={registerUserHandler}
-                            validations={[
-                                requiredValidator(),
-                                minValidator(8),
-                                maxValidator(20),
-                                emailValidator()
-                            ]}
-                        >
+                        <Button className="login-form__btn" type="submit" onClick={registerUserHandler}>
                             <i class="login-form__btn-icon fa fa-user-plus"></i>
                             <span class="login-form__btn-text">عضویت</span>
                         </Button>

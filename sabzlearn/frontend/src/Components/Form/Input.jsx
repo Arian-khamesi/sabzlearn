@@ -2,15 +2,18 @@ import React, { useReducer } from 'react'
 
 import './Input.css'
 
+import validator from '../../validators/validator'
+
 export default function Input(props) {
 
     const inputReducer = (state, action) => {
+
         switch (action.type) {
             case 'CHANGE': {
                 return {
                     ...state,
                     value: action.value,
-                    isValid: action.isValid
+                    isValid: validator(action.value, action.validations)
                 }
             }
             default: {
@@ -29,6 +32,7 @@ export default function Input(props) {
         dispatch({
             type: 'CHANGE',
             value: event.target.value,
+            validations: props.validations,
             isValid: true
         })
     }
@@ -39,12 +43,14 @@ export default function Input(props) {
             placeholder={props.placeholder}
             className={`${props.className} ${maininput.isValid ? ('success') : ('error')}`}
             value={maininput.value}
+            validations={props.validations}
             onChange={inputChangeHandler}
         />
     ) : (<textarea
         placeholder={props.placeholder}
         className={props.className}
         value={maininput.value}
+        validations={props.validations}
         onChange={inputChangeHandler}
     />)
 

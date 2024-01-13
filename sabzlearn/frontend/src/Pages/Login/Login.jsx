@@ -41,6 +41,12 @@ export default function Login() {
                                 type="text"
                                 placeholder="نام کاربری یا آدرس ایمیل"
                                 element='input'
+                                validations={[
+                                    requiredValidator(),
+                                    minValidator(8),
+                                    maxValidator(20),
+                                    emailValidator()
+                                ]}
                             />
                             <i class="login-form__username-icon fa fa-user"></i>
                         </div>
@@ -50,17 +56,16 @@ export default function Login() {
                                 type="text"
                                 placeholder="رمز عبور"
                                 element='input'
+                                validations={[
+                                    requiredValidator(),
+                                    minValidator(8),
+                                    maxValidator(20),
+                                    emailValidator()
+                                ]}
                             />
                             <i class="login-form__password-icon fa fa-lock-open"></i>
                         </div>
-                        <Button className="login-form__btn" type="submit" onClick={loginUserHandler}
-                        validations={[
-                            requiredValidator(),
-                            minValidator(8),
-                            maxValidator(20),
-                            emailValidator()
-                        ]}
-                        >
+                        <Button className="login-form__btn" type="submit" onClick={loginUserHandler}>
                             <i class="login-form__btn-icon fas fa-sign-out-alt"></i>
                             <span class="login-form__btn-text">ورود</span>
                         </Button>

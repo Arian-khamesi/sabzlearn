@@ -1,5 +1,6 @@
 import React from 'react'
 import "./NavBar.css"
+import { Link } from 'react-router-dom'
 
 export default function NavBar() {
   return (
@@ -11,7 +12,7 @@ export default function NavBar() {
 
               <ul class="main-header__menu">
                 <li class="main-header__item">
-                  <a href="#" class="main-header__link"><span className='main-header__link-span'>صفحه اصلی</span></a>
+                  <Link to="/" class="main-header__link"><span className='main-header__link-span'>صفحه اصلی</span></Link>
                 </li>
 
                 <li class="main-header__item">
