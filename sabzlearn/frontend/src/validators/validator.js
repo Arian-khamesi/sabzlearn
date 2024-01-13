@@ -21,7 +21,12 @@ const validator = (value, validations) => {
         }
     }
 
-    console.log(validationsResult);
+    if (validationsResult.length) {
+        return false
+    }
+    else {
+        return true
+    }
 
 
 }

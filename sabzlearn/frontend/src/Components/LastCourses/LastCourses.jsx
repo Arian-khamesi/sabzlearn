@@ -10,17 +10,17 @@ import prototypeData from '../../prototypeData/prototypeData';
 export default function LastCourses() {
 
     return (
-        <div class="courses">
-            <div class="container">
+        <div className="courses">
+            <div className="container">
                 <SectionHeader
                     title='جدیدترین دوره ها'
                     descrip='سکوی پرتاب شما به سمت موفقیت'
                     btnTitle='تمامی دوره ها'
                     btnHref={'/courses'}
                 />
-                <div class="courses-content">
-                    <div class="container">
-                        <div class="row">
+                <div className="courses-content">
+                    <div className="container">
+                        <div className="row">
                             {prototypeData.map((data) => {
                                 if (data.id < 7) {
                                     return (

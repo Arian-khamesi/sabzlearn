@@ -22,11 +22,11 @@ export default function Courses() {
                         { id: 2, title: 'تمامی دوره ها', to: '/courses' },
                     ]}
             />
-            <section class="courses">
-                <div class="container">
-                    <div class="courses-content">
-                        <div class="container">
-                            <div class="row">
+            <section className="courses">
+                <div className="container">
+                    <div className="courses-content">
+                        <div className="container">
+                            <div className="row">
                                 {prototypeData.map((data) => {
                                    return (
                                         <CourseBox

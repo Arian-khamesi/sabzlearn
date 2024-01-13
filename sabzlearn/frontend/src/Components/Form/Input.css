@@ -4,6 +4,6 @@
 
 
 .error{
-    border: 1px solid rgba(165, 26, 26, 0.801);
+    border: 1px solid rgba(165, 26, 26, 0.801) !important;
 }
 

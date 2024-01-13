@@ -7,19 +7,20 @@ import validator from '../../validators/validator'
 export default function Input(props) {
 
     const inputReducer = (state, action) => {
-
         switch (action.type) {
             case 'CHANGE': {
                 return {
                     ...state,
                     value: action.value,
-                    isValid: validator(action.value, action.validations)
+                    isValid: validator(action.value , action.validations)
+
                 }
             }
             default: {
                 return state
             }
         }
+
     }
 
     const [maininput, dispatch] = useReducer(inputReducer,
@@ -43,7 +44,7 @@ export default function Input(props) {
             placeholder={props.placeholder}
             className={`${props.className} ${maininput.isValid ? ('success') : ('error')}`}
             value={maininput.value}
-            validations={props.validations}
+            // validations={props.validations}
             onChange={inputChangeHandler}
         />
     ) : (<textarea
