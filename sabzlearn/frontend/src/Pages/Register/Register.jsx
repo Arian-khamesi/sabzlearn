@@ -43,7 +43,7 @@ export default function Register() {
                                     requiredValidator(),
                                     minValidator(8),
                                     maxValidator(20),
-                                    emailValidator()
+                                    // emailValidator()
                                 ]}
                             />
                             <i class="login-form__username-icon fa fa-user"></i>
@@ -74,7 +74,7 @@ export default function Register() {
                                     requiredValidator(),
                                     minValidator(8),
                                     maxValidator(20),
-                                    emailValidator()
+                                    // emailValidator()
                                 ]}
                             />
                             <i class="login-form__password-icon fa fa-lock-open"></i>
