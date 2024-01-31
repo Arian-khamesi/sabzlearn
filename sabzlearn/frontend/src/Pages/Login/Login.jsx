@@ -8,14 +8,32 @@ import Footer from '../../Components/Footer/Footer'
 import { Link } from 'react-router-dom'
 import Input from '../../Components/Form/Input'
 import Button from '../../Components/Form/Button'
-import { requiredValidator,minValidator,maxValidator,emailValidator } from '../../validators/rules'
+import { requiredValidator, minValidator, maxValidator, emailValidator } from '../../validators/rules'
+
+import { useForm } from '../../hooks/useForm'
+
 
 export default function Login() {
+
+    const [formState, onInputHandler] = useForm({
+        username: {
+            value: "",
+            isValid: false
+        },
+        password: {
+            value: "",
+            isValid: false
+        },
+    }, false)
+
+    console.log(formState);
+
 
     const loginUserHandler = (event) => {
         event.preventDefault()
         console.log('user login');
     }
+
 
     return (
         <>
@@ -39,6 +57,7 @@ export default function Login() {
                             <Input
                                 className="login-form__username-input"
                                 type="text"
+                                id="username"
                                 placeholder="نام کاربری یا آدرس ایمیل"
                                 element='input'
                                 validations={[
@@ -47,6 +66,7 @@ export default function Login() {
                                     maxValidator(20),
                                     emailValidator()
                                 ]}
+                                onInputHandler={onInputHandler}
                             />
                             <i className="login-form__username-icon fa fa-user"></i>
                         </div>
@@ -54,6 +74,7 @@ export default function Login() {
                             <Input
                                 className="login-form__password-input"
                                 type="text"
+                                id="password"
                                 placeholder="رمز عبور"
                                 element='input'
                                 validations={[
@@ -61,7 +82,9 @@ export default function Login() {
                                     minValidator(8),
                                     maxValidator(20),
                                     // emailValidator()
+
                                 ]}
+                                onInputHandler={onInputHandler}
                             />
                             <i className="login-form__password-icon fa fa-lock-open"></i>
                         </div>

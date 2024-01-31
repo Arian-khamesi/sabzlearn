@@ -10,7 +10,26 @@ import Input from '../../Components/Form/Input'
 import Button from '../../Components/Form/Button'
 import { requiredValidator, minValidator, maxValidator, emailValidator } from '../../validators/rules'
 
+import { useForm } from '../../hooks/useForm'
+
 export default function Register() {
+
+    const [formState,onInputHandler]=useForm({
+        username:{
+            value:"",
+            isValid:false
+        },
+        password:{
+            value:"",
+            isValid:false
+        },
+        email:{
+            value:"",
+            isValid:false
+        },
+    },false)
+
+    console.log(formState);
 
     const registerUserHandler = (event) => {
         event.preventDefault()
@@ -37,6 +56,7 @@ export default function Register() {
                             <Input
                                 className="login-form__username-input"
                                 type="text"
+                                id="username"
                                 placeholder="نام کاربری"
                                 element='input'
                                 validations={[
@@ -45,6 +65,7 @@ export default function Register() {
                                     maxValidator(20),
                                     // emailValidator()
                                 ]}
+                                onInputHandler={onInputHandler}
                             />
                             <i className="login-form__username-icon fa fa-user"></i>
                         </div>
@@ -52,6 +73,7 @@ export default function Register() {
                             <Input
                                 className="login-form__password-input"
                                 type="text"
+                                id="email"
                                 placeholder="آدرس ایمیل"
                                 element='input'
                                 validations={[
@@ -60,6 +82,7 @@ export default function Register() {
                                     maxValidator(20),
                                     emailValidator()
                                 ]}
+                                onInputHandler={onInputHandler}
                             />
 
                             <i className="login-form__password-icon fa fa-envelope"></i>
@@ -67,7 +90,8 @@ export default function Register() {
                         <div className="login-form__password">
                             <Input
                                 className="login-form__password-input"
-                                type="text"
+                                type="password"
+                                id="password"
                                 placeholder="رمز عبور"
                                 element='input'
                                 validations={[
@@ -76,6 +100,7 @@ export default function Register() {
                                     maxValidator(20),
                                     // emailValidator()
                                 ]}
+                                onInputHandler={onInputHandler}
                             />
                             <i className="login-form__password-icon fa fa-lock-open"></i>
                         </div>
