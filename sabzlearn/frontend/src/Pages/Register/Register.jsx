@@ -14,20 +14,20 @@ import { useForm } from '../../hooks/useForm'
 
 export default function Register() {
 
-    const [formState,onInputHandler]=useForm({
-        username:{
-            value:"",
-            isValid:false
+    const [formState, onInputHandler] = useForm({
+        username: {
+            value: "",
+            isValid: false
         },
-        password:{
-            value:"",
-            isValid:false
+        password: {
+            value: "",
+            isValid: false
         },
-        email:{
-            value:"",
-            isValid:false
+        email: {
+            value: "",
+            isValid: false
         },
-    },false)
+    }, false)
 
     console.log(formState);
 
@@ -104,7 +104,7 @@ export default function Register() {
                             />
                             <i className="login-form__password-icon fa fa-lock-open"></i>
                         </div>
-                        <Button className="login-form__btn" type="submit" onClick={registerUserHandler}>
+                        <Button className={`login-form__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} type="submit" onClick={registerUserHandler} disabled={!formState.isInputValid}>
                             <i className="login-form__btn-icon fa fa-user-plus"></i>
                             <span className="login-form__btn-text">عضویت</span>
                         </Button>

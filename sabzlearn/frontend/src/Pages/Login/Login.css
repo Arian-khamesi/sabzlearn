@@ -106,6 +106,16 @@
     background-color: #2bce56;
     position: relative;
   }
+
+  .success-sub{
+    background-color: #2bce56;
+  }
+
+  .error-sub{
+    background-color: #2bce579d;
+    cursor: not-allowed;
+  }
+
   .login-form__btn-icon {
     color: var(--white-color);
     font-size: 1.8rem;
