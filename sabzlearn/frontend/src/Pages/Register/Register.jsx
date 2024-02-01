@@ -15,7 +15,15 @@ import { useForm } from '../../hooks/useForm'
 export default function Register() {
 
     const [formState, onInputHandler] = useForm({
+        fullname: {
+            value: "",
+            isValid: false
+        },
         username: {
+            value: "",
+            isValid: false
+        },
+        email: {
             value: "",
             isValid: false
         },
@@ -23,7 +31,7 @@ export default function Register() {
             value: "",
             isValid: false
         },
-        email: {
+        confirmPassword: {
             value: "",
             isValid: false
         },
@@ -34,7 +42,31 @@ export default function Register() {
     const registerUserHandler = (event) => {
         event.preventDefault()
         console.log('user register');
+
+        const newUserInfo = {
+            name: formState.inputs.fullname.value,
+            username: formState.inputs.username.value,
+            email: formState.inputs.email.value,
+            password: formState.inputs.password.value,
+            confirmPassword: formState.inputs.confirmPassword.value,
+        };
+
+        console.log(newUserInfo);
+        if (newUserInfo.password.value === newUserInfo.confirmPassword.value) {
+            fetch("http://localhost:5000/v1/auth/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newUserInfo),
+            }).then(res => console.log(res))
+        }
+        else {
+            alert("رمز عبور با تکرار آن یکسان نیست")
+        }
+
     }
+
 
     return (
         <>
@@ -53,6 +85,20 @@ export default function Register() {
                     </div>
                     <form action="#" className="login-form">
                         <div className="login-form__username">
+                            <Input
+                                className="login-form__username-input"
+                                type="text"
+                                id="fullname"
+                                placeholder="نام و نام خانوادگی"
+                                element='input'
+                                validations={[
+                                    requiredValidator(),
+                                    minValidator(8),
+                                    maxValidator(20),
+                                    // emailValidator()
+                                ]}
+                                onInputHandler={onInputHandler}
+                            />
                             <Input
                                 className="login-form__username-input"
                                 type="text"
@@ -79,7 +125,7 @@ export default function Register() {
                                 validations={[
                                     requiredValidator(),
                                     minValidator(8),
-                                    maxValidator(20),
+                                    maxValidator(40),
                                     emailValidator()
                                 ]}
                                 onInputHandler={onInputHandler}
@@ -93,6 +139,20 @@ export default function Register() {
                                 type="password"
                                 id="password"
                                 placeholder="رمز عبور"
+                                element='input'
+                                validations={[
+                                    requiredValidator(),
+                                    minValidator(8),
+                                    maxValidator(20),
+                                    // emailValidator()
+                                ]}
+                                onInputHandler={onInputHandler}
+                            />
+                            <Input
+                                className="login-form__password-input"
+                                type="password"
+                                id="confirmPassword"
+                                placeholder="تکرار رمز عبور"
                                 element='input'
                                 validations={[
                                     requiredValidator(),
