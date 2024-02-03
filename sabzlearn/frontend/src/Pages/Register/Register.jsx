@@ -59,7 +59,8 @@ export default function Register() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(newUserInfo),
-            }).then(res => console.log(res))
+            }).then(res =>res.json())
+            .then(result=>console.log(result))
         }
         else {
             alert("رمز عبور با تکرار آن یکسان نیست")
