@@ -14,8 +14,10 @@ function App() {
 
   const router = useRoutes(routes)
 
-  const login = (token) => {
+  const login = (token,userInfos) => {
     setToken(token)
+    setUserInfos(userInfos)
+    setIsLoggedIn(true)
     localStorage.setItem("user", JSON.stringify({ token }))
   }
 
@@ -23,7 +25,7 @@ function App() {
     setToken(null)
     localStorage.removeItem("user")
   }
-  
+
 
   return (
     <AuthContext.Provider value={{

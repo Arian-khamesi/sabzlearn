@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import './Register.css'
 import { Link } from 'react-router-dom'
@@ -12,7 +12,14 @@ import { requiredValidator, minValidator, maxValidator, emailValidator } from '.
 
 import { useForm } from '../../hooks/useForm'
 
+import AuthContext from '../../context/authContext'
+
+
 export default function Register() {
+
+    const authContext = useContext(AuthContext)
+    console.log(authContext);
+
 
     const [formState, onInputHandler] = useForm({
         fullname: {
@@ -37,7 +44,7 @@ export default function Register() {
         },
     }, false)
 
-    console.log(formState);
+   
 
     const registerUserHandler = (event) => {
         event.preventDefault()
@@ -59,8 +66,8 @@ export default function Register() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(newUserInfo),
-            }).then(res =>res.json())
-            .then(result=>console.log(result))
+            }).then(res => res.json())
+                .then(result => authContext.login(result.accessToken,result.user))
         }
         else {
             alert("رمز عبور با تکرار آن یکسان نیست")

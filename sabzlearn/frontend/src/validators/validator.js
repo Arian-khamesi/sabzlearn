@@ -3,7 +3,6 @@ import emailValidator from "./regex"
 
 const validator = (value, validations) => {
 
-    console.log(value, validations);
 
     const validationsResult = [];
 
