@@ -31,7 +31,38 @@ export default function Login() {
 
     const loginUserHandler = (event) => {
         event.preventDefault()
-        console.log('user login');
+
+        const userLoginData = {
+            identifier: formState.inputs.username.value,
+            password: formState.inputs.password.value
+        }
+
+        fetch("http://localhost:5000/v1/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userLoginData)
+        })
+            .then(res => {
+                console.log(res)
+                if (!res.ok) {
+                    return res.text().then(text => {
+                        throw new Error(text)
+                    })
+                } else {
+                    return res.json()
+                }
+            })
+            .then(result => {
+                console.log(result)
+            })
+            .catch(err => {
+                console.log("err =>", err)
+                alert("کاربری با اطلاعات وارد شده یافت نشد ):")
+            })
+
+        console.log(userLoginData);
     }
 
 
@@ -63,8 +94,8 @@ export default function Login() {
                                 validations={[
                                     requiredValidator(),
                                     minValidator(8),
-                                    maxValidator(20),
-                                    emailValidator()
+                                    maxValidator(40),
+                                    // emailValidator()
                                 ]}
                                 onInputHandler={onInputHandler}
                             />
