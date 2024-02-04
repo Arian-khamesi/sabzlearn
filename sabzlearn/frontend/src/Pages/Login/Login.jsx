@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import './Login.css'
 import TopBar from '../../Components/TopBar/TopBar'
@@ -12,8 +12,14 @@ import { requiredValidator, minValidator, maxValidator, emailValidator } from '.
 
 import { useForm } from '../../hooks/useForm'
 
+import AuthContext from '../../context/authContext'
+
 
 export default function Login() {
+
+
+    const authContext = useContext(AuthContext)
+
 
     const [formState, onInputHandler] = useForm({
         username: {
@@ -56,6 +62,7 @@ export default function Login() {
             })
             .then(result => {
                 console.log(result)
+                authContext.login(result.accessToken, {})
             })
             .catch(err => {
                 console.log("err =>", err)
