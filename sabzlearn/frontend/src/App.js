@@ -1,6 +1,6 @@
 
 import './App.css';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRoutes } from 'react-router-dom';
 import routes from './routes';
 import AuthContext from './context/authContext';
@@ -14,17 +14,36 @@ function App() {
 
   const router = useRoutes(routes)
 
-  const login = (token,userInfos) => {
+  const login = useCallback((token, userInfos) => {
     setToken(token)
     setUserInfos(userInfos)
     setIsLoggedIn(true)
     localStorage.setItem("user", JSON.stringify({ token }))
-  }
+  }, [])
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setToken(null)
     localStorage.removeItem("user")
-  }
+  }, [])
+
+
+  useEffect(() => {
+
+    const localStorageData = JSON.parse(localStorage.getItem("user"))
+
+    if (localStorageData) {
+      fetch("http://localhost:5000/v1/auth/me", {
+        headers: {
+          "Authorization": `Bearer ${localStorageData.token}`
+        }
+      }).then(res => res.json())
+        .then(userData => {
+          setIsLoggedIn(true)
+          setUserInfos(userData)
+        })
+    }
+
+  }, [login])
 
 
   return (
