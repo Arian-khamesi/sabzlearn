@@ -14,11 +14,15 @@ import { useForm } from '../../hooks/useForm'
 
 import AuthContext from '../../context/authContext'
 
+import swal from 'sweetalert'
+import { useNavigate } from 'react-router-dom'
+
 
 export default function Login() {
 
 
     const authContext = useContext(AuthContext)
+    const navigate = useNavigate()
 
 
     const [formState, onInputHandler] = useForm({
@@ -33,6 +37,9 @@ export default function Login() {
     }, false)
 
     console.log(formState);
+
+
+
 
 
     const loginUserHandler = (event) => {
@@ -63,10 +70,22 @@ export default function Login() {
             .then(result => {
                 console.log(result)
                 authContext.login(result.accessToken, {})
+                swal({
+                    title: `${formState.inputs.username.value} عزیز با موفقیت وارد شدید`,
+                    icon: "success",
+                    buttons: 'ورود به پنل کاربری'
+                })
+                    .then(value => {
+                        navigate('/')
+                    })
             })
             .catch(err => {
                 console.log("err =>", err)
-                alert("کاربری با اطلاعات وارد شده یافت نشد ):")
+                swal({
+                    title: "کاربری با اطلاعات وارد شده یافت نشد",
+                    icon: "error",
+                    buttons: 'تلاش دوباره'
+                })
             })
 
         console.log(userLoginData);
