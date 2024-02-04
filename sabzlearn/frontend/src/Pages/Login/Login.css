@@ -113,7 +113,7 @@
 
   .error-sub{
     background-color: #2bce579d;
-    cursor: not-allowed;
+    cursor: not-allowed !important;
   }
 
   .login-form__btn-icon {
