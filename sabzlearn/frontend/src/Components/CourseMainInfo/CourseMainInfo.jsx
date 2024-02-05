@@ -2,20 +2,22 @@ import React from 'react'
 
 import './CourseMainInfo.css'
 
-export default function CourseMainInfo() {
+export default function CourseMainInfo(props) {
+
+
   return (
     <section className="course-info">
       <div className="container">
         <div className="row">
           <div className="col-12 col-md-6">
             <a href="#" className="course-info__link">
-              آموزش برنامه نویسی فرانت اند
+              {props.id.title}
             </a>
             <h1 className="course-info__title">
-              آموزش 20 کتابخانه جاوااسکریپت برای بازار کار
+              {props.details.name}
             </h1>
             <p className="course-info__text">
-              امروزه کتابخانه‌ها کد نویسی را خیلی آسان و لذت بخش تر کرده اند. به قدری که حتی امروزه هیچ شرکت برنامه نویسی پروژه های خود را با Vanilla Js پیاده سازی نمی کند و همیشه از کتابخانه ها و فریمورک های موجود استفاده می کند. پس شما هم اگه میخواید یک برنامه نویس عالی فرانت اند باشید، باید کتابخانه های کاربردی که در بازار کار استفاده می شوند را به خوبی بلد باشید
+              {props.details.description}
             </p>
             <div className="course-info__social-media">
               <a href="#" className="course-info__social-media-item">
@@ -31,7 +33,7 @@ export default function CourseMainInfo() {
           </div>
 
           <div className="col-12 col-md-6 ">
-            <video src="" poster="/images/courses/js_project.png" className="course-info__video" controls></video>
+            <video src="" poster={props.details.cover} className="course-info__video" controls></video>
           </div>
         </div>
       </div>

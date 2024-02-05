@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import "./CourseInfo.css"
 import TopBar from '../../Components/TopBar/TopBar'
@@ -18,6 +18,12 @@ export default function CourseInfo() {
   const { courseName } = useParams()
   const spName = courseName.split("-")
 
+  const [comments, setComments] = useState([])
+  const [sessions, setSessions] = useState([])
+  const [courseDetails, setCourseDetails] = useState({})
+  const [categoryId, setCategoryId] = useState({})
+  const [lastUpdate, setLastUpdate] = useState("")
+
 
   useEffect(() => {
 
@@ -27,9 +33,19 @@ export default function CourseInfo() {
         'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user')).token}`
       }
     }).then(res => res.json())
-      .then(courseInfo => console.log(courseInfo))
+      .then(courseInfo => {
+        console.log(courseInfo)
+        setComments(courseInfo.comments)
+        setSessions(courseInfo.sessions)
+        setCategoryId(courseInfo.categoryID)
+        setCourseDetails(courseInfo)
+        setLastUpdate(courseInfo.updatedAt)
+
+      })
+
 
   }, [])
+
 
   return (
     <>
@@ -44,7 +60,7 @@ export default function CourseInfo() {
           ]
         } />
 
-      <CourseMainInfo />
+      <CourseMainInfo details={courseDetails} id={categoryId} />
 
       <main className="main">
         <div className="container">
@@ -64,7 +80,7 @@ export default function CourseInfo() {
                       icon={'-clock'} />
                     <CourseDetailsBox
                       title={'آخرین بروزرسانی :'}
-                      text={'1401/03/02'}
+                      text={lastUpdate.split("T")[0]}
                       icon={'-calendar-alt'} />
                     <CourseDetailsBox
                       title={'روش پشتیبانی'}
