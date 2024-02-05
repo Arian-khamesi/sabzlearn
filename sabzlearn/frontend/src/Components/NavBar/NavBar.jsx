@@ -14,7 +14,6 @@ export default function NavBar() {
     fetch('http://localhost:5000/v1/menus')
       .then(res => res.json())
       .then(menus => {
-        console.log(menus)
         setAllMenus(menus)
       })
   }, [])

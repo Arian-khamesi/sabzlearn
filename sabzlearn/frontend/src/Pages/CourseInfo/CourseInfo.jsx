@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import "./CourseInfo.css"
 import TopBar from '../../Components/TopBar/TopBar'
@@ -9,10 +9,28 @@ import CourseMainInfo from '../../Components/CourseMainInfo/CourseMainInfo'
 import CourseDetailsBox from '../../Components/CourseDetailsBox/CourseDetailsBox'
 import CourseInfoSideBar from '../../Components/CourseInfoSideBar/CourseInfoSideBar'
 import CommentsTextArea from '../../Components/CommentsTextArea/CommentsTextArea'
+import { useParams } from 'react-router-dom'
 
 import Accordion from 'react-bootstrap/Accordion'
 
 export default function CourseInfo() {
+
+  const { courseName } = useParams()
+  const spName = courseName.split("-")
+
+
+  useEffect(() => {
+
+    fetch(`http://localhost:5000/v1/courses/${spName[0]}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user')).token}`
+      }
+    }).then(res => res.json())
+      .then(courseInfo => console.log(courseInfo))
+
+  }, [])
+
   return (
     <>
       <TopBar />
