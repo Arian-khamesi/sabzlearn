@@ -1,20 +1,29 @@
 import React from 'react'
 
 import './CourseInfoSideBar.css'
+import { Link } from 'react-router-dom';
 
 export default function CourseInfoSideBar(props) {
 
-console.log(props);
+    console.log(props.comments);
 
     return (
         <div className="col-4">
             <div className="courses-info">
                 <div className="course-info">
                     <div className="course-info__register">
-                        <span className="course-info__register-title">
+
+                        {props.details.isUserRegisteredToThisCourse ? (<span className="course-info__register-title">
                             <i className="fas fa-graduation-cap course-info__register-icon"></i>
                             دانشجوی دوره هستید
-                        </span>
+                        </span>) : (
+                            <span className="course-info__register-title">
+                                <Link to={"/"} className='register-cors'>ثبت نام در دوره</Link>
+
+                            </span>
+                        )}
+
+
                     </div>
                 </div>
                 <div className="course-info">
@@ -26,7 +35,7 @@ console.log(props);
                                     تعداد دانشجو :
                                 </span>
                                 <span className="course-info__total-sale-number">
-                                    178
+                                    {props.details.courseStudentsCount}
                                 </span>
                             </div>
                         </div>
@@ -34,7 +43,7 @@ console.log(props);
                             <div className="course-info__total-comment">
                                 <i className="far fa-comments course-info__total-comment-icon"></i>
                                 <span className="course-info__total-comment-text">
-                                    67 دیدگاه
+                                    {`${props.comments.length} دیدگاه`}
                                 </span>
                             </div>
                             <div className="course-info__total-view">
@@ -63,7 +72,7 @@ console.log(props);
                     </span>
                     <span className="course-info__topic-text">
                         برای مشاهده و یا دانلود دوره روی کلمه&nbsp;
-                        <a href="#" style={{color: '#1e83f0', fontWeight: 'bold'}}>
+                        <a href="#" style={{ color: '#1e83f0', fontWeight: 'bold' }}>
                             لینک&nbsp;
                         </a>
                         کلیک کنید

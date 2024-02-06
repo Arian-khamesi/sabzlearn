@@ -395,7 +395,7 @@ export default function CourseInfo() {
               </div>
             </div>
 
-            <CourseInfoSideBar details={courseDetails}/>
+            <CourseInfoSideBar details={courseDetails} comments={comments}/>
 
           </div>
         </div>
