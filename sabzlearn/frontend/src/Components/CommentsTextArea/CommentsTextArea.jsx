@@ -2,6 +2,7 @@ import React from 'react'
 
 import './CommentsTextArea.css'
 
+
 export default function CommentsTextArea() {
   return (
     <div className="comments">

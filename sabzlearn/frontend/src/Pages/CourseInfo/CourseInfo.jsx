@@ -10,6 +10,7 @@ import CourseDetailsBox from '../../Components/CourseDetailsBox/CourseDetailsBox
 import CourseInfoSideBar from '../../Components/CourseInfoSideBar/CourseInfoSideBar'
 import CommentsTextArea from '../../Components/CommentsTextArea/CommentsTextArea'
 import { useParams } from 'react-router-dom'
+import Comments from '../../Components/Comments/Comments'
 
 import Accordion from 'react-bootstrap/Accordion'
 
@@ -24,7 +25,7 @@ export default function CourseInfo() {
   const [sessions, setSessions] = useState([])
   const [courseDetails, setCourseDetails] = useState({})
   const [categoryId, setCategoryId] = useState({})
-  // const [lastUpdate, setLastUpdate] = useState("")
+  const [lastUpdate, setLastUpdate] = useState("")
 
 
   useEffect(() => {
@@ -32,7 +33,7 @@ export default function CourseInfo() {
     fetch(`http://localhost:5000/v1/courses/npm`, {
       method: 'GET',
       headers: {
-        "Content-Type":"application/json",
+        "Content-Type": "application/json",
         'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user')).token}`
       }
     }).then(res => res.json())
@@ -42,13 +43,14 @@ export default function CourseInfo() {
         setSessions(courseInfo.sessions)
         setCategoryId(courseInfo.categoryID)
         setCourseDetails(courseInfo)
-        // setLastUpdate(courseInfo.updatedAt)
+        setLastUpdate(courseInfo.updatedAt)
 
       })
 
 
   }, [])
 
+  console.log(comments);
 
   return (
     <>
@@ -83,7 +85,7 @@ export default function CourseInfo() {
                       icon={'-clock'} />
                     <CourseDetailsBox
                       title={'آخرین بروزرسانی :'}
-                      text={"lastUpdate."}
+                      text={lastUpdate.split("T")[0]}
                       icon={'-calendar-alt'} />
                     <CourseDetailsBox
                       title={'روش پشتیبانی'}
@@ -157,133 +159,63 @@ export default function CourseInfo() {
                   </div>
 
                   <div className="introduction__topic">
-                    <Accordion defaultActiveKey={['0']} alwaysOpen>
-                      <Accordion.Item eventKey="0" className='accordion'>
-                        <Accordion.Header className='accordion-head'>معرفی دوره</Accordion.Header>
-                        <Accordion.Body className='accordion-body'>
-                          <div className="accordion-body introduction__accordion-body">
-                            <div className="introduction__accordion-right">
-                              <span className="introduction__accordion-count">1</span>
-                              <i className="fab fa-youtube introduction__accordion-icon"></i>
-                              <a href="#" className="introduction__accordion-link">
-                                معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
-                              </a>
-                            </div>
-                            <div className="introduction__accordion-left">
-                              <span className="introduction__accordion-time">
-                                18:34
-                              </span>
-                            </div>
-                          </div>
-                        </Accordion.Body>
-                        <Accordion.Body>
-                          <div className="accordion-body introduction__accordion-body">
-                            <div className="introduction__accordion-right">
-                              <span className="introduction__accordion-count">2</span>
-                              <i className="fab fa-youtube introduction__accordion-icon"></i>
-                              <a href="#" className="introduction__accordion-link">
-                                معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
-                              </a>
-                            </div>
-                            <div className="introduction__accordion-left">
-                              <span className="introduction__accordion-time">
-                                18:34
-                              </span>
-                            </div>
-                          </div>
-                        </Accordion.Body>
-                        <Accordion.Body className='accordion-body'>
-                          <div className="accordion-body introduction__accordion-body">
-                            <div className="introduction__accordion-right">
-                              <span className="introduction__accordion-count">3</span>
-                              <i className="fab fa-youtube introduction__accordion-icon"></i>
-                              <a href="#" className="introduction__accordion-link">
-                                معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
-                              </a>
-                            </div>
-                            <div className="introduction__accordion-left">
-                              <span className="introduction__accordion-time">
-                                18:34
-                              </span>
-                            </div>
-                          </div>
-                        </Accordion.Body>
-                      </Accordion.Item>
-                      <Accordion.Item eventKey="1" className='accordion'>
-                        <Accordion.Header>فصل یک کتابخانه های js</Accordion.Header>
-                        <Accordion.Body className='accordion-body'>
-                          <div className="accordion-body introduction__accordion-body">
-                            <div className="introduction__accordion-right">
-                              <span className="introduction__accordion-count">1</span>
-                              <i className="fab fa-youtube introduction__accordion-icon"></i>
-                              <a href="#" className="introduction__accordion-link">
-                                معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
-                              </a>
-                            </div>
-                            <div className="introduction__accordion-left">
-                              <span className="introduction__accordion-time">
-                                18:34
-                              </span>
-                            </div>
-                          </div>
-                        </Accordion.Body>
-                        <Accordion.Body className='accordion-body'>
-                          <div className="accordion-body introduction__accordion-body">
-                            <div className="introduction__accordion-right">
-                              <span className="introduction__accordion-count">2</span>
-                              <i className="fab fa-youtube introduction__accordion-icon"></i>
-                              <a href="#" className="introduction__accordion-link">
-                                معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
-                              </a>
-                            </div>
-                            <div className="introduction__accordion-left">
-                              <span className="introduction__accordion-time">
-                                18:34
-                              </span>
-                            </div>
-                          </div>
-                        </Accordion.Body>
 
-                      </Accordion.Item>
-                      <Accordion.Item eventKey="2" className='accordion'>
-                        <Accordion.Header>کتابخانه های ضروری react</Accordion.Header>
-                        <Accordion.Body className='accordion-body'>
-                          <div className="accordion-body introduction__accordion-body">
-                            <div className="introduction__accordion-right">
-                              <span className="introduction__accordion-count">1</span>
-                              <i className="fab fa-youtube introduction__accordion-icon"></i>
-                              <a href="#" className="introduction__accordion-link">
-                                معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
-                              </a>
+                    {sessions.map(accordion => (
+                      <Accordion defaultActiveKey={['0']} alwaysOpen>
+                        <Accordion.Item eventKey="0" className='accordion' key={accordion.id}>
+                          <Accordion.Header className='accordion-head'>{accordion.title}</Accordion.Header>
+                          <Accordion.Body className='accordion-body'>
+                            <div className="accordion-body introduction__accordion-body">
+                              <div className="introduction__accordion-right">
+                                <span className="introduction__accordion-count">1</span>
+                                <i className="fab fa-youtube introduction__accordion-icon"></i>
+                                <a href="#" className="introduction__accordion-link">
+                                  معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
+                                </a>
+                              </div>
+                              <div className="introduction__accordion-left">
+                                <span className="introduction__accordion-time">
+                                  18:34
+                                </span>
+                              </div>
                             </div>
-                            <div className="introduction__accordion-left">
-                              <span className="introduction__accordion-time">
-                                18:34
-                              </span>
+                          </Accordion.Body>
+                          <Accordion.Body>
+                            <div className="accordion-body introduction__accordion-body">
+                              <div className="introduction__accordion-right">
+                                <span className="introduction__accordion-count">2</span>
+                                <i className="fab fa-youtube introduction__accordion-icon"></i>
+                                <a href="#" className="introduction__accordion-link">
+                                  معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
+                                </a>
+                              </div>
+                              <div className="introduction__accordion-left">
+                                <span className="introduction__accordion-time">
+                                  18:34
+                                </span>
+                              </div>
                             </div>
-                          </div>
-                        </Accordion.Body>
-                      </Accordion.Item>
-                      <Accordion.Item eventKey="3" className='accordion'>
-                        <Accordion.Header>کتابخانه های next.js</Accordion.Header>
-                        <Accordion.Body className='accordion-body'>
-                          <div className="accordion-body introduction__accordion-body">
-                            <div className="introduction__accordion-right">
-                              <span className="introduction__accordion-count">1</span>
-                              <i className="fab fa-youtube introduction__accordion-icon"></i>
-                              <a href="#" className="introduction__accordion-link">
-                                معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
-                              </a>
+                          </Accordion.Body>
+                          <Accordion.Body className='accordion-body'>
+                            <div className="accordion-body introduction__accordion-body">
+                              <div className="introduction__accordion-right">
+                                <span className="introduction__accordion-count">3</span>
+                                <i className="fab fa-youtube introduction__accordion-icon"></i>
+                                <a href="#" className="introduction__accordion-link">
+                                  معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
+                                </a>
+                              </div>
+                              <div className="introduction__accordion-left">
+                                <span className="introduction__accordion-time">
+                                  18:34
+                                </span>
+                              </div>
                             </div>
-                            <div className="introduction__accordion-left">
-                              <span className="introduction__accordion-time">
-                                18:34
-                              </span>
-                            </div>
-                          </div>
-                        </Accordion.Body>
-                      </Accordion.Item>
-                    </Accordion>
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
+                    ))}
+
                     {/* <div className="accordion" id="accordionExample">
                       <div className="accordion-item">
                         <h2 className="accordion-header" id="headingOne">
@@ -390,12 +322,14 @@ export default function CourseInfo() {
 
                 {/* Finish Teacher Details  */}
 
-                <CommentsTextArea />
+                <Comments comment={comments}/>
+
+                {/* <CommentsTextArea /> */}
 
               </div>
             </div>
 
-            <CourseInfoSideBar details={courseDetails} comments={comments}/>
+            <CourseInfoSideBar details={courseDetails} comments={comments} />
 
           </div>
         </div>
