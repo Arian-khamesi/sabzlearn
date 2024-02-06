@@ -4,6 +4,7 @@ import './CourseMainInfo.css'
 
 export default function CourseMainInfo(props) {
 
+  console.log(props);
 
   return (
     <section className="course-info">

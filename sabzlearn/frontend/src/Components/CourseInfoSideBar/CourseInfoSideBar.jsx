@@ -2,7 +2,10 @@ import React from 'react'
 
 import './CourseInfoSideBar.css'
 
-export default function CourseInfoSideBar() {
+export default function CourseInfoSideBar(props) {
+
+console.log(props);
+
     return (
         <div className="col-4">
             <div className="courses-info">

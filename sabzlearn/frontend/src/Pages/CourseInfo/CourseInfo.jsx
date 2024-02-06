@@ -16,20 +16,23 @@ import Accordion from 'react-bootstrap/Accordion'
 export default function CourseInfo() {
 
   const { courseName } = useParams()
-  const spName = courseName.split("-")
+  console.log(courseName);
+  console.log(localStorage.getItem('user'));
+  // const spName = courseName.split("-")
 
   const [comments, setComments] = useState([])
   const [sessions, setSessions] = useState([])
   const [courseDetails, setCourseDetails] = useState({})
   const [categoryId, setCategoryId] = useState({})
-  const [lastUpdate, setLastUpdate] = useState("")
+  // const [lastUpdate, setLastUpdate] = useState("")
 
 
   useEffect(() => {
 
-    fetch(`http://localhost:5000/v1/courses/${spName[0]}`, {
-      method: 'POST',
+    fetch(`http://localhost:5000/v1/courses/npm`, {
+      method: 'GET',
       headers: {
+        "Content-Type":"application/json",
         'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user')).token}`
       }
     }).then(res => res.json())
@@ -39,7 +42,7 @@ export default function CourseInfo() {
         setSessions(courseInfo.sessions)
         setCategoryId(courseInfo.categoryID)
         setCourseDetails(courseInfo)
-        setLastUpdate(courseInfo.updatedAt)
+        // setLastUpdate(courseInfo.updatedAt)
 
       })
 
@@ -80,7 +83,7 @@ export default function CourseInfo() {
                       icon={'-clock'} />
                     <CourseDetailsBox
                       title={'آخرین بروزرسانی :'}
-                      text={lastUpdate.split("T")[0]}
+                      text={"lastUpdate."}
                       icon={'-calendar-alt'} />
                     <CourseDetailsBox
                       title={'روش پشتیبانی'}
@@ -392,7 +395,7 @@ export default function CourseInfo() {
               </div>
             </div>
 
-            <CourseInfoSideBar />
+            <CourseInfoSideBar details={courseDetails}/>
 
           </div>
         </div>
