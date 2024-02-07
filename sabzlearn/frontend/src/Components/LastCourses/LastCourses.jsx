@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import './LastCourses.css';
 import SectionHeader from '../SectionHeader/SectionHeader';
@@ -8,6 +8,15 @@ import prototypeData from '../../prototypeData/prototypeData';
 
 
 export default function LastCourses() {
+
+
+    // useEffect(() => {
+
+    //     fetch("http://localhost:5000/v1/courses/", {
+    //         method: "GET"
+    //     }).then(res => res.json()).then(allCourse => console.log(allCourse))
+
+    // }, [])
 
     return (
         <div className="courses">

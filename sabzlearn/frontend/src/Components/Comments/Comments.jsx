@@ -10,9 +10,13 @@ export default function Comments(props) {
     const comments = props.comment
     const authContext = useContext(AuthContext)
     const [newCommentBody, setNewCommentBody] = useState()
+    const [newCommentScore, setNewCommentScore] = useState(5)
 
     const onchangeCommentHandler = (event) => {
         setNewCommentBody(event.target.value)
+    }
+    const onchangeCommentScoreHandler = (event) => {
+        setNewCommentScore(event.target.value)
     }
 
     return (
@@ -124,17 +128,17 @@ export default function Comments(props) {
                             <div class="comments__score">
                                 <span class="comments__score-title">امتیاز شما</span>
                                 <div class="comments__score-input">
-                                    <span class="comments__score-input-text">
-                                        امتیاز خود را انتخاب کنید
-                                    </span>
-                                    <i class="fas fa-angle-down	 comments__input-icon"></i>
+                                    <input className="comments__score-input-text inputScore" type='range' min={1} max={5} placeholder='امتیاز خود را انتخاب کنید' value={newCommentScore} onChange={onchangeCommentScoreHandler}>
+                                    </input>
+                                    <span>{newCommentScore}</span>
+                                    
                                 </div>
                             </div>
                             <div class="comments__respond-content">
                                 <div class="comments__respond-title">دیدگاه شما *</div>
                                 <textarea class="comments__score-input-respond" value={newCommentBody} onChange={onchangeCommentHandler}></textarea>
                             </div>
-                            <button type="submit" class="comments__respond-btn" onClick={()=>props.submitComment(newCommentBody)} >
+                            <button type="submit" class="comments__respond-btn" onClick={()=>props.submitComment(newCommentBody,newCommentScore)} >
                                 ارسال
                             </button>
                         </div>

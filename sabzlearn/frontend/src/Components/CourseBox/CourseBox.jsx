@@ -49,7 +49,7 @@ export default function CourseBox({ img, title, instructor, participants, price 
               <i className="fas fa-users course-box__users-icon"></i>
               <span className="course-box__users-text">{participants}</span>
             </div>
-            <span className="course-box__price">{price}</span>
+            <span className="course-box__price">{price.toLocaleString()}</span>
           </div>
         </div>
 

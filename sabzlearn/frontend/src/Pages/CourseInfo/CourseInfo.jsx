@@ -12,6 +12,7 @@ import { useParams } from 'react-router-dom'
 import Comments from '../../Components/Comments/Comments'
 
 import Accordion from 'react-bootstrap/Accordion'
+import swal from "sweetalert"
 
 export default function CourseInfo() {
 
@@ -51,21 +52,28 @@ export default function CourseInfo() {
 
   console.log(comments);
 
-  const submitComment = (newCommentBody) => {
+  const submitComment = (newCommentBody,newCommentScore) => {
 
     const localStorageData = JSON.parse(localStorage.getItem("user"))
 
-    fetch("http://localhost:5000/v1/comments",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
-        "Authorization":`Bearer ${localStorageData.token}`
+    fetch("http://localhost:5000/v1/comments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorageData.token}`
       },
-      body:JSON.stringify({
-        body:newCommentBody,
-        
+      body: JSON.stringify({
+        body: newCommentBody,
+        courseShortName: courseName,
+        score:newCommentScore
       })
-    })
+    }).then(res => res.json())
+      .then(result => {console.log(result)
+      swal({
+        title:"کامنت شما با موفقیت ثبت شد",
+        icon:"success",
+        button:"تایید"        
+      })})
 
   }
 

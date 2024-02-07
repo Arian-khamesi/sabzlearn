@@ -152,8 +152,7 @@
     transition: all 400ms ease;
   }
   .comments__score-input:hover {
-    background-color: #1e83f0;
-    color: var(--white-color);
+   color: #1e83f0;
   }
   .comments__respond-title {
     font-size: 1.5rem;
@@ -176,4 +175,8 @@
     border-radius: 0.5rem;
     padding: 0.5rem 2rem;
     margin-top: 2rem;
+  }
+
+  .inputScore{
+    width: 90%;
   }
