@@ -5,11 +5,12 @@ import { Link } from 'react-router-dom'
 import AuthContext from '../../context/authContext'
 
 
+
 export default function NavBar() {
 
   const authContext = useContext(AuthContext)
   const [allMenus, setAllMenus] = useState([])
-
+  
   useEffect(() => {
     fetch('http://localhost:5000/v1/menus')
       .then(res => res.json())
@@ -17,6 +18,8 @@ export default function NavBar() {
         setAllMenus(menus)
       })
   }, [])
+  
+  
 
   return (
     <div className="main-header">
