@@ -3,8 +3,9 @@ import { useState } from 'react'
 
 import './CourseBox.css'
 import CircleSpinner from '../CircleSpinner/CircleSpinner'
+import { Link } from 'react-router-dom'
 
-export default function CourseBox({ img, title, instructor, participants, price }) {
+export default function CourseBox({ img, title, instructor, participants, price, href }) {
 
   const [isImgLoad, setIsImgLoad] = useState(false)
   // const [hrefimg, sethrefimg] = useState(null)
@@ -22,18 +23,18 @@ export default function CourseBox({ img, title, instructor, participants, price 
   return (
     <div className="col-12 col-sm-4">
       <div className="course-box">
-        <a href="#">
-          <img src={img}
+        <Link to={`/course-info/${href}`}>
+          <img src={`/images/courses/${img}`}
             alt="Course img" className="course-box__img" onLoad={loaderImg} />
           {!isImgLoad && <CircleSpinner />}
-        </a>
+        </Link>
         <div className="course-box__main">
-          <a href="#" className="course-box__title">{title}</a>
+          <Link to={`/course-info/${href}`} className="course-box__title">{title}</Link>
 
           <div className="course-box__rating-teacher">
             <div className="course-box__teacher">
               <i className="fas fa-chalkboard-teacher course-box__teacher-icon"></i>
-              <a href="#" className="course-box__teacher-link">{instructor}</a>
+              <Link to={`/course-info/${href}`} className="course-box__teacher-link">{instructor}</Link>
             </div>
             <div className="course-box__rating">
               <img src="/images/svgs/star.svg" alt="rating" className="course-box__star" />
@@ -49,15 +50,15 @@ export default function CourseBox({ img, title, instructor, participants, price 
               <i className="fas fa-users course-box__users-icon"></i>
               <span className="course-box__users-text">{participants}</span>
             </div>
-            <span className="course-box__price">{price.toLocaleString()}</span>
+            <span className="course-box__price">{price?price.toLocaleString():"رایگان"}</span>
           </div>
         </div>
 
         <div className="course-box__footer">
-          <a href="#" className="course-box__footer-link">
+          <Link to={`/course-info/${href}`} className="course-box__footer-link">
             مشاهده اطلاعات
             <i className="fas fa-arrow-left course-box__footer-icon"></i>
-          </a>
+          </Link>
         </div>
 
       </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import "./Category.css"
 
@@ -9,8 +9,23 @@ import Footer from '../../Components/Footer/Footer'
 
 import prototypeData from '../../prototypeData/prototypeData'
 import Pagination from '../../Components/Pagination/Pagination'
+import { useParams } from 'react-router-dom'
 
 export default function Category() {
+
+  const [courses, setCourses] = useState([])
+  const params = useParams()
+  console.log(params.categoryName);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/v1/courses/category/:${params.categoryName}`)
+      .then(res => res.json())
+      .then(result => {
+        console.log(result);
+      })
+  }, [params])
+
+
   return (
     <>
       <TopBar />
