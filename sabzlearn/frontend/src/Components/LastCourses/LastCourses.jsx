@@ -18,7 +18,6 @@ export default function LastCourses() {
 
 }, [])
 
-console.log(lastCourses);
 
 return (
     <div className="courses">
@@ -33,7 +32,7 @@ return (
                 <div className="container">
                     <div className="row">
                         {lastCourses.splice(0,3).map((data) => {
-                            console.log(data)
+                            
                                 return (
                                     <CourseBox
                                         img={data.cover}
