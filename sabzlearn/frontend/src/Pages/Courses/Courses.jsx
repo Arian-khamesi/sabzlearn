@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import './Courses.css'
 import TopBar from '../../Components/TopBar/TopBar'
@@ -6,10 +6,21 @@ import NavBar from '../../Components/NavBar/NavBar'
 import Footer from '../../Components/Footer/Footer'
 import Pagination from '../../Components/Pagination/Pagination'
 import BreadCrumb from '../../Components/BreadCrumb/BreadCrumb'
-import prototypeData from '../../prototypeData/prototypeData'
 import CourseBox from '../../Components/CourseBox/CourseBox'
 
 export default function Courses() {
+
+const [allCourses,setAllCourses]=useState([])
+
+useEffect(()=>{
+
+fetch('http://localhost:5000/v1/courses')
+.then(res=>res.json())
+.then(result=>setAllCourses(result))
+
+},[])
+
+console.log(allCourses);
     return (
         <>
             <TopBar />
@@ -27,16 +38,17 @@ export default function Courses() {
                     <div className="courses-content">
                         <div className="container">
                             <div className="row">
-                                {prototypeData.map((data) => {
-                                   return (
+                                {allCourses.map((data) => {
+                                    return (
                                         <CourseBox
-                                        img={data.img}
-                                        title={data.title}
-                                        instructor={data.instructor}
-                                        participants={data.participants}
-                                        price={data.price}
-                                        key={data.id}
-                                    />
+                                            img={data.cover}
+                                            title={data.name}
+                                            instructor={data.creator}
+                                            participants={data.participants}
+                                            price={data.price}
+                                            key={data.id}
+                                            href={data.shortName}
+                                        />
                                     )
                                 })}
                             </div>
