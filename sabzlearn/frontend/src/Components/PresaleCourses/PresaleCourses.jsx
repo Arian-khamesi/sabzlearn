@@ -21,7 +21,6 @@ export default function PresellCourses() {
 
     }, [])
 
-    console.log(preCourses);
 
     return (
         <div className="presell">
@@ -37,8 +36,7 @@ export default function PresellCourses() {
                                 spaceBetween={30}
                                 slidesPerView={3}
                                 pagination={{ clickable: true }}
-                                onSwiper={(swiper) => console.log(swiper)}
-                                onSlideChange={() => console.log('slide change')}
+                                loop={true}
                             >
 
                                 {preCourses.map(preCours => (
