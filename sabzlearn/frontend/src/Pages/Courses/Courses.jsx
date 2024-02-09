@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 
 import './Courses.css'
 import TopBar from '../../Components/TopBar/TopBar'
@@ -11,16 +11,18 @@ import CourseBox from '../../Components/CourseBox/CourseBox'
 export default function Courses() {
 
 const [allCourses,setAllCourses]=useState([])
+const [shownCourses,setShownCourses]=useState([])
 
 useEffect(()=>{
 
-fetch('http://localhost:5000/v1/courses')
-.then(res=>res.json())
-.then(result=>setAllCourses(result))
+    fetch('http://localhost:5000/v1/courses')
+    .then(res=>res.json())
+    .then(result=>setAllCourses(result))
 
 },[])
 
-console.log(allCourses);
+
+
     return (
         <>
             <TopBar />
@@ -38,7 +40,7 @@ console.log(allCourses);
                     <div className="courses-content">
                         <div className="container">
                             <div className="row">
-                                {allCourses.map((data) => {
+                                {shownCourses.map((data) => {
                                     return (
                                         <CourseBox
                                             img={data.cover}
@@ -57,7 +59,12 @@ console.log(allCourses);
                 </div>
             </section>
 
-            <Pagination />
+            <Pagination 
+            item={allCourses}
+            itemCount={3}
+            pathName={'/courses'}
+            setShownCourses={setShownCourses}
+            />
             <Footer />
 
         </>
