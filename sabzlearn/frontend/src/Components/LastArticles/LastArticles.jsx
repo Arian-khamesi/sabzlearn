@@ -24,6 +24,7 @@ export default function LastArticles() {
                     title={'جدیدترین مقاله ها'}
                     descrip={'پیش به سوی ارتقای دانش'}
                     btnTitle={'تمامی مقاله ها'}
+                    btnHref={"/articles"}
                 />
 
                 <div className="articles__content">
