@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import "./ArticleInfo.css"
 
@@ -8,8 +8,28 @@ import Footer from '../../Components/Footer/Footer'
 import BreadCrumb from '../../Components/BreadCrumb/BreadCrumb'
 import ArticleInfoSideBar from '../../Components/ArticleInfoSideBar/ArticleInfoSideBar'
 import CommentsTextArea from '../../Components/CommentsTextArea/CommentsTextArea'
+import { useParams } from 'react-router-dom'
 
 export default function ArticleInfo() {
+
+  const { articleName } = useParams()
+  const [articleDetails, setArticleDetails] = useState([])
+  const [articleCreator, setArticleCreator] = useState([])
+  const [articleCategoryID, setArticleCategoryID] = useState([])
+  const [lastUpdate, setLastUpdate] = useState("")
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/v1/articles/${articleName}`)
+      .then(res => res.json())
+      .then(result => {
+        setArticleDetails(result)
+        setArticleCreator(result.creator)
+        setArticleCategoryID(result.categoryID)
+        setLastUpdate(result.createdAt)
+      })
+  }, [])
+
+
   return (
     <>
       <TopBar />
@@ -21,7 +41,7 @@ export default function ArticleInfo() {
           [
             { id: 1, title: 'خانه', to: '/' },
             { id: 2, title: 'مقاله ها', to: '/article-info/vue vs react' },
-            { id: 3, title: 'مقایسه ویو با ری اکت', to: '/article-info/vue vs react' },
+            { id: 3, title: `${articleDetails.title}`, to: '/article-info/vue vs react' },
           ]
         } />
 
@@ -32,20 +52,20 @@ export default function ArticleInfo() {
             <div className="col-8">
               <div className="article">
                 <h1 className="article__title">
-                  معرفی بهترین سایت آموزش جاوا اسکریپت [ تجربه محور ] + آموزش رایگان
+                  {articleDetails.title}
                 </h1>
                 <div className="article__header">
                   <div className="article-header__category article-header__item">
                     <i className="far fa-folder article-header__icon"></i>
-                    <a href="#" className="article-header__text">جاوا اسکریپت</a>
+                    <a href="#" className="article-header__text">{articleCategoryID.title}</a>
                   </div>
                   <div className="article-header__category article-header__item">
                     <i className="far fa-user article-header__icon"></i>
-                    <span className="article-header__text"> ارسال شده توسط قدیر</span>
+                    <span className="article-header__text"> ارسال شده {articleCreator.name}</span>
                   </div>
                   <div className="article-header__category article-header__item">
                     <i className="far fa-clock article-header__icon"></i>
-                    <span className="article-header__text"> ارسال شده توسط قدیر</span>
+                    <span className="article-header__text"> تاریخ انتشار : {lastUpdate.split("T")[0]}</span>
                   </div>
                   <div className="article-header__category article-header__item">
                     <i className="far fa-eye article-header__icon"></i>
