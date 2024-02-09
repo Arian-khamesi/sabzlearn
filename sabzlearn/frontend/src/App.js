@@ -4,12 +4,14 @@ import { useCallback, useEffect, useState } from 'react';
 import { useRoutes } from 'react-router-dom';
 import routes from './routes';
 import AuthContext from './context/authContext';
+import { useNavigate } from 'react-router-dom'
 
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [token, setToken] = useState(null)
   const [userInfos, setUserInfos] = useState(null)
+  const navigate = useNavigate()
 
 
   const router = useRoutes(routes)
@@ -19,7 +21,7 @@ function App() {
     setUserInfos(userInfos)
     setIsLoggedIn(true)
     localStorage.setItem("user", JSON.stringify({ token }))
-  }, [])
+  }, [navigate])
 
   const logout = useCallback(() => {
     setToken(null)

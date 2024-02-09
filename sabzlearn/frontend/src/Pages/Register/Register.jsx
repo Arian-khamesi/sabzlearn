@@ -13,12 +13,14 @@ import { requiredValidator, minValidator, maxValidator, emailValidator } from '.
 import { useForm } from '../../hooks/useForm'
 
 import AuthContext from '../../context/authContext'
+import swal from 'sweetalert'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Register() {
 
     const authContext = useContext(AuthContext)
-    console.log(authContext);
+    // console.log(authContext);
 
 
     const [formState, onInputHandler] = useForm({
@@ -44,7 +46,7 @@ export default function Register() {
         },
     }, false)
 
-   
+    const navigate = useNavigate();
 
     const registerUserHandler = (event) => {
         event.preventDefault()
@@ -67,7 +69,15 @@ export default function Register() {
                 },
                 body: JSON.stringify(newUserInfo),
             }).then(res => res.json())
-                .then(result => authContext.login(result.accessToken,result.user))
+                .then(result => {
+                    authContext.login(result.accessToken, result.user)
+                    swal({
+                        title: `${formState.inputs.username.value} عزیز با موفقیت در سایت ثبت نام شدید`,
+                        icon: "success",
+                        buttons: 'ورود به پنل کاربری',
+                        onClose: redirector()
+                    })
+                })
         }
         else {
             alert("رمز عبور با تکرار آن یکسان نیست")
@@ -75,6 +85,9 @@ export default function Register() {
 
     }
 
+    const redirector = () => {
+        navigate('/');
+    }
 
     return (
         <>

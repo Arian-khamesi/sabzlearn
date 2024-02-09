@@ -37,7 +37,6 @@ export default function Login() {
         },
     }, false)
 
-    console.log(formState);
 
     const [isVerifyRecaptcha, setIsVerifyRecaptcha] = useState(false)
     const onChangeCaptchaHandler = () => {
