@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Landing.css'
 import Typewriter from 'typewriter-effect';
 
 import LandingCounter from '../LandingCounter/LandingCounter';
+import { Link } from 'react-router-dom';
 
 export default function Landing() {
+
+const [searchValue,setSearchValue]=useState("")
+
+
     return (
 
         <section className="landing">
@@ -30,10 +35,12 @@ export default function Landing() {
                 <h2 className="landing__subtitle">با آکادمی سبزلرن، برنامه نویسی رو با خیال راحت یاد بگیر و پیشرفت کن.
                 </h2>
                 <div className="landing__searchbar">
-                    <input type="text" className="landing__searchbar-input" placeholder="چه چیزی دوست داری یاد بگیری ..." />
-                    <button className="landing__searchbar-btn" type="submit">
+                    <input type="text" className="landing__searchbar-input" placeholder="چه چیزی دوست داری یاد بگیری ..." value={searchValue} onChange={event=>setSearchValue(event.target.value)}/>
+                    <Link to={`/search/${searchValue}`}>
+                    <button className="landing__searchbar-btn" type="submit" >
                         <i className="fas fa-search landing__searchbar-icon"></i>
                     </button>
+                    </Link>
                 </div>
                 <div className="landing-status">
 

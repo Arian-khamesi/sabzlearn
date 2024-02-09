@@ -1,0 +1,8 @@
+.search-container{
+    display: flex;
+    justify-content: start;
+}
+.alert-with{
+    width: 100%;
+    text-align: center;
+}
