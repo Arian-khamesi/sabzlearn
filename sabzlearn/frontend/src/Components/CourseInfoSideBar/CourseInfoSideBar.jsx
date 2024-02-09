@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 export default function CourseInfoSideBar(props) {
 
-    console.log(props.comments);
 
     return (
         <div className="col-4">

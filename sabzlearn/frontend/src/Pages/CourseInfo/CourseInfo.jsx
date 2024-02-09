@@ -17,14 +17,13 @@ import swal from "sweetalert"
 export default function CourseInfo() {
 
   const { courseName } = useParams()
-  console.log(courseName);
-  console.log(localStorage.getItem('user'));
 
 
   const [comments, setComments] = useState([])
   const [sessions, setSessions] = useState([])
   const [courseDetails, setCourseDetails] = useState({})
   const [categoryId, setCategoryId] = useState({})
+  const [creator, setCreator] = useState({})
   const [lastUpdate, setLastUpdate] = useState("")
 
 
@@ -42,6 +41,7 @@ export default function CourseInfo() {
         setComments(courseInfo.comments)
         setSessions(courseInfo.sessions)
         setCategoryId(courseInfo.categoryID)
+        setCreator(courseInfo.creator)
         setCourseDetails(courseInfo)
         setLastUpdate(courseInfo.updatedAt)
 
@@ -50,7 +50,6 @@ export default function CourseInfo() {
 
   }, [])
 
-  console.log(comments);
 
   const submitComment = (newCommentBody,newCommentScore) => {
 
@@ -251,9 +250,9 @@ export default function CourseInfo() {
                 <div className="techer-details">
                   <div className="techer-details__header">
                     <div className="techer-details__header-right">
-                      <img src="/images/info/teacher.jfif" alt="Teacher Profile" className="techer-details__header-img" />
+                      <img src={creator.profile} alt="Teacher Profile" className="techer-details__header-img" />
                       <div className="techer-details__header-titles">
-                        <a href="#" className="techer-details__header-link">محمدامین سعیدی راد</a>
+                        <a href="#" className="techer-details__header-link">{creator.name}</a>
                         <span className="techer-details__header-skill">
                           Front End & Back End Developer
                         </span>

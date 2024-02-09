@@ -11,7 +11,7 @@ export default function SectionHeader({ title, descrip, btnTitle, btnHref }) {
                 <span className="courses-header__text">{descrip}</span>
             </div>
             {btnTitle ? (<div className="courses-header__left">
-                <Link to={btnHref} className="courses-header__link">
+                <Link to={`${btnHref}/1`} className="courses-header__link">
                     <span>{btnTitle}</span>
                     <i className="fas fa-arrow-left courses-header__icon"></i>
                 </Link>
