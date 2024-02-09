@@ -11,7 +11,7 @@ import Login from "./Pages/Login/Login";
 const routes = [
     {path:"/",element:<Index/>},
     {path:"/course-info/:courseName",element:<CourseInfo/>},
-    {path:"/category-info/:categoryName",element:<Category/>},
+    {path:"/category-info/:categoryName/:page",element:<Category/>},
     {path:"/article-info/:articleName",element:<ArticleInfo/>},
     {path:"/courses/:page",element:<Courses/>},
     {path:"/login/",element:<Login/>},

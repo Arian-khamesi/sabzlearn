@@ -37,7 +37,7 @@ export default function NavBar() {
               {
                 allMenus.map(menu => (
                   <li className="main-header__item">
-                    <Link to={menu.href} className="main-header__link"><span className='main-header__link-span'>
+                    <Link to={`${menu.href}/1`} className="main-header__link"><span className='main-header__link-span'>
                       {menu.title}
                       {menu.submenus.length !== 0 && (
                         <>

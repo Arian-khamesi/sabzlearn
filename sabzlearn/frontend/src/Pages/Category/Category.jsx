@@ -15,6 +15,7 @@ export default function Category() {
 
   const [courses, setCourses] = useState([])
   const { categoryName } = useParams()
+  const [shownCourses,setShownCourses]=useState([])
 
 
   useEffect(() => {
@@ -41,7 +42,7 @@ export default function Category() {
               <div className="row">
                 {
                   courses.length ? (
-                    courses.map((data) => {
+                    shownCourses.map((data) => {
                       <>
                         <div className="courses-top-bar">
 
@@ -86,7 +87,12 @@ export default function Category() {
                           key={data.id}
                           href={data.shortName}
                         />
-                        <Pagination />
+                        <Pagination
+                          item={courses}
+                          itemCount={3}
+                          pathName={`/category-info/${categoryName}`}
+                          setShownCourses={setShownCourses}
+                        />
                       </>
                     }
                     )
