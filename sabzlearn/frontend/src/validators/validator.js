@@ -1,5 +1,10 @@
 import rules from "./rules";
-import emailValidator from "./regex"
+import {emailValidator} from "./regex"
+import {phoneValidator }from "./regex"
+
+console.log(rules);
+console.log(emailValidator);
+console.log(phoneValidator);
 
 const validator = (value, validations) => {
 
@@ -18,6 +23,9 @@ const validator = (value, validations) => {
         }
         if (validator.value === rules.emailValue) {
             !emailValidator(value) && validationsResult.push(false);
+        }
+        if (validator.value === rules.phoneValue) {
+            !phoneValidator(value) && validationsResult.push(false);
         }
     }
 

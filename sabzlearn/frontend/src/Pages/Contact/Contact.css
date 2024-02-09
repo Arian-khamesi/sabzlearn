@@ -94,6 +94,7 @@
   
   .login-form__btn-success {
     background-color: #2bce56;
+    cursor: pointer;
   }
   
   .login-form__btn-error {

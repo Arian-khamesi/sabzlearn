@@ -5,4 +5,11 @@ const emailValidator = (value) => {
 }
 
 
-export default emailValidator;
+const phoneValidator = (value) => {
+    const phonePattern = /^\d+$/g
+
+    return phonePattern.test(value)
+}
+
+
+export { emailValidator, phoneValidator };

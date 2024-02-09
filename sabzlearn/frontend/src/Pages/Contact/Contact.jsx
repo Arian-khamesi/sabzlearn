@@ -5,16 +5,20 @@ import Footer from '../../Components/Footer/Footer'
 
 import Input from '../../Components/Form/Input'
 import Button from '../../Components/Form/Button'
-import { requiredValidator, minValidator, maxValidator, emailValidator } from '../../validators/rules'
+import { requiredValidator, minValidator, maxValidator, emailValidator ,phoneValidator } from '../../validators/rules'
 
 import './Contact.css'
 import { useForm } from '../../hooks/useForm'
+
+import swal from 'sweetalert'
+import { useNavigate } from 'react-router-dom'
 
 
 
 
 export default function Contact() {
 
+ const navigate = useNavigate();
 
   const [formState, onInputHandler] = useForm(
     {
@@ -38,10 +42,40 @@ export default function Contact() {
     false
   );
 
-  const addNewContact = () => {
+
+
+  const addNewContact = (event) => {
+    event.preventDefault()
     console.log("درخواست شما برای مدیران سایت ارسال شد");
+    const newOpinion = {
+      name: formState.inputs.name.value,
+      email: formState.inputs.email.value,
+      phone: Number(formState.inputs.phone.value),
+      body: formState.inputs.body.value,
+    }
+    console.log(newOpinion);
+
+    fetch("http://localhost:5000/v1/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newOpinion),
+    }).then(res => res.json())
+      .then(result => {
+        swal({
+          title: `${formState.inputs.name.value} عزیز نظر شما با موفقیت ثبت شد`,
+          icon: "success",
+          buttons: 'ورود به پنل کاربری',
+          onClose: redirector()
+        })
+      })
+
   };
 
+ const redirector = () => {
+        navigate('/');
+    }
 
   return (
     <>
@@ -63,7 +97,7 @@ export default function Contact() {
                 className="login-form__username-input"
                 type="text"
                 placeholder="نام و نام خانوادگی"
-                validations={[requiredValidator(), minValidator(6), maxValidator(20)]}
+                validations={[requiredValidator(), minValidator(6), maxValidator(20) ]}
               />
               <i className="login-form__username-icon fa fa-user"></i>
             </div>
@@ -75,7 +109,7 @@ export default function Contact() {
                 className="login-form__password-input"
                 type="text"
                 placeholder="آدرس ایمیل"
-                validations={[requiredValidator(), minValidator(8), maxValidator(40), emailValidator()]}
+                validations={[requiredValidator(), minValidator(8), maxValidator(50), emailValidator()]}
               />
               <i className="login-form__password-icon fa fa-envelope"></i>
             </div>
@@ -87,7 +121,7 @@ export default function Contact() {
                 className="login-form__password-input"
                 type="text"
                 placeholder="شماره تماس"
-                validations={[requiredValidator(), minValidator(10), maxValidator(11)]}
+                validations={[requiredValidator(), minValidator(10), maxValidator(11),phoneValidator()]}
               />
               <i className="login-form__password-icon fa fa-phone"></i>
             </div>
@@ -102,13 +136,11 @@ export default function Contact() {
               />
             </div>
             <Button
-              className={`login-form__btn ${formState.isFormValid === true
+              className={`login-form__btn ${formState.isInputValid === true
                 ? "login-form__btn-success"
                 : "login-form__btn-error"
                 }`}
-              type="submit"
-              onClick={addNewContact}
-              disabled={!formState.isFormValid}
+              type="submit" onClick={addNewContact} disabled={!formState.isInputValid}
             >
               <span className="login-form__btn-text">ارسال</span>
             </Button>
