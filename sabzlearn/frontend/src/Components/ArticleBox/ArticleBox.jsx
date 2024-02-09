@@ -2,8 +2,9 @@ import React from 'react'
 
 import './ArticleBox.css'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-export default function ArticleBox({ title, descrip, cover }) {
+export default function ArticleBox({ title, description, cover, shortName }) {
 
   const [isCoverLoad, setIsCoverLoad] = useState(false)
   const coverLoader = () => {
@@ -14,18 +15,18 @@ export default function ArticleBox({ title, descrip, cover }) {
     <div className="col-4">
       <div className="article-card">
         <div className="article-card__header">
-          <a href="#" className="article-card__link-img">
-            <img src={isCoverLoad ? cover : "/images/shimmer.gif"} className={isCoverLoad ? "article-card__img" : ""} alt="Article Cover" onLoad={coverLoader} />
-          </a>
+          <Link to={`/article-info/${shortName}`} className="article-card__link-img">
+            <img src={isCoverLoad ? `/images/articles/${cover}` : "/images/shimmer.gif"} className={isCoverLoad ? "article-card__img" : ""} alt="Article Cover" onLoad={coverLoader} />
+          </Link>
         </div>
         <div className="article-card__content">
-          <a href="#" className="article-card__link">
+          <Link to={`/article-info/${shortName}`} className="article-card__link">
             {title}
-          </a>
+          </Link>
           <p className="article-card__text">
-            {descrip}
+            {description}
           </p>
-          <a href="#" className="article-card__btn">بیشتر بخوانید</a>
+          <Link to={`/article-info/${shortName}`} className="article-card__btn">بیشتر بخوانید</Link>
         </div>
       </div>
     </div>

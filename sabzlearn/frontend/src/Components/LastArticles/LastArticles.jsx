@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import './LastArticles.css'
 import SectionHeader from '../SectionHeader/SectionHeader'
 import ArticleBox from '../ArticleBox/ArticleBox'
 
 export default function LastArticles() {
+
+    const [articles, setArticles] = useState([])
+
+    useEffect(() => {
+
+        fetch("http://localhost:5000/v1/articles")
+            .then(res => res.json())
+            .then(result => setArticles(result))
+
+    }, [])
+
+
     return (
         <section className="articles">
             <div className="container">
@@ -16,21 +28,14 @@ export default function LastArticles() {
 
                 <div className="articles__content">
                     <div className="row">
-                        <ArticleBox
-                            title={'نحوه نصب کتابخانه در پایتون | آموزش نصب کتابخانه پایتون'}
-                            descrip={'زبان پایتون هم مانند دیگر زبان­های برنامه نویسی رایج، دارای کتابخانه های مختلفی برای تسریع...'}
-                            cover={'images/blog/3.jpg'}
-                        />
-                        <ArticleBox
-                            title={'نحوه نصب کتابخانه در پایتون | آموزش نصب کتابخانه پایتون'}
-                            descrip={'زبان پایتون هم مانند دیگر زبان­های برنامه نویسی رایج، دارای کتابخانه های مختلفی برای تسریع...'}
-                            cover={'images/blog/3.jpg'}
-                        />
-                        <ArticleBox
-                            title={'نحوه نصب کتابخانه در پایتون | آموزش نصب کتابخانه پایتون'}
-                            descrip={'زبان پایتون هم مانند دیگر زبان­های برنامه نویسی رایج، دارای کتابخانه های مختلفی برای تسریع...'}
-                            cover={'images/blog/3.jpg'}
-                        />
+
+                        {
+                            articles.slice(0,3).map(article=>(
+                                <ArticleBox
+                                {...article}
+                            />
+                            ))
+                        }
 
                     </div>
                 </div>
