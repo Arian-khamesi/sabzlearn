@@ -16,42 +16,37 @@ export default function LastCourses() {
         }).then(res => res.json())
             .then(allCourse => setLastCourses(allCourse))
 
-}, [])
+    }, [])
 
 
-return (
-    <div className="courses">
-        <div className="container">
-            <SectionHeader
-                title='جدیدترین دوره ها'
-                descrip='سکوی پرتاب شما به سمت موفقیت'
-                btnTitle='تمامی دوره ها'
-                btnHref={'/courses'}
-            />
-            <div className="courses-content">
-                <div className="container">
-                    <div className="row">
-                        {lastCourses.splice(0,3).map((data) => {
-                            
+    return (
+        <div className="courses">
+            <div className="container">
+                <SectionHeader
+                    title='جدیدترین دوره ها'
+                    descrip='سکوی پرتاب شما به سمت موفقیت'
+                    btnTitle='تمامی دوره ها'
+                    btnHref={'/courses'}
+                />
+                <div className="courses-content">
+                    <div className="container">
+                        <div className="row">
+                            {lastCourses.splice(0, 3).map((data) => {
+
                                 return (
                                     <CourseBox
-                                        img={data.cover}
-                                        title={data.name}
-                                        instructor={data.creator}
-                                        participants={data.participants}
-                                        price={data.price}
+                                        {...data}
                                         key={data.id}
-                                        href={data.shortName}
                                     />
                                 )
-                            
-                        }
-                        )}
+
+                            }
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-)
+    )
 }
