@@ -1,14 +1,15 @@
 import React from "react";
 import './Sidebar.css'
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return (
     <div id="sidebar" class="col-2">
       <div class="sidebar-header">
         <div class="sidebar-logo">
-          <a href="#">
+          <Link to={`/panel-admin/`}>
             <img src="/images/logo/Logo.png" alt="Logo" />
-          </a>
+          </Link>
         </div>
 
         <div class="sidebar-menu-btn">
@@ -18,39 +19,39 @@ export default function Sidebar() {
       <div class="sidebar-menu">
         <ul>
           <li class="active-menu">
-            <a href="#">
+            <Link to={`/panel-admin/`}>
               <span>صفحه اصلی</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">
+            <Link to={`courses`}>
               <span>دوره ها</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">
+            <Link to={`menus`}>
               <span>منو ها</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">
+            <Link to={`articles`}>
               <span>مقاله ها</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">
+            <Link to={`users`}>
               <span>کاربران</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">
+            <Link to={`offs`}>
               <span>کدهای تخفیف</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">
+            <Link to={`/panel-admin/`}>
               <span>دسته‌بندی‌ها</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
