@@ -50,12 +50,12 @@ export default function Topbar() {
           <div class="home-left">
             <div class="home-profile">
               <div class="home-profile-image">
-                <a href="#">
-                  <img src="/images/profile.png" alt="" />
+                <a href="#" >
+                <img src="/images/profile/profile-1.JPG" alt="profile"/>
                 </a>
               </div>
               <div class="home-profile-name">
-                <a href="#">محمدامین سعیدی راد</a>
+                <a href="#">آریان خامسی</a>
               </div>
               <div class="home-profile-icon">
                 <i class="fas fa-angle-down"></i>

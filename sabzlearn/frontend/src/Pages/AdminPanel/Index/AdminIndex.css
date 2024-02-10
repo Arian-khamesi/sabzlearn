@@ -101,15 +101,15 @@
   }
   @font-face {
     font-family: "vazir";
-    src: url("./../../fonts/Vazir/Vazir.eot");
-    src: url("./../../fonts/Vazir/Vazir.ttf");
-    src: url("./../../fonts/Vazir/Vazir.woff");
-    src: url("./../../fonts/Vazir/Vazir.woff2");
+    src: url("./../../../fonts/Vazir/Vazir.eot");
+    src: url("./../../../fonts/Vazir/Vazir.ttf");
+    src: url("./../../../fonts/Vazir/Vazir.woff");
+    src: url("./../../../fonts/Vazir/Vazir.woff2");
   }
   @font-face {
     font-family: "lalezar";
-    src: url("./../../fonts/Lalezar-Font/OTF/Lalezar-Regular.otf");
-    src: url("./../../fonts/Lalezar-Font/TTF/Lalezar-Regular.ttf");
+    src: url("./../../../fonts/Lalezar-Font/OTF/Lalezar-Regular.otf");
+    src: url("./../../../fonts/Lalezar-Font/TTF/Lalezar-Regular.ttf");
   }
   #sidebar {
     background-color: #17203f;
@@ -362,6 +362,7 @@
   }
   #home .home-header .home-left .home-profile .home-profile-image img {
     width: 50px;
+    height: 50px;
     border-radius: 50%;
   }
   #home .home-header .home-left .home-profile .home-profile-name {
@@ -741,4 +742,8 @@
     display: block !important;
   }
   /*# sourceMappingURL=main.css.map */
+  /* .profile-image{
+    display: block;
+    height: 100%;
+  } */
   
