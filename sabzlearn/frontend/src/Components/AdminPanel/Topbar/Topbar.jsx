@@ -24,7 +24,21 @@ export default function Topbar() {
         console.log(adminInfo)
       })
 
-  }, [])
+  }, [tickedNotif])
+
+  function tickedNotif (notifID) {
+
+    const localstorageData = JSON.parse(localStorage.getItem("user"))
+
+    fetch(`http://localhost:5000/v1/notifications/see/${notifID}`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${localstorageData.token}`
+      }
+    })
+      .then(res => res.json())
+      .then(result => console.log(result))
+  }
 
   return (
     <div class="container-fluid">
@@ -35,17 +49,17 @@ export default function Topbar() {
               <input type="text" class="search-bar" placeholder="جستجو..." />
             </div>
             <div class="home-notification">
-              <button type="button"  onMouseEnter={()=>setShowNotifsModal(true)}>
+              <button type="button" onMouseEnter={() => setShowNotifsModal(true)}>
                 <i class="far fa-bell"></i>
               </button>
             </div>
-            <div class="home-notification-modal" onMouseEnter={()=>setShowNotifsModal(true)} onMouseLeave={()=>setShowNotifsModal(false)}>
+            <div class="home-notification-modal" onMouseEnter={() => setShowNotifsModal(true)} onMouseLeave={() => setShowNotifsModal(false)}>
               <ul class="home-notification-modal-list">
                 {adminNotifs.map(notif => (
                   <li class="home-notification-modal-item" key={notif.id}>
                     <span class="home-notification-modal-text">پیغام ها</span>
                     <label class="switch">
-                      <a href="jvascript:void(0)">
+                      <a href="jvascript:void(0)" onClick={() => tickedNotif(notif._id)}>
                         متوجه شدم
                       </a>
                     </label>
