@@ -310,6 +310,7 @@
     -webkit-transition: 0.4s;
     transition: 0.4s;
   }
+ 
   #home .home-header .home-right .home-notification-modal .slider:before {
     position: absolute;
     content: "";

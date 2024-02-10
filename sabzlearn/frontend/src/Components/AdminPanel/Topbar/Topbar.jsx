@@ -2,68 +2,60 @@ import React, { useEffect, useState } from "react";
 
 export default function Topbar() {
 
-  const [adminInfo,setAdminInfo]=useState({})
+  const [adminInfo, setAdminInfo] = useState({})
+  const [adminNotifs, setAdminNotifs] = useState([])
+  const [showNotifsModal, setShowNotifsModal] = useState(false)
 
-useEffect(()=>{
 
-  const localstorageData = JSON.parse(localStorage.getItem("user"))
+  useEffect(() => {
 
-fetch("http://localhost:5000/v1/auth/me",{
-  headers:{
-    "Authorization":`Bearer ${localstorageData.token}`
-  }
-})
-.then(res=>res.json())
-.then(result=>{
-  console.log(result);
-  setAdminInfo(result)
-  console.log(adminInfo)
-})
+    const localstorageData = JSON.parse(localStorage.getItem("user"))
 
-},[])
+    fetch("http://localhost:5000/v1/auth/me", {
+      headers: {
+        "Authorization": `Bearer ${localstorageData.token}`
+      }
+    })
+      .then(res => res.json())
+      .then(result => {
+        console.log(result);
+        setAdminInfo(result)
+        setAdminNotifs(result.notifications)
+        console.log(adminInfo)
+      })
+
+  }, [])
 
   return (
     <div class="container-fluid">
       <div class="container">
-        <div class="home-header">
-          <div class="home-right">
+        <div class={showNotifsModal ? "home-header active-modal-notfication" : "home-header"}>
+          <div class="home-right ">
             <div class="home-searchbar">
               <input type="text" class="search-bar" placeholder="جستجو..." />
             </div>
             <div class="home-notification">
-              <button type="button">
+              <button type="button"  onMouseEnter={()=>setShowNotifsModal(true)}>
                 <i class="far fa-bell"></i>
               </button>
             </div>
-            <div class="home-notification-modal">
+            <div class="home-notification-modal" onMouseEnter={()=>setShowNotifsModal(true)} onMouseLeave={()=>setShowNotifsModal(false)}>
               <ul class="home-notification-modal-list">
+                {adminNotifs.map(notif => (
+                  <li class="home-notification-modal-item" key={notif.id}>
+                    <span class="home-notification-modal-text">پیغام ها</span>
+                    <label class="switch">
+                      <a href="jvascript:void(0)">
+                        متوجه شدم
+                      </a>
+                    </label>
+                  </li>
+                ))}
                 <li class="home-notification-modal-item">
                   <span class="home-notification-modal-text">پیغام ها</span>
-                  <label class="switch">
-                    <input type="checkbox" checked />
-                    <span class="slider round"></span>
-                  </label>
-                </li>
-                <li class="home-notification-modal-item">
-                  <span class="home-notification-modal-text">پیغام ها</span>
-                  <label class="switch">
-                    <input type="checkbox" checked />
-                    <span class="slider round"></span>
-                  </label>
-                </li>
-                <li class="home-notification-modal-item">
-                  <span class="home-notification-modal-text">پیغام ها</span>
-                  <label class="switch">
-                    <input type="checkbox" checked />
-                    <span class="slider round"></span>
-                  </label>
-                </li>
-                <li class="home-notification-modal-item">
-                  <span class="home-notification-modal-text">پیغام ها</span>
-                  <label class="switch">
-                    <input type="checkbox" checked />
-                    <span class="slider round"></span>
-                  </label>
+                  <a href="jvascript:void(0)">
+                    دیدم
+                  </a>
                 </li>
               </ul>
             </div>
@@ -72,7 +64,7 @@ fetch("http://localhost:5000/v1/auth/me",{
             <div class="home-profile">
               <div class="home-profile-image">
                 <a href="#" >
-                <img src={adminInfo.profile} alt="profile"/>
+                  <img src={adminInfo.profile} alt="profile" />
                 </a>
               </div>
               <div class="home-profile-name">
