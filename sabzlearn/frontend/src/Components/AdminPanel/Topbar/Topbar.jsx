@@ -55,22 +55,22 @@ export default function Topbar() {
             </div>
             <div class="home-notification-modal" onMouseEnter={() => setShowNotifsModal(true)} onMouseLeave={() => setShowNotifsModal(false)}>
               <ul class="home-notification-modal-list">
-                {adminNotifs.map(notif => (
-                  <li class="home-notification-modal-item" key={notif.id}>
-                    <span class="home-notification-modal-text">پیغام ها</span>
-                    <label class="switch">
-                      <a href="jvascript:void(0)" onClick={() => tickedNotif(notif._id)}>
-                        متوجه شدم
-                      </a>
-                    </label>
+                {adminNotifs.length?(
+                  adminNotifs.map(notif => (
+                    <li class="home-notification-modal-item" key={notif.id}>
+                      <span class="home-notification-modal-text">پیغام ها</span>
+                      <label class="switch">
+                        <a href="jvascript:void(0)" onClick={() => tickedNotif(notif._id)}>
+                          متوجه شدم
+                        </a>
+                      </label>
+                    </li>
+                  ))
+                ):(
+                  <li class="home-notification-modal-item">
+                  <span class="home-notification-modal-text">اعلانی برای شما وجود ندارد!</span>
                   </li>
-                ))}
-                <li class="home-notification-modal-item">
-                  <span class="home-notification-modal-text">پیغام ها</span>
-                  <a href="jvascript:void(0)">
-                    دیدم
-                  </a>
-                </li>
+                )}
               </ul>
             </div>
           </div>
