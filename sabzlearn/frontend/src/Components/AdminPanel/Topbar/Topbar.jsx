@@ -19,10 +19,10 @@ export default function Topbar() {
       })
         .then(res => res.json())
         .then(result => {
-          console.log(result);
+          // console.log(result);
           setAdminInfo(result)
           setAdminNotifs(result.notifications)
-          console.log(adminInfo)
+          // console.log(adminInfo)
         })
     }
 
