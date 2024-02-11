@@ -13,7 +13,7 @@ export default function Users() {
   }, [])
   console.log(allUser)
 
-  function getUsers () {
+  function getUsers() {
     fetch('http://localhost:5000/v1/users', {
       headers: {
         "Authorization": `Bearer ${localstorageData.token}`
@@ -49,6 +49,31 @@ export default function Users() {
       .then(result => getUsers())
   }
 
+  const blocker = (userId) => {
+    fetch(`http://localhost:5000/v1/ban/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${localstorageData.token}`
+      }
+    })
+      .then((res) => {
+        res.json()
+        res.ok && swal({ title: "کاربر مدنظر با موفقیت مسدود شد", icon: "success", buttons: "بازگشت" })
+      })
+      .then(result => getUsers())
+  }
+
+  const userBlock = (id) => {
+    console.log(id);
+    swal({
+      title: "آیا از مسدود کردن کاربر اطمینان دارید؟",
+      icon: "warning",
+      buttons: ["انصراف", "مسدود"]
+    }).then(result => {
+      result && blocker(id)
+    })
+  }
+
   return (
     <>
       <DataTable title="کاربران">
@@ -69,7 +94,7 @@ export default function Users() {
               <tr>
                 <td>{user._id}</td>
                 <td>{user.name}</td>
-                <td>09123443243</td>
+                <td>{user.phone}</td>
                 <td>{user.email}</td>
                 <td>
                   <button type="button" class="btn btn-primary edit-btn">
@@ -82,7 +107,7 @@ export default function Users() {
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-secondary delete-btn">
+                  <button type="button" class="btn btn-secondary delete-btn" onClick={() => userBlock(user._id)}>
                     مسدود
                   </button>
                 </td>
