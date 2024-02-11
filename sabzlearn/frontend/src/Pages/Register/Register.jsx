@@ -8,7 +8,7 @@ import Footer from '../../Components/Footer/Footer'
 
 import Input from '../../Components/Form/Input'
 import Button from '../../Components/Form/Button'
-import { requiredValidator, minValidator, maxValidator, emailValidator } from '../../validators/rules'
+import { requiredValidator, minValidator, maxValidator, emailValidator, phoneValidator } from '../../validators/rules'
 
 import { useForm } from '../../hooks/useForm'
 
@@ -36,6 +36,10 @@ export default function Register() {
             value: "",
             isValid: false
         },
+        phone: {
+            value: "",
+            isValid: false,
+        },
         password: {
             value: "",
             isValid: false
@@ -56,6 +60,7 @@ export default function Register() {
             name: formState.inputs.fullname.value,
             username: formState.inputs.username.value,
             email: formState.inputs.email.value,
+            phone: Number(formState.inputs.phone.value),
             password: formState.inputs.password.value,
             confirmPassword: formState.inputs.confirmPassword.value,
         };
@@ -138,7 +143,7 @@ export default function Register() {
                         </div>
                         <div className="login-form__password">
                             <Input
-                                className="login-form__password-input"
+                                className="login-form__username-input"
                                 type="text"
                                 id="email"
                                 placeholder="آدرس ایمیل"
@@ -154,9 +159,23 @@ export default function Register() {
 
                             <i className="login-form__password-icon fa fa-envelope"></i>
                         </div>
+
+                        <div className="login-form__phone-number login-form__parent">
+                            <Input
+                                className="login-form__username-input"
+                                onInputHandler={onInputHandler}
+                                element="input"
+                                id="phone"
+                                type="text"
+                                placeholder="شماره تماس"
+                                validations={[requiredValidator(), minValidator(10), maxValidator(11), phoneValidator()]}
+                            />
+                            <i className="login-form__password-icon fa fa-phone"></i>
+                        </div>
+
                         <div className="login-form__password">
                             <Input
-                                className="login-form__password-input"
+                                className="login-form__username-input"
                                 type="password"
                                 id="password"
                                 placeholder="رمز عبور"
