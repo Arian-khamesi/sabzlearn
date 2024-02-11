@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import './Sidebar.css'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import AuthContext from '../../../context/authContext';
+import swal from "sweetalert";
 
 export default function Sidebar() {
+
+  const authContext = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const logOutHandler = () => {
+    swal({
+      title: "با موفقیت از حساب خود خارج شدید",
+      icon: "success",
+      buttons: "صفحه اصلی"
+    }).then(() => {
+      authContext.logout()
+      navigate("/")
+    })
+  }
+
+
   return (
     <div id="sidebar" class="col-2">
       <div class="sidebar-header">
@@ -51,6 +69,11 @@ export default function Sidebar() {
           <li>
             <Link to={`/panel-admin/`}>
               <span>دسته‌بندی‌ها</span>
+            </Link>
+          </li>
+          <li>
+            <Link to={`/panel-admin/`} onClick={logOutHandler}>
+              <span>خروج از حساب کاربری</span>
             </Link>
           </li>
         </ul>

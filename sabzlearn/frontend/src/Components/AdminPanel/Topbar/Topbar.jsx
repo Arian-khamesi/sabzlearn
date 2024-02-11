@@ -11,22 +11,24 @@ export default function Topbar() {
 
     const localstorageData = JSON.parse(localStorage.getItem("user"))
 
-    fetch("http://localhost:5000/v1/auth/me", {
-      headers: {
-        "Authorization": `Bearer ${localstorageData.token}`
-      }
-    })
-      .then(res => res.json())
-      .then(result => {
-        console.log(result);
-        setAdminInfo(result)
-        setAdminNotifs(result.notifications)
-        console.log(adminInfo)
+    if (localstorageData) {
+      fetch("http://localhost:5000/v1/auth/me", {
+        headers: {
+          "Authorization": `Bearer ${localstorageData.token}`
+        }
       })
+        .then(res => res.json())
+        .then(result => {
+          console.log(result);
+          setAdminInfo(result)
+          setAdminNotifs(result.notifications)
+          console.log(adminInfo)
+        })
+    }
 
   }, [tickedNotif])
 
-  function tickedNotif (notifID) {
+  function tickedNotif(notifID) {
 
     const localstorageData = JSON.parse(localStorage.getItem("user"))
 
@@ -55,7 +57,7 @@ export default function Topbar() {
             </div>
             <div class="home-notification-modal" onMouseEnter={() => setShowNotifsModal(true)} onMouseLeave={() => setShowNotifsModal(false)}>
               <ul class="home-notification-modal-list">
-                {adminNotifs.length?(
+                {adminNotifs.length ? (
                   adminNotifs.map(notif => (
                     <li class="home-notification-modal-item" key={notif.id}>
                       <span class="home-notification-modal-text">پیغام ها</span>
@@ -66,9 +68,9 @@ export default function Topbar() {
                       </label>
                     </li>
                   ))
-                ):(
+                ) : (
                   <li class="home-notification-modal-item">
-                  <span class="home-notification-modal-text">اعلانی برای شما وجود ندارد!</span>
+                    <span class="home-notification-modal-text">اعلانی برای شما وجود ندارد!</span>
                   </li>
                 )}
               </ul>

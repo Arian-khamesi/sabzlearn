@@ -25,6 +25,7 @@ function App() {
 
   const logout = useCallback(() => {
     setToken(null)
+    setUserInfos({})
     localStorage.removeItem("user")
   }, [])
 
@@ -43,9 +44,11 @@ function App() {
           setIsLoggedIn(true)
           setUserInfos(userData)
         })
+    } else {
+      setIsLoggedIn(false)
     }
 
-  }, [login])
+  }, [login, logout])
 
 
   return (
