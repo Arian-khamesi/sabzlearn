@@ -50,17 +50,21 @@ export default function Users() {
   }
 
   const blocker = (userId) => {
-    fetch(`http://localhost:5000/v1/ban/${userId}`, {
+    console.log(localstorageData)
+    fetch(`http://localhost:5000/v1/users/ban/${userId}`, {
       method: "PUT",
       headers: {
         "Authorization": `Bearer ${localstorageData.token}`
       }
     })
-      .then((res) => {
-        res.json()
-        res.ok && swal({ title: "کاربر مدنظر با موفقیت مسدود شد", icon: "success", buttons: "بازگشت" })
-      })
-      .then(result => getUsers())
+    .then((res) => {
+      res.json()
+      res.ok && swal({ title: "کاربر مدنظر با موفقیت مسدود شد", icon: "success", buttons: "بازگشت" })
+    })
+    .then(result => {
+      remover(userId)
+      getUsers()
+    })
   }
 
   const userBlock = (id) => {
@@ -71,6 +75,7 @@ export default function Users() {
       buttons: ["انصراف", "مسدود"]
     }).then(result => {
       result && blocker(id)
+  
     })
   }
 

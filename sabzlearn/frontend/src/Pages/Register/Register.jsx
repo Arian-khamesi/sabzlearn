@@ -73,8 +73,21 @@ export default function Register() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(newUserInfo),
-            }).then(res => res.json())
-                .then(result => {
+            }).then((res) => {
+                if (res.ok) {
+                    return res.json()
+                } else {
+                    if (res.status === 403) {
+                        swal({
+                            title: "دسترسی این شماره به سایت مسدود است",
+                            icon: "error",
+                            buttons: "تغییر شماره"
+                        })
+                    }
+                    return false;
+                }
+            })
+                .then((result) => {
                     authContext.login(result.accessToken, result.user)
                     swal({
                         title: `${formState.inputs.username.value} عزیز با موفقیت در سایت ثبت نام شدید`,
