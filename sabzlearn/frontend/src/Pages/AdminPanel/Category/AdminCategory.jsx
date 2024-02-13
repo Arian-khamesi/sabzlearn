@@ -22,6 +22,7 @@ export default function AdminCategory() {
       .then(result => setAllCategory(result))
   }
 
+  /////////////////////creat category/////////////////////////
 
   const createNewCategory = (event) => {
     event.preventDefault();
@@ -47,7 +48,7 @@ export default function AdminCategory() {
         buttons: "بازگشت",
       })).then(() => {
         getAllCategories()
-    })
+      })
   }
 
 
@@ -63,6 +64,38 @@ export default function AdminCategory() {
       },
     },
     false)
+
+  //////////////////////remove category/////////////////////
+
+  const categoryRemover = (categoryId) => {
+
+    swal({
+      title: "آیا از حذف این دسته بندی از دوره ها اطمینان دارید؟",
+      icon: "warning",
+      buttons: ["انصراف", "حذف"]
+    }).then(result => {
+      result && remover(categoryId)
+    })
+
+  }
+
+  const remover = (categoryId) => {
+
+    const localStorageData = JSON.parse(localStorage.getItem("user"))
+
+    fetch(`http://localhost:5000/v1/category/${categoryId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorageData.token}`,
+      },
+    })
+      .then((res) => {
+        res.json()
+        res.ok && swal({ title: "دسته بندی مدنظر با موفقیت حذف شد", icon: "success", buttons: "بازگشت" })
+      })
+      .then(result => getAllCategories())
+  }
 
   return (
     <>
@@ -105,7 +138,7 @@ export default function AdminCategory() {
               <div class="bottom-form">
                 <div class="submit-btn">
                   <input
-                  className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid}
+                    className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid}
                     type="submit"
                     value="افزودن"
                     onClick={createNewCategory}
@@ -142,7 +175,7 @@ export default function AdminCategory() {
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-danger delete-btn" >
+                  <button type="button" class="btn btn-danger delete-btn" onClick={() => categoryRemover(category._id)}>
                     حذف
                   </button>
                 </td>
