@@ -166,7 +166,7 @@ export default function AdminCategory() {
                   type="text"
                   id="shortname"
                   placeholder="لطفا اسم کوتاه را وارد کنید..."
-                  validations={[minValidator(5), maxValidator(20)]}
+                  validations={[minValidator(3), maxValidator(20)]}
                 />
                 <span class="error-message text-danger"></span>
               </div>
