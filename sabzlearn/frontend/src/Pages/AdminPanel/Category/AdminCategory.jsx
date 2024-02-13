@@ -97,6 +97,43 @@ export default function AdminCategory() {
       .then(result => getAllCategories())
   }
 
+
+  /////////////////////////update category//////////////////////
+
+  const categoryUpdater = (categoryId,categoryName) => {
+    swal({
+      title: "عنوان دسته بندی مدنظر را وارد کنید",
+      content: "input",
+      buttons:  ["انصراف", "ویرایش"]
+    })
+      .then(result => {
+        updater(categoryId,categoryName, result)
+      })
+
+  }
+
+  const updater = (id,categoryName, categoryTitle) => {
+
+    const localStorageData = JSON.parse(localStorage.getItem("user"))
+
+    fetch(`http://localhost:5000/v1/category/${id}`,{
+      method:"PUT",
+      headers:{
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorageData.token}`,
+      },
+      body:JSON.stringify({
+        title:categoryTitle,
+        name:categoryName
+      })
+    })
+      .then(res => {
+        res.json()
+        res.ok && swal({ title: "دسته بندی مدنظر با موفقیت ویرایش شد", icon: "success", buttons: "بازگشت" })
+      })
+      .then(result => getAllCategories())
+  }
+
   return (
     <>
 
@@ -170,7 +207,7 @@ export default function AdminCategory() {
                 <td>{category.name}</td>
                 <td>{category.updatedAt.slice(0, 10)}</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit-btn">
+                  <button type="button" class="btn btn-primary edit-btn" onClick={() => categoryUpdater(category._id,category.name)}>
                     ویرایش
                   </button>
                 </td>
