@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import swal from 'sweetalert'
 
 import Input from "../../../Components/Form/Input"
-import { requiredValidator, minValidator, maxValidator } from '../../../validators/rules'
+import { requiredValidator, minValidator, maxValidator, phoneValidator } from '../../../validators/rules'
 import { useForm } from '../../../hooks/useForm'
 
 
@@ -64,7 +64,7 @@ export default function Courses() {
   /////////////////////////////get category id//////////////////
 
   const [allCategory, setAllCategory] = useState([])
-  const [courseCategory, setCourseCategory] = useState("");
+  const [courseCategory, setCourseCategory] = useState(-1);
 
   useEffect(() => {
     getAllCategories()
@@ -127,25 +127,43 @@ export default function Courses() {
     formData.append('cover', courseCover)
 
     console.log(formData);
+    console.log(Boolean(courseCover.name));
+    console.log(courseCategory);
 
-    fetch(`http://localhost:5000/v1/courses`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${localStorageData.token}`
-      },
-      body: formData
-    }).then(res => {
-      console.log(res);
-      if (res.ok) {
-        swal({
-          title: 'دوره جدید با موفقیت اضافه شد',
-          icon: 'success',
-          buttons: 'بازگشت'
-        }).then(() => {
-          getCourses()
-        })
-      }
-    })
+    if (courseCategory === -1) {
+      swal({
+        title: "لطفا دسته بندی دوره جدید را انتخاب نمایید",
+        icon: "error",
+        buttons: "بازگشت"
+      })
+    }
+    if(!courseCover.name) {
+      swal({
+        title: "لطفا عکس دوره جدید را انتخاب نمایید",
+        icon: "error",
+        buttons: "بازگشت"
+      })
+    }
+    else {
+      fetch(`http://localhost:5000/v1/courses`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${localStorageData.token}`
+        },
+        body: formData
+      }).then(res => {
+        console.log(res);
+        if (res.ok) {
+          swal({
+            title: 'دوره جدید با موفقیت اضافه شد',
+            icon: 'success',
+            buttons: 'بازگشت'
+          }).then(() => {
+            getCourses()
+          })
+        }
+      })
+    }
 
   }
 
@@ -208,7 +226,7 @@ export default function Courses() {
                   id="price"
                   element="input"
                   onInputHandler={onInputHandler}
-                  validations={[minValidator(5)]}
+                  validations={[minValidator(5), phoneValidator()]}
                   type="text"
                   isValid="false"
                   placeholder="لطفا قیمت دوره را وارد کنید..."
@@ -235,6 +253,7 @@ export default function Courses() {
               <div class="number input">
                 <label class="input-title">دسته‌بندی دوره</label>
                 <select onChange={selectCategory}>
+                  <option value={-1}>لطفا دسته بندی موردنظر را انتخاب نمایید</option>
                   {allCategory.map((category) => (
                     <option value={category._id}>{category.title}</option>
                   ))}
