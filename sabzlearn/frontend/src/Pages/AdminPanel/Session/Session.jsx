@@ -3,6 +3,7 @@ import { useForm } from '../../../hooks/useForm'
 import Input from '../../../Components/Form/Input'
 import { minValidator, phoneValidator } from '../../../validators/rules'
 import swal from 'sweetalert'
+import DataTable from '../../../Components/AdminPanel/DataTable/DataTable'
 
 export default function Session() {
 
@@ -26,6 +27,8 @@ export default function Session() {
     );
 
     useEffect(() => {
+        getAllSessions()
+
         fetch("http://localhost:5000/v1/courses")
             .then((res) => res.json())
             .then((allCourses) => {
@@ -64,7 +67,18 @@ export default function Session() {
             }
         })
     }
+    //////////////////////get sessions///////////////////////
 
+    const [allSessions, setAllSessions] = useState([])
+
+    const getAllSessions = () => {
+        fetch("http://localhost:5000/v1/courses/sessions")
+            .then(res => res.json())
+            .then(result => setAllSessions(result))
+    }
+
+
+    console.log(allSessions);
     return (
         <>
             <div class="container-fluid" id="home-content">
@@ -164,6 +178,45 @@ export default function Session() {
                     </form>
                 </div>
             </div>
+
+            <DataTable title="جلسات">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>شناسه</th>
+                            <th>عنوان</th>
+                            <th>مدت زمان</th>
+                            <th>دوره</th>
+                            <th>تاریخ ثبت</th>
+                            <th>ویرایش</th>
+                            <th>حذف</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {allSessions.map((session, index) => (
+                            <tr>
+                                <td>{index + 1}</td>
+                                <td>{session.title}</td>
+                                <td>{session.time}</td>
+                                <td>{session.course?session.course.name:"-"}</td>
+                                <td>{session.createdAt.slice(0,10)}</td>
+                                
+                                {/* <td><Link to={`/course-info/${course.shortName}`}>{course.shortName}</Link></td> */}
+                                <td>
+                                    <button type="button" class="btn btn-primary edit-btn">
+                                        ویرایش
+                                    </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger delete-btn">
+                                        حذف
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </DataTable>
         </>
     )
 }
