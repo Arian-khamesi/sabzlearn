@@ -5,6 +5,7 @@ import swal from "sweetalert"
 import { useForm } from '../../../hooks/useForm'
 import Input from '../../../Components/Form/Input'
 import { minValidator } from '../../../validators/rules'
+import Editor from "../../../Components/Form/Editor"
 
 export default function AdminArticles() {
 
@@ -67,6 +68,7 @@ export default function AdminArticles() {
   const [allCategory, setAllCategory] = useState([])
   const [articleCategory, setArticleCategory] = useState(-1);
   const [articleCover, setArticleCover] = useState({});
+  const [articleBody, setArticleBody] = useState("");
 
   useEffect(() => {
     getAllCategories()
@@ -137,6 +139,20 @@ export default function AdminArticles() {
                   validations={[minValidator(5)]}
                   className="article-textarea"
                 />
+                <span class="error-message text-danger"></span>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="name input">
+                <label class="input-title" style={{ display: "block" }}>
+                  محتوا
+                </label>
+                {/* <textarea style={{ width: "100%", height: "200px" }}></textarea> */}
+
+               <Editor
+               value={articleBody}
+               setValue={setArticleBody}
+               />
                 <span class="error-message text-danger"></span>
               </div>
             </div>
