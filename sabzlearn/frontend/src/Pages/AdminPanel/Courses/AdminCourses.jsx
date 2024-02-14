@@ -114,7 +114,6 @@ export default function Courses() {
 
   const addNewCourse = (event) => {
     event.preventDefault()
-    console.log("add course");
     const localStorageData = JSON.parse(localStorage.getItem("user"))
     let formData = new FormData()
     formData.append('name', formState.inputs.name.value)
@@ -126,9 +125,9 @@ export default function Courses() {
     formData.append('status', courseStatus)
     formData.append('cover', courseCover)
 
-    console.log(formData);
-    console.log(Boolean(courseCover.name));
-    console.log(courseCategory);
+    // console.log(formData);
+    // console.log(Boolean(courseCover.name));
+    // console.log(courseCategory);
 
     if (courseCategory === -1) {
       swal({

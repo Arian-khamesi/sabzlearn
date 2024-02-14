@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from '../../../hooks/useForm'
 import Input from '../../../Components/Form/Input'
-import { minValidator } from '../../../validators/rules'
+import { minValidator, phoneValidator } from '../../../validators/rules'
+import swal from 'sweetalert'
 
 export default function Session() {
 
     const [courses, setCourses] = useState([]);
     const [sessionCourse, setSessionCourse] = useState('-1');
     const [sessionVideo, setSessionVideo] = useState({})
+    const [sessionStatus, setSessionStatus] = useState(0)
 
     const [formState, onInputHandler] = useForm(
         {
@@ -32,6 +34,36 @@ export default function Session() {
             });
     }, []);
 
+    ///////////////////////add session////////////////////////
+
+    const addNewSession = (event) => {
+        event.preventDefault()
+        const localStorageData = JSON.parse(localStorage.getItem("user"))
+
+        let formData = new FormData()
+        formData.append('title', formState.inputs.title.value)
+        formData.append('time', Number(formState.inputs.time.value))
+        formData.append('video', sessionVideo)
+        formData.append('status', sessionStatus)
+
+        fetch(`http://localhost:5000/v1/courses/${sessionCourse}/sessions`, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${localStorageData.token}`
+            },
+            body: formData
+        }).then(res => {
+            if (res.ok) {
+                swal({
+                    title: "جلسه مورد نظر با موفقیت اضافه شد",
+                    icon: 'success',
+                    buttons: 'اوکی'
+                }).then(() => {
+                    console.log('Get All Sessions');
+                })
+            }
+        })
+    }
 
     return (
         <>
@@ -92,8 +124,40 @@ export default function Session() {
                         </div>
                         <div class="col-12">
                             <div class="bottom-form">
+                                <div class="condition">
+                                    <label class="input-title">وضعیت دوره</label>
+                                    <div class="radios">
+                                        <div class="available">
+                                            <label>
+                                                <span>غیر رایگان</span>
+                                                <input
+                                                    type="radio"
+                                                    value={1}
+                                                    name="condition"
+                                                    checked
+                                                    onInput={event => setSessionStatus(event.target.value)}
+                                                />
+                                            </label>
+                                        </div>
+                                        <div class="unavailable">
+                                            <label>
+                                                <span>رایگان</span>
+                                                <input
+                                                    type="radio"
+                                                    value={0}
+                                                    name="condition"
+                                                    onInput={event => setSessionStatus(event.target.value)}
+                                                />
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="bottom-form">
                                 <div class="submit-btn">
-                                    <input type="submit" value="افزودن" className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid} />
+                                    <input type="submit" value="افزودن" onClick={addNewSession} className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid} />
                                 </div>
                             </div>
                         </div>
