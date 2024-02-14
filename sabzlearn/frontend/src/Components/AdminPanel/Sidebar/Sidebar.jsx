@@ -72,6 +72,11 @@ export default function Sidebar() {
             </Link>
           </li>
           <li>
+            <Link to={`contact`}>
+              <span>نظرات</span>
+            </Link>
+          </li>
+          <li>
             <Link to={`/panel-admin/`} onClick={logOutHandler}>
               <span>خروج از حساب کاربری</span>
             </Link>
