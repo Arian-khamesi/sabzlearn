@@ -10,14 +10,49 @@ export default function AdminContact() {
         .then(res => res.json())
         .then(result => setAllComments(result))
 
-    console.log(allComments);
 
-const showMsg=(msg)=>{
-swal({
-    title:msg,
-    buttons:"بازگشت"
-})
-}
+    const showMsg = (msg) => {
+        swal({
+            title: msg,
+            buttons: "بازگشت"
+        })
+    }
+
+    /////////////answer msg//////////////////////////
+
+    const answerMsg = (userEmail) => {
+
+        swal({
+            title: "پاسخ به این پیام :",
+            content: "input",
+            buttons: "ارسال"
+        })
+            .then(res => {
+                const answerInfo = {
+                    email: userEmail,
+                    answer: res
+                }
+                res && sendAnswer(answerInfo)
+            })
+
+    }
+
+    const sendAnswer = (answer) => {
+        const localstorageData = JSON.parse(localStorage.getItem("user"))
+
+        fetch("http://localhost:5000/v1/contact/answer", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localstorageData.token}`
+            },
+            body: JSON.stringify(answer)
+        })
+            .then((res) => {
+                res.json()
+                res.ok && swal({ title: "پاسخ مدنظر با موفقیت ارسال شد", icon: "success", buttons: "بازگشت" })
+            })
+    }
 
     return (
         <>
@@ -43,8 +78,8 @@ swal({
                                 <td>{user.phone}</td>
                                 <td>{user.email}</td>
                                 <td>
-                                    <button type="button" class="btn btn-success delete-btn" onClick={()=>showMsg(user.body)}>
-                                    مشاهده متن پیام
+                                    <button type="button" class="btn btn-success delete-btn" onClick={() => showMsg(user.body)}>
+                                        مشاهده متن پیام
                                     </button>
                                 </td>
                                 <td>{user.createdAt.slice(0, 10)}</td>
@@ -54,7 +89,7 @@ swal({
                                     </button>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-primary edit-btn" >
+                                    <button type="button" class="btn btn-primary edit-btn" onClick={() => answerMsg(user.email)}>
                                         پاسخ
                                     </button>
                                 </td>
