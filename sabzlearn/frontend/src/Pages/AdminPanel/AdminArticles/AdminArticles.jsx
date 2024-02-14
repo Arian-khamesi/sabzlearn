@@ -86,6 +86,36 @@ export default function AdminArticles() {
     setArticleCategory(event.target.value);
   }
 
+  const addNewArticle = (event) => {
+    event.preventDefault()
+    const localStorageDate = JSON.parse(localStorage.getItem('user'))
+    let formData = new FormData()
+    formData.append('title', formState.inputs.title.value)
+    formData.append('shortName', formState.inputs.shortName.value)
+    formData.append('description', formState.inputs.description.value)
+    formData.append('categoryID', articleCategory)
+    formData.append('cover', articleCover)
+    formData.append('body', articleBody)
+
+    fetch(`http://localhost:5000/v1/articles`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorageDate.token}`
+      },
+      body: formData
+    }).then(res => {
+      if (res.ok) {
+        swal({
+          title: 'مقاله جدید با موفقیت ایجاد شد',
+          icon: 'success',
+          buttons: 'اوکی'
+        }).then(() => {
+          getAllArticles()
+        })
+      }
+    })
+  }
+
   return (
     <>
       <div class="container-fluid" id="home-content">
@@ -149,10 +179,10 @@ export default function AdminArticles() {
                 </label>
                 {/* <textarea style={{ width: "100%", height: "200px" }}></textarea> */}
 
-               <Editor
-               value={articleBody}
-               setValue={setArticleBody}
-               />
+                <Editor
+                  value={articleBody}
+                  setValue={setArticleBody}
+                />
                 <span class="error-message text-danger"></span>
               </div>
             </div>
@@ -189,7 +219,7 @@ export default function AdminArticles() {
             <div class="col-12">
               <div class="bottom-form">
                 <div class="submit-btn">
-                  <input type="submit" value="افزودن" className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid}/>
+                  <input type="submit" value="افزودن" className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid} onClick={addNewArticle} />
                 </div>
               </div>
             </div>
