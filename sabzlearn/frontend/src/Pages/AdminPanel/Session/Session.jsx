@@ -7,6 +7,8 @@ export default function Session() {
 
     const [courses, setCourses] = useState([]);
     const [sessionCourse, setSessionCourse] = useState('-1');
+    const [sessionVideo, setSessionVideo] = useState({})
+
     const [formState, onInputHandler] = useForm(
         {
             title: {
@@ -81,11 +83,17 @@ export default function Session() {
                                 <span class="error-message text-danger"></span>
                             </div>
                         </div>
-
+                        <div class="col-6">
+                            <div class="name input">
+                                <label class="input-title">فایل ویدیو جلسه</label>
+                                <input type="file" onChange={event => setSessionVideo(event.target.files[0])} />
+                                <span class="error-message text-danger"></span>
+                            </div>
+                        </div>
                         <div class="col-12">
                             <div class="bottom-form">
                                 <div class="submit-btn">
-                                    <input type="submit" value="افزودن" />
+                                    <input type="submit" value="افزودن" className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid} />
                                 </div>
                             </div>
                         </div>
