@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DataTable from '../../../Components/AdminPanel/DataTable/DataTable'
 import swal from 'sweetalert';
 
@@ -6,10 +6,15 @@ export default function AdminContact() {
 
     const [allComments, setAllComments] = useState([])
 
-    fetch("http://localhost:5000/v1/contact")
-        .then(res => res.json())
-        .then(result => setAllComments(result))
+    useEffect(() => {
+        getAllComments()
+    }, [])
 
+    const getAllComments = () => {
+        fetch("http://localhost:5000/v1/contact")
+            .then(res => res.json())
+            .then(result => setAllComments(result))
+    }
 
     const showMsg = (msg) => {
         swal({
@@ -54,6 +59,33 @@ export default function AdminContact() {
             })
     }
 
+    //////////////////////////delete msg/////////////////////
+
+    const deleteComment = (id) => {
+        swal({
+            title: "از حذف این نظر مطمئن هستید ؟",
+            icon: "warning",
+            buttons: ["انصراف", "حذف"]
+        }).then(result => {
+            result && remover(id)
+        })
+    }
+
+    const remover = (userId) => {
+        const localstorageData = JSON.parse(localStorage.getItem("user"))
+        fetch(`http://localhost:5000/v1/contact/${userId}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${localstorageData.token}`
+            }
+        })
+            .then((res) => {
+                res.json()
+                res.ok && swal({ title: "پیام مدنظر با موفقیت حذف شد", icon: "success", buttons: "بازگشت" })
+            })
+            .then(result => getAllComments())
+    }
+
     return (
         <>
             <DataTable title={"نظرات کاربران"}>
@@ -84,7 +116,7 @@ export default function AdminContact() {
                                 </td>
                                 <td>{user.createdAt.slice(0, 10)}</td>
                                 <td>
-                                    <button type="button" class="btn btn-danger delete-btn">
+                                    <button type="button" class="btn btn-danger delete-btn" onClick={() => deleteComment(user._id)}>
                                         حذف
                                     </button>
                                 </td>
