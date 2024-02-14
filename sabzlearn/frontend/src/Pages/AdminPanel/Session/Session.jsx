@@ -47,7 +47,7 @@ export default function Session() {
         formData.append('title', formState.inputs.title.value)
         formData.append('time', Number(formState.inputs.time.value))
         formData.append('video', sessionVideo)
-        formData.append('status', sessionStatus)
+        formData.append('free', sessionStatus)
 
         fetch(`http://localhost:5000/v1/courses/${sessionCourse}/sessions`, {
             method: 'POST',
@@ -62,7 +62,7 @@ export default function Session() {
                     icon: 'success',
                     buttons: 'اوکی'
                 }).then(() => {
-                    console.log('Get All Sessions');
+                    getAllSessions();
                 })
             }
         })
@@ -79,6 +79,32 @@ export default function Session() {
 
 
     console.log(allSessions);
+    //////////////////delete session//////////////////////
+    const sessionRemover=(id,name)=>{
+        swal({
+            title: `آیا از حذف  ${name} اطمینان دارید؟`,
+            icon: "warning",
+            buttons: ["انصراف", "حذف"]
+          }).then(result => {
+            result && remover(id)
+          })
+    }
+
+    const remover = (userId) => {
+        const localstorageData = JSON.parse(localStorage.getItem("user"))
+        fetch(`http://localhost:5000/v1/courses/sessions/${userId}`, {
+          method: "DELETE",
+          headers: {
+            "Authorization": `Bearer ${localstorageData.token}`
+          }
+        })
+          .then((res) => {
+            res.json()
+            res.ok && swal({ title: "جلسه مدنظر با موفقیت حذف شد", icon: "success", buttons: "بازگشت" })
+          })
+          .then(result => getAllSessions())
+      }
+
     return (
         <>
             <div class="container-fluid" id="home-content">
@@ -208,7 +234,7 @@ export default function Session() {
                                     </button>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-danger delete-btn">
+                                    <button type="button" class="btn btn-danger delete-btn" onClick={() => sessionRemover(session._id, session.title)}>
                                         حذف
                                     </button>
                                 </td>
