@@ -16,6 +16,7 @@ import Menus from "./Pages/AdminPanel/Menus/Menus";
 import AdminArticles from "./Pages/AdminPanel/AdminArticles/AdminArticles";
 import AdminCategory from "./Pages/AdminPanel/Category/AdminCategory";
 import AdminContact from "./Pages/AdminPanel/AdminContact/AdminContact";
+import Session from "./Pages/AdminPanel/Session/Session";
 
 
 const routes = [
@@ -39,6 +40,7 @@ const routes = [
             { path: "articles", element: <AdminArticles /> },
             { path: "category", element: <AdminCategory/> },
             { path: "contact", element: <AdminContact/> },
+            { path: "sessions", element: <Session/> },
         ]
     },
 ]
