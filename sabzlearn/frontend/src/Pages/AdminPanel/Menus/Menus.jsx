@@ -68,11 +68,37 @@ export default function Menus() {
 
   const createMenu = (event) => {
     event.preventDefault();
+    const localStorageDate = JSON.parse(localStorage.getItem('user'))
+    const newMenuInfo = {
+      title: formState.inputs.title.value,
+      href: formState.inputs.href.value,
+      parent: (menuParent === "main") ? undefined : menuParent
+    }
+
+    fetch("http://localhost:5000/v1/menus", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorageDate.token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newMenuInfo)
+    })
+      .then(res => {
+        if (res.ok) {
+          swal({
+            title: 'منو جدید با موفقیت ایجاد شد',
+            icon: 'success',
+            buttons: 'اوکی'
+          }).then(() => {
+            getAllMenus()
+          })
+        }
+      })
   };
 
   return (
     <>
-<div class="container">
+      <div class="container">
         <div class="home-title">
           <span>افزودن کاربر جدید</span>
         </div>
@@ -115,10 +141,11 @@ export default function Menus() {
                 onChange={(event) => setMenuParent(event.target.value)}
               >
                 <option value="-1">منوی اصلی را انتخاب کنید</option>
+                <option value="main"><span>منوی اصلی</span></option>
                 {allMenus.map((menu) => (
                   <>
                     {!Boolean(menu.parent) && (
-                      <option value={menu._id}>{menu.title}</option>
+                      <option value={menu._id}>زیرمنوی {menu.title}</option>
                     )}
                   </>
                 ))}
@@ -129,7 +156,7 @@ export default function Menus() {
           <div class="col-12">
             <div class="bottom-form">
               <div class="submit-btn">
-                <input type="submit" value="افزودن" onClick={createMenu} className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid}/>
+                <input type="submit" value="افزودن" onClick={createMenu} className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid} />
               </div>
             </div>
           </div>
