@@ -53,6 +53,7 @@ export default function Users() {
       })
       .then(result => getUsers())
   }
+////////////////////////block user//////////////////////
 
   const blocker = (userId) => {
     console.log(localstorageData)
@@ -67,7 +68,7 @@ export default function Users() {
         res.ok && swal({ title: "کاربر مدنظر با موفقیت مسدود شد", icon: "success", buttons: "بازگشت" })
       })
       .then(result => {
-        remover(userId)
+        // remover(userId)
         getUsers()
       })
   }

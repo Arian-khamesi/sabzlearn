@@ -5,6 +5,7 @@ import swal from 'sweetalert'
 export default function Comments() {
 
   const [comments, setComments] = useState([])
+  const localstorageData = JSON.parse(localStorage.getItem("user"))
 
   useEffect(() => {
     getAllComments()
@@ -29,7 +30,6 @@ export default function Comments() {
   }
 
   const remover = (userId) => {
-    const localstorageData = JSON.parse(localStorage.getItem("user"))
     fetch(`http://localhost:5000/v1/comments/${userId}`, {
       method: "DELETE",
       headers: {
@@ -50,7 +50,37 @@ export default function Comments() {
         buttons: "بازگشت"
     })
 }
+/////////////////////////block user////////////////////
 
+const userBlock = (id) => {
+
+  swal({
+    title: "آیا از مسدود کردن کاربر اطمینان دارید؟",
+    icon: "warning",
+    buttons: ["انصراف", "مسدود"]
+  }).then(result => {
+    result && blocker(id)
+
+  })
+}
+
+const blocker = (userId) => {
+  console.log(localstorageData)
+  fetch(`http://localhost:5000/v1/users/ban/${userId}`, {
+    method: "PUT",
+    headers: {
+      "Authorization": `Bearer ${localstorageData.token}`
+    }
+  })
+    .then((res) => {
+      res.json()
+      res.ok && swal({ title: "کاربر مدنظر با موفقیت مسدود شد", icon: "success", buttons: "بازگشت" })
+    })
+    .then(result => {
+      // remover(userId)
+      getAllComments()
+    })
+}
 
   return (
     <>
@@ -112,6 +142,7 @@ export default function Comments() {
                   <button
                     type="button"
                     class="btn btn-secondary delete-btn"
+                    onClick={() => userBlock(comment.creator._id)}
                   >
                     بن
                   </button>
