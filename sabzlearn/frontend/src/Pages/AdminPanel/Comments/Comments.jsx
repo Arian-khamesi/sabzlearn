@@ -1,18 +1,47 @@
-import React,{useEffect,useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import DataTable from "../../../Components/AdminPanel/DataTable/DataTable"
+import swal from 'sweetalert'
 
 export default function Comments() {
 
   const [comments, setComments] = useState([])
 
   useEffect(() => {
-      fetch('http://localhost:5000/v1/comments')
-          .then(res => res.json())
-          .then(allComments => setComments(allComments))
+    getAllComments()
   }, [])
 
+  const getAllComments = () => {
+    fetch('http://localhost:5000/v1/comments')
+      .then(res => res.json())
+      .then(allComments => setComments(allComments))
+  }
 
+  console.log(comments);
+  /////////////////////delete comments/////////////////////
+  const deleteComment = (id) => {
+    swal({
+      title: "از حذف این نظر مطمئن هستید ؟",
+      icon: "warning",
+      buttons: ["انصراف", "حذف"]
+    }).then(result => {
+      result && remover(id)
+    })
+  }
 
+  const remover = (userId) => {
+    const localstorageData = JSON.parse(localStorage.getItem("user"))
+    fetch(`http://localhost:5000/v1/comments/${userId}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${localstorageData.token}`
+      }
+    })
+      .then((res) => {
+        res.json()
+        res.ok && swal({ title: "پیام مدنظر با موفقیت حذف شد", icon: "success", buttons: "بازگشت" })
+      })
+      .then(result => getAllComments())
+  }
   return (
     <>
       <DataTable title="کامنت‌ها">
@@ -63,6 +92,7 @@ export default function Comments() {
                   <button
                     type="button"
                     class="btn btn-danger delete-btn"
+                    onClick={() => deleteComment(comment._id)}
                   >
                     حذف
                   </button>
