@@ -10,18 +10,34 @@ export default function Offs() {
     const [courses, setCourses] = useState([]);
     const [sessionCourse, setSessionCourse] = useState('-1');
     const [newcountsOff, setNewCountsOff] = useState(10)
+    const [allOffs, setAllOffs] = useState([])
     const localStorageData = JSON.parse(localStorage.getItem("user"))
 
 
-   useEffect(() => {
-
+    useEffect(() => {
+        getAllOffsCode()
         fetch("http://localhost:5000/v1/courses")
             .then((res) => res.json())
             .then((allCourses) => {
-                console.log(allCourses);
                 setCourses(allCourses);
             });
     }, []);
+
+    const getAllOffsCode = () => {
+        fetch("http://localhost:5000/v1/offs",{
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorageData.token}`,
+            },
+        })
+            .then((res) => res.json())
+            .then((allOffs) => {
+                console.log(allOffs);
+                setAllOffs(allOffs);
+            });
+    }
+
+    ///////////////create off code///////////////////////
 
     const [formState, onInputHandler] = useForm(
         {
@@ -44,26 +60,26 @@ export default function Offs() {
     const addNewOffs = (event) => {
         event.preventDefault()
 
-        const newOffInfos ={
-            code:formState.inputs.code.value,
-            percent:Number(formState.inputs.percent.value),
-            course:sessionCourse,
-            max:Number(newcountsOff)
+        const newOffInfos = {
+            code: formState.inputs.code.value,
+            percent: Number(formState.inputs.percent.value),
+            course: sessionCourse,
+            max: Number(newcountsOff)
         }
         console.log(newOffInfos);
-        fetch("http://localhost:5000/v1/offs",{
-            method:"POST",
+        fetch("http://localhost:5000/v1/offs", {
+            method: "POST",
             headers: {
-                "Content-Type":"application/json",
+                "Content-Type": "application/json",
                 Authorization: `Bearer ${localStorageData.token}`,
             },
-            body:JSON.stringify(newOffInfos)
+            body: JSON.stringify(newOffInfos)
         })
-        .then((res) => {
-            res.json()
-            res.ok && swal({ title: "کد تخفیف مدنظر با موفقیت ساخته شد", icon: "success", buttons: "بازگشت" })
-          })
-        //   .then(result => getAllSessions())
+            .then((res) => {
+                res.json()
+                res.ok && swal({ title: "کد تخفیف مدنظر با موفقیت ساخته شد", icon: "success", buttons: "بازگشت" })
+            })
+          .then(result => getAllOffsCode())
     }
 
 
@@ -138,6 +154,40 @@ export default function Offs() {
                     </form>
                 </div>
             </div>
+
+            <DataTable title="جلسات">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>شناسه</th>
+                            <th>کد</th>
+                            <th>درصد</th>
+                            <th>حداکثر استفاده</th>
+                            <th>سازنده</th>
+                            <th>حذف</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {allOffs.map((off, index) => (
+                            <tr>
+                                <td>{index + 1}</td>
+                                <td>{off.code}</td>
+                                <td>{off.percent}</td>
+                                <td>{off.max}</td>
+                                <td>{off.creator}</td>
+
+
+
+                                <td>
+                                    <button type="button" class="btn btn-danger delete-btn" >
+                                        حذف
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </DataTable>
         </>
     )
 }
