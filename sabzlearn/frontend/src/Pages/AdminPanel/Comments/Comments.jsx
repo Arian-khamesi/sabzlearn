@@ -46,41 +46,44 @@ export default function Comments() {
   /////////////////show body comment/////////////////////
   const showMsg = (msg) => {
     swal({
-        title: msg,
-        buttons: "بازگشت"
+      title: msg,
+      buttons: "بازگشت"
     })
-}
-/////////////////////////block user////////////////////
+  }
+  /////////////////////////block user////////////////////
 
-const userBlock = (id) => {
+  const userBlock = (id) => {
 
-  swal({
-    title: "آیا از مسدود کردن کاربر اطمینان دارید؟",
-    icon: "warning",
-    buttons: ["انصراف", "مسدود"]
-  }).then(result => {
-    result && blocker(id)
+    swal({
+      title: "آیا از مسدود کردن کاربر اطمینان دارید؟",
+      icon: "warning",
+      buttons: ["انصراف", "مسدود"]
+    }).then(result => {
+      result && blocker(id)
 
-  })
-}
-
-const blocker = (userId) => {
-  console.log(localstorageData)
-  fetch(`http://localhost:5000/v1/users/ban/${userId}`, {
-    method: "PUT",
-    headers: {
-      "Authorization": `Bearer ${localstorageData.token}`
-    }
-  })
-    .then((res) => {
-      res.json()
-      res.ok && swal({ title: "کاربر مدنظر با موفقیت مسدود شد", icon: "success", buttons: "بازگشت" })
     })
-    .then(result => {
-      // remover(userId)
-      getAllComments()
+  }
+
+  const blocker = (userId) => {
+    console.log(localstorageData)
+    fetch(`http://localhost:5000/v1/users/ban/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${localstorageData.token}`
+      }
     })
-}
+      .then((res) => {
+        res.json()
+        res.ok && swal({ title: "کاربر مدنظر با موفقیت مسدود شد", icon: "success", buttons: "بازگشت" })
+      })
+      .then(result => {
+        // remover(userId)
+        getAllComments()
+      })
+  }
+  ///////////////////answer comment//////////////////
+
+
 
   return (
     <>
@@ -114,12 +117,11 @@ const blocker = (userId) => {
                   </button>
                 </td>
                 <td>
-                  <button
-                    type="button"
-                    class="btn btn-primary edit-btn"
-                  >
-                    پاسخ
-                  </button>
+                  {comment.answer ? <i class="fa fa-check-square" aria-hidden="true" style={{ color: "#54b464", fontSize: "22px" }}></i> :
+                    <button type="button" class="btn btn-primary edit-btn">
+                      پاسخ
+                    </button>
+                  }
                 </td>
                 <td>
                   <button
