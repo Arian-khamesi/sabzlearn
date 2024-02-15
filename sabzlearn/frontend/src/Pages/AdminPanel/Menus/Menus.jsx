@@ -3,6 +3,9 @@ import "./Menus.css"
 import DataTable from '../../../Components/AdminPanel/DataTable/DataTable'
 import { Link } from "react-router-dom"
 import swal from 'sweetalert'
+import Input from "../../../Components/Form/Input"
+import { useForm } from "../../../hooks/useForm";
+import { minValidator } from "../../../validators/rules";
 
 export default function Menus() {
 
@@ -47,9 +50,92 @@ export default function Menus() {
       })
       .then(result => getAllMenus())
   }
+  ////////////////////////add new menu//////////////////////////////
+  const [menuParent, setMenuParent] = useState("-1");
+  const [formState, onInputHandler] = useForm(
+    {
+      title: {
+        value: "",
+        isValid: false,
+      },
+      href: {
+        value: "",
+        isValid: false,
+      },
+    },
+    false
+  );
+
+  const createMenu = (event) => {
+    event.preventDefault();
+  };
 
   return (
     <>
+<div class="container">
+        <div class="home-title">
+          <span>افزودن کاربر جدید</span>
+        </div>
+        <form class="form">
+          <div class="col-6">
+            <div class="name input">
+              <label class="input-title">عنوان</label>
+              <Input
+                element="input"
+                onInputHandler={onInputHandler}
+                id="title"
+                type="text"
+                isValid="false"
+                placeholder="لطفا عنوان را وارد کنید..."
+                validations={[minValidator(5)]}
+              />
+              <span class="error-message text-danger"></span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="name input">
+              <label class="input-title">عنوان</label>
+              <Input
+                element="input"
+                onInputHandler={onInputHandler}
+                id="href"
+                type="text"
+                isValid="false"
+                validations={[minValidator(5)]}
+                placeholder="لطفا عنوان را وارد کنید..."
+              />
+              <span class="error-message text-danger"></span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="name input">
+              <label class="input-title">عنوان</label>
+              <select
+                class="select"
+                onChange={(event) => setMenuParent(event.target.value)}
+              >
+                <option value="-1">منوی اصلی را انتخاب کنید</option>
+                {allMenus.map((menu) => (
+                  <>
+                    {!Boolean(menu.parent) && (
+                      <option value={menu._id}>{menu.title}</option>
+                    )}
+                  </>
+                ))}
+              </select>
+              <span class="error-message text-danger"></span>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="bottom-form">
+              <div class="submit-btn">
+                <input type="submit" value="افزودن" onClick={createMenu} className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid}/>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
       <DataTable title={"منو ها"}>
         <table class="table">
           <thead>
