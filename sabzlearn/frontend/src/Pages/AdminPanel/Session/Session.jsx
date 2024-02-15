@@ -172,7 +172,7 @@ export default function Session() {
                                                 <span>غیر رایگان</span>
                                                 <input
                                                     type="radio"
-                                                    value={1}
+                                                    value={0}
                                                     name="condition"
                                                     checked
                                                     onInput={event => setSessionStatus(event.target.value)}
@@ -184,7 +184,7 @@ export default function Session() {
                                                 <span>رایگان</span>
                                                 <input
                                                     type="radio"
-                                                    value={0}
+                                                    value={1}
                                                     name="condition"
                                                     onInput={event => setSessionStatus(event.target.value)}
                                                 />

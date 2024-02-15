@@ -8,7 +8,7 @@ import BreadCrumb from '../../Components/BreadCrumb/BreadCrumb'
 import CourseMainInfo from '../../Components/CourseMainInfo/CourseMainInfo'
 import CourseDetailsBox from '../../Components/CourseDetailsBox/CourseDetailsBox'
 import CourseInfoSideBar from '../../Components/CourseInfoSideBar/CourseInfoSideBar'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Comments from '../../Components/Comments/Comments'
 
 import Accordion from 'react-bootstrap/Accordion'
@@ -51,7 +51,7 @@ export default function CourseInfo() {
   }, [])
 
 
-  const submitComment = (newCommentBody,newCommentScore) => {
+  const submitComment = (newCommentBody, newCommentScore) => {
 
     const localStorageData = JSON.parse(localStorage.getItem("user"))
 
@@ -64,15 +64,17 @@ export default function CourseInfo() {
       body: JSON.stringify({
         body: newCommentBody,
         courseShortName: courseName,
-        score:newCommentScore
+        score: newCommentScore
       })
     }).then(res => res.json())
-      .then(result => {console.log(result)
-      swal({
-        title:"کامنت شما با موفقیت ثبت شد",
-        icon:"success",
-        button:"تایید"        
-      })})
+      .then(result => {
+        console.log(result)
+        swal({
+          title: "کامنت شما با موفقیت ثبت شد",
+          icon: "success",
+          button: "تایید"
+        })
+      })
 
   }
 
@@ -183,62 +185,51 @@ export default function CourseInfo() {
                   </div>
 
                   <div className="introduction__topic">
-
-                    {sessions.map(accordion => (
-                      <Accordion defaultActiveKey={['0']} alwaysOpen>
-                        <Accordion.Item eventKey="0" className='accordion' key={accordion.id}>
-                          <Accordion.Header className='accordion-head'>{accordion.title}</Accordion.Header>
-                          <Accordion.Body className='accordion-body'>
-                            <div className="accordion-body introduction__accordion-body">
-                              <div className="introduction__accordion-right">
-                                <span className="introduction__accordion-count">1</span>
-                                <i className="fab fa-youtube introduction__accordion-icon"></i>
-                                <a href="#" className="introduction__accordion-link">
-                                  معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
-                                </a>
-                              </div>
-                              <div className="introduction__accordion-left">
-                                <span className="introduction__accordion-time">
-                                  18:34
-                                </span>
-                              </div>
-                            </div>
+                    <Accordion defaultActiveKey={['0']} alwaysOpen>
+                      <Accordion.Item eventKey="0" className='accordion'>
+                        <Accordion.Header className='accordion-head'>جلسات دوره</Accordion.Header>
+                        {sessions.map((session, index) => (
+                          <Accordion.Body className='accordion-body' key={session._id}>
+                            {
+                              (session.free === 1 || courseDetails.isUserRegisteredToThisCourse) ? (
+                                <>
+                                  <div className="accordion-body introduction__accordion-body">
+                                    <div className="introduction__accordion-right">
+                                      <span className="introduction__accordion-count">{index + 1}</span>
+                                      <i className="fab fa-youtube introduction__accordion-icon"></i>
+                                      <Link href="#" className="introduction__accordion-link">
+                                        {session.title}
+                                      </Link>
+                                    </div>
+                                    <div className="introduction__accordion-left">
+                                      <span className="introduction__accordion-time">
+                                        {session.time}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </>
+                              ) : (
+                                <div className="accordion-body introduction__accordion-body">
+                                  <div className="introduction__accordion-right">
+                                    <span className="introduction__accordion-count">{index + 1}</span>
+                                    <i className="fab fa-youtube introduction__accordion-icon"></i>
+                                    <span className="introduction__accordion-link">
+                                      {session.title}
+                                    </span>
+                                  </div>
+                                  <div className="introduction__accordion-left">
+                                  <i className='fa fa-lock introduction__accordion-time' style={{marginLeft:"7px"}}></i>
+                                    <span className="introduction__accordion-time">
+                                      {session.time}
+                                    </span>
+                                  </div>
+                                </div>
+                              )
+                            }
                           </Accordion.Body>
-                          <Accordion.Body>
-                            <div className="accordion-body introduction__accordion-body">
-                              <div className="introduction__accordion-right">
-                                <span className="introduction__accordion-count">2</span>
-                                <i className="fab fa-youtube introduction__accordion-icon"></i>
-                                <a href="#" className="introduction__accordion-link">
-                                  معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
-                                </a>
-                              </div>
-                              <div className="introduction__accordion-left">
-                                <span className="introduction__accordion-time">
-                                  18:34
-                                </span>
-                              </div>
-                            </div>
-                          </Accordion.Body>
-                          <Accordion.Body className='accordion-body'>
-                            <div className="accordion-body introduction__accordion-body">
-                              <div className="introduction__accordion-right">
-                                <span className="introduction__accordion-count">3</span>
-                                <i className="fab fa-youtube introduction__accordion-icon"></i>
-                                <a href="#" className="introduction__accordion-link">
-                                  معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
-                                </a>
-                              </div>
-                              <div className="introduction__accordion-left">
-                                <span className="introduction__accordion-time">
-                                  18:34
-                                </span>
-                              </div>
-                            </div>
-                          </Accordion.Body>
-                        </Accordion.Item>
-                      </Accordion>
-                    ))}
+                        ))}
+                      </Accordion.Item>
+                    </Accordion>
                   </div>
 
                 </div>

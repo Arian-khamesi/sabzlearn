@@ -43,13 +43,7 @@ useEffect(()=>{
                                 {shownCourses.map((data) => {
                                     return (
                                         <CourseBox
-                                            img={data.cover}
-                                            title={data.name}
-                                            instructor={data.creator}
-                                            participants={data.participants}
-                                            price={data.price}
-                                            key={data.id}
-                                            href={data.shortName}
+                                            {...data}
                                         />
                                     )
                                 })}
