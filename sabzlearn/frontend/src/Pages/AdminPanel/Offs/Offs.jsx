@@ -82,6 +82,32 @@ export default function Offs() {
           .then(result => getAllOffsCode())
     }
 
+    ///////////////////remove offs code///////////////////////
+    const offersRemover=(id,name)=>{
+        swal({
+            title: `آیا از حذف کد تخفیف   ${name} اطمینان دارید؟`,
+            icon: "warning",
+            buttons: ["انصراف", "حذف"]
+          }).then(result => {
+            result && remover(id)
+          })
+    }
+
+    const remover = (codeId) => {
+        const localstorageData = JSON.parse(localStorage.getItem("user"))
+        fetch(`http://localhost:5000/v1/offs/${codeId}`, {
+          method: "DELETE",
+          headers: {
+            "Authorization": `Bearer ${localstorageData.token}`
+          }
+        })
+          .then((res) => {
+            res.json()
+            res.ok && swal({ title: "کد تخفیف مدنظر با موفقیت حذف شد", icon: "success", buttons: "بازگشت" })
+          })
+          .then(result => getAllOffsCode())
+      }
+
 
     return (
         <>
@@ -179,7 +205,7 @@ export default function Offs() {
 
 
                                 <td>
-                                    <button type="button" class="btn btn-danger delete-btn" >
+                                    <button type="button" class="btn btn-danger delete-btn" onClick={() => offersRemover(off._id, off.code)}>
                                         حذف
                                     </button>
                                 </td>
