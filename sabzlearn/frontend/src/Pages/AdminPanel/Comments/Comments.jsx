@@ -82,6 +82,44 @@ export default function Comments() {
       })
   }
   ///////////////////answer comment//////////////////
+  const answerMsg = (userID) => {
+
+    swal({
+      title: "پاسخ به این پیام :",
+      content: "input",
+      buttons: "ارسال"
+    })
+      .then(res => {
+        if (res) {
+          const answerInfo = {
+            body: res
+          }
+
+          res && sendAnswer(answerInfo, userID)
+        }
+      })
+  }
+
+
+
+  const sendAnswer = (answer, id) => {
+
+    fetch(`http://localhost:5000/v1/comments/answer/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localstorageData.token}`
+      },
+      body: JSON.stringify(answer)
+    })
+      .then((res) => {
+        res.json()
+        res.ok && swal({ title: "پاسخ مدنظر با موفقیت ارسال شد", icon: "success", buttons: "بازگشت" })
+      })
+      .then(result => getAllComments())
+  }
+
+
 
 
 
@@ -118,7 +156,7 @@ export default function Comments() {
                 </td>
                 <td>
                   {comment.answer ? <i class="fa fa-check-square" aria-hidden="true" style={{ color: "#54b464", fontSize: "22px" }}></i> :
-                    <button type="button" class="btn btn-primary edit-btn">
+                    <button type="button" class="btn btn-primary edit-btn" onClick={() => answerMsg(comment._id)}>
                       پاسخ
                     </button>
                   }
