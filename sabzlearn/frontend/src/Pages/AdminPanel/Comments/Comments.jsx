@@ -42,6 +42,16 @@ export default function Comments() {
       })
       .then(result => getAllComments())
   }
+
+  /////////////////show body comment/////////////////////
+  const showMsg = (msg) => {
+    swal({
+        title: msg,
+        buttons: "بازگشت"
+    })
+}
+
+
   return (
     <>
       <DataTable title="کامنت‌ها">
@@ -68,6 +78,7 @@ export default function Comments() {
                   <button
                     type="button"
                     class="btn btn-success edit-btn"
+                    onClick={() => showMsg(comment.body)}
                   >
                     مشاهده
                   </button>
