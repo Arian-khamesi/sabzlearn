@@ -120,37 +120,64 @@ export default function Comments() {
       .then(result => getAllComments())
   }
 
-/////////////////////accept comment////////////////////////
+  /////////////////////accept comment////////////////////////
 
-const acceptMsg=(id)=>{
-  swal({
-    title: "آیا از تایید کردن این نظر اطمینان دارید؟",
-    icon: "warning",
-    buttons: ["انصراف", "تایید"]
-  }).then(result => {
-    result && accepter(id)
+  const acceptMsg = (id) => {
+    swal({
+      title: "آیا از تایید کردن این نظر اطمینان دارید؟",
+      icon: "warning",
+      buttons: ["انصراف", "تایید"]
+    }).then(result => {
+      result && accepter(id)
 
-  })
-}
-
-const accepter = (userId) => {
-  console.log(localstorageData)
-  fetch(`http://localhost:5000/v1/comments/accept/${userId}`, {
-    method: "PUT",
-    headers: {
-      "Authorization": `Bearer ${localstorageData.token}`
-    }
-  })
-    .then((res) => {
-      res.json()
-      res.ok && swal({ title: "کامنت مدنظر با موفقیت تایید شد", icon: "success", buttons: "بازگشت" })
     })
-    .then(result => {
-      // remover(userId)
-      getAllComments()
-    })
-}
+  }
 
+  const accepter = (userId) => {
+    fetch(`http://localhost:5000/v1/comments/accept/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${localstorageData.token}`
+      }
+    })
+      .then((res) => {
+        res.json()
+        res.ok && swal({ title: "پیام مدنظر با موفقیت تایید شد", icon: "success", buttons: "بازگشت" })
+      })
+      .then(result => {
+        // remover(userId)
+        getAllComments()
+      })
+  }
+
+  /////////////////////reject comment/////////////////////
+
+  const rejectMsg = (id) => {
+    swal({
+      title: "آیا از رد کردن این نظر اطمینان دارید؟",
+      icon: "warning",
+      buttons: ["انصراف", "رد"]
+    }).then(result => {
+      result && rejecter(id)
+
+    })
+  }
+
+  const rejecter = (userId) => {
+    fetch(`http://localhost:5000/v1/comments/reject/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${localstorageData.token}`
+      }
+    })
+      .then((res) => {
+        res.json()
+        res.ok && swal({ title: "پیام مدنظر با موفقیت رد شد", icon: "success", buttons: "بازگشت" })
+      })
+      .then(result => {
+        getAllComments()
+      })
+  }
 
 
   return (
@@ -164,8 +191,8 @@ const accepter = (userId) => {
               <th>دوره</th>
               <th>مشاهده</th>
               <th>پاسخ</th>
-              <th>ویرایش</th>
               <th>تایید نظر</th>
+              <th>ویرایش</th>
               <th>حذف</th>
               <th>بن</th>
             </tr>
@@ -173,7 +200,7 @@ const accepter = (userId) => {
           <tbody>
             {comments.map((comment, index) => (
               <tr>
-                <td className= {comment.answer ? "success-border":"error-border"}>{index + 1}</td>
+                <td className={comment.answer ? "success-border" : "error-border"}>{index + 1}</td>
                 <td>{comment.creator.name}</td>
                 <td>{comment.course}</td>
                 <td>
@@ -186,11 +213,20 @@ const accepter = (userId) => {
                   </button>
                 </td>
                 <td>
-                  {/* {comment.answer ? <i class="fa fa-check-square" aria-hidden="true" style={{ color: "#54b464", fontSize: "22px" }}></i> : */}
+                  {comment.answer ? <i class="fa fa-check-square" aria-hidden="true" style={{ color: "#54b464", fontSize: "22px" }}></i> :
                     <button type="button" class="btn btn-primary edit-btn" onClick={() => answerMsg(comment._id)}>
                       پاسخ
                     </button>
-                  {/* } */}
+                  }
+                </td>
+                <td>
+                  {comment.answer ? <button type="button" class="btn btn-danger edit-btn" onClick={() => rejectMsg(comment._id)}>
+                    رد نظر
+                  </button> :
+                    <button type="button" class="btn btn-success edit-btn" onClick={() => acceptMsg(comment._id)}>
+                      تایید
+                    </button>
+                  }
                 </td>
                 <td>
                   <button
@@ -199,13 +235,6 @@ const accepter = (userId) => {
                   >
                     ویرایش
                   </button>
-                </td>
-                <td>
-                  {comment.answer ? <i class="fa fa-check-square" aria-hidden="true" style={{ color: "#54b464", fontSize: "22px" }}></i> :
-                    <button type="button" class="btn btn-primary edit-btn" onClick={() => acceptMsg(comment._id)}>
-                      تایید
-                    </button>
-                  }
                 </td>
                 <td>
                   <button
