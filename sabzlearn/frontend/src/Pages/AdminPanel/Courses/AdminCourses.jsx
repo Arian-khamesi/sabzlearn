@@ -308,7 +308,7 @@ export default function Courses() {
         </div>
       </div>
 
-      <DataTable title="کاربران">
+      <DataTable title="دوره ها">
         <table class="table">
           <thead>
             <tr>

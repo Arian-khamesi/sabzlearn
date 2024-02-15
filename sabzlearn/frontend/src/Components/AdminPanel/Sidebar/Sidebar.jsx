@@ -67,6 +67,11 @@ export default function Sidebar() {
             </Link>
           </li>
           <li>
+            <Link to={`comments`}>
+              <span>نظرات دوره ها</span>
+            </Link>
+          </li>
+          <li>
             <Link to={`offs`}>
               <span>کدهای تخفیف</span>
             </Link>
@@ -78,7 +83,7 @@ export default function Sidebar() {
           </li>
           <li>
             <Link to={`contact`}>
-              <span>نظرات</span>
+              <span>نظرات سایت</span>
             </Link>
           </li>
           <li>

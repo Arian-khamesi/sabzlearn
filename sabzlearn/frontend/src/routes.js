@@ -18,6 +18,7 @@ import AdminCategory from "./Pages/AdminPanel/Category/AdminCategory";
 import AdminContact from "./Pages/AdminPanel/AdminContact/AdminContact";
 import Session from "./Pages/AdminPanel/Session/Session";
 import SessionInfo from "./Pages/SessionInfo/SessionInfo";
+import Comments from "./Pages/AdminPanel/Comments/Comments";
 
 
 const routes = [
@@ -43,6 +44,7 @@ const routes = [
             { path: "category", element: <AdminCategory/> },
             { path: "contact", element: <AdminContact/> },
             { path: "sessions", element: <Session/> },
+            { path: "comments", element: <Comments/> },
         ]
     },
 ]
