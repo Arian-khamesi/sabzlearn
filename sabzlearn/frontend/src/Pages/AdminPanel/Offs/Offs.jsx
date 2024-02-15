@@ -10,6 +10,7 @@ export default function Offs() {
     const [courses, setCourses] = useState([]);
     const [sessionCourse, setSessionCourse] = useState('-1');
     const [newcountsOff, setNewCountsOff] = useState(10)
+    const localStorageData = JSON.parse(localStorage.getItem("user"))
 
 
    useEffect(() => {
@@ -42,6 +43,27 @@ export default function Offs() {
 
     const addNewOffs = (event) => {
         event.preventDefault()
+
+        const newOffInfos ={
+            code:formState.inputs.code.value,
+            percent:Number(formState.inputs.percent.value),
+            course:sessionCourse,
+            max:Number(newcountsOff)
+        }
+        console.log(newOffInfos);
+        fetch("http://localhost:5000/v1/offs",{
+            method:"POST",
+            headers: {
+                "Content-Type":"application/json",
+                Authorization: `Bearer ${localStorageData.token}`,
+            },
+            body:JSON.stringify(newOffInfos)
+        })
+        .then((res) => {
+            res.json()
+            res.ok && swal({ title: "کد تخفیف مدنظر با موفقیت ساخته شد", icon: "success", buttons: "بازگشت" })
+          })
+        //   .then(result => getAllSessions())
     }
 
 
