@@ -1,0 +1,7 @@
+.success-border{
+    border-right: 5px solid #54b464 !important;
+}
+.error-border{
+    border-right: 5px solid #dc3545 !important;
+    
+}

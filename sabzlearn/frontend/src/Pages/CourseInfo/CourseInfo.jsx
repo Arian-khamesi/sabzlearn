@@ -50,6 +50,8 @@ export default function CourseInfo() {
 
   }, [])
 
+  console.log(comments)
+  console.log(courseDetails)
 
   const submitComment = (newCommentBody, newCommentScore) => {
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from "../../../Components/AdminPanel/DataTable/DataTable"
 import swal from 'sweetalert'
+import "./Comments.css"
 
 export default function Comments() {
 
@@ -142,7 +143,7 @@ export default function Comments() {
           <tbody>
             {comments.map((comment, index) => (
               <tr>
-                <td>{index + 1}</td>
+                <td className= {comment.answer ? "success-border":"error-border"}>{index + 1}</td>
                 <td>{comment.creator.name}</td>
                 <td>{comment.course}</td>
                 <td>
