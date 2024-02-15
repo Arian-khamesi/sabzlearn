@@ -57,6 +57,7 @@ export default function AdminContact() {
                 res.json()
                 res.ok && swal({ title: "پاسخ مدنظر با موفقیت ارسال شد", icon: "success", buttons: "بازگشت" })
             })
+            .then(result=>getAllComments())
     }
 
     //////////////////////////delete msg/////////////////////
@@ -121,9 +122,11 @@ export default function AdminContact() {
                                     </button>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-primary edit-btn" onClick={() => answerMsg(user.email)}>
-                                        پاسخ
-                                    </button>
+                                    {user.answer ?<i class="fa fa-check-square" aria-hidden="true" style={{color:"#54b464",fontSize:"22px"}}></i>:
+                                        <button type="button" class="btn btn-primary edit-btn" onClick={() => answerMsg(user.email)}>
+                                            پاسخ
+                                        </button>
+                                    }
                                 </td>
                             </tr>
                         ))}
