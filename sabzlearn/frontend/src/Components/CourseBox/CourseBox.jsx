@@ -19,7 +19,7 @@ export default function CourseBox({ cover, name, creator, participants, price, s
   // setTimeout(()=>{
   //   sethrefimg(img)
   // },2000)
-console.log(name);
+// console.log(name);
   return (
     <div className={isSlider ? "col-12" : "col-12 col-sm-4"}>
       <div className="course-box">

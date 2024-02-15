@@ -120,7 +120,36 @@ export default function Comments() {
       .then(result => getAllComments())
   }
 
+/////////////////////accept comment////////////////////////
 
+const acceptMsg=(id)=>{
+  swal({
+    title: "آیا از تایید کردن این نظر اطمینان دارید؟",
+    icon: "warning",
+    buttons: ["انصراف", "تایید"]
+  }).then(result => {
+    result && accepter(id)
+
+  })
+}
+
+const accepter = (userId) => {
+  console.log(localstorageData)
+  fetch(`http://localhost:5000/v1/comments/accept/${userId}`, {
+    method: "PUT",
+    headers: {
+      "Authorization": `Bearer ${localstorageData.token}`
+    }
+  })
+    .then((res) => {
+      res.json()
+      res.ok && swal({ title: "کامنت مدنظر با موفقیت تایید شد", icon: "success", buttons: "بازگشت" })
+    })
+    .then(result => {
+      // remover(userId)
+      getAllComments()
+    })
+}
 
 
 
@@ -136,6 +165,7 @@ export default function Comments() {
               <th>مشاهده</th>
               <th>پاسخ</th>
               <th>ویرایش</th>
+              <th>تایید نظر</th>
               <th>حذف</th>
               <th>بن</th>
             </tr>
@@ -156,11 +186,11 @@ export default function Comments() {
                   </button>
                 </td>
                 <td>
-                  {comment.answer ? <i class="fa fa-check-square" aria-hidden="true" style={{ color: "#54b464", fontSize: "22px" }}></i> :
+                  {/* {comment.answer ? <i class="fa fa-check-square" aria-hidden="true" style={{ color: "#54b464", fontSize: "22px" }}></i> : */}
                     <button type="button" class="btn btn-primary edit-btn" onClick={() => answerMsg(comment._id)}>
                       پاسخ
                     </button>
-                  }
+                  {/* } */}
                 </td>
                 <td>
                   <button
@@ -169,6 +199,13 @@ export default function Comments() {
                   >
                     ویرایش
                   </button>
+                </td>
+                <td>
+                  {comment.answer ? <i class="fa fa-check-square" aria-hidden="true" style={{ color: "#54b464", fontSize: "22px" }}></i> :
+                    <button type="button" class="btn btn-primary edit-btn" onClick={() => acceptMsg(comment._id)}>
+                      تایید
+                    </button>
+                  }
                 </td>
                 <td>
                   <button
