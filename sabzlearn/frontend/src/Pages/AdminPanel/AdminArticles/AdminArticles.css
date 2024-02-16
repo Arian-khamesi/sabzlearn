@@ -1,0 +1,4 @@
+.set-child{
+    display: flex;
+    justify-content: space-around;
+}

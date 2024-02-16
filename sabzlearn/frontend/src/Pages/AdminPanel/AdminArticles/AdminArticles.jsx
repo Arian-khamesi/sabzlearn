@@ -115,6 +115,37 @@ export default function AdminArticles() {
       }
     })
   }
+  ////////////////////draft Article/////////////////////
+
+  const addArticlesDraft = (event) => {
+    event.preventDefault()
+    const localStorageDate = JSON.parse(localStorage.getItem('user'))
+    let formData = new FormData()
+    formData.append('title', formState.inputs.title.value)
+    formData.append('shortName', formState.inputs.shortName.value)
+    formData.append('description', formState.inputs.description.value)
+    formData.append('categoryID', articleCategory)
+    formData.append('cover', articleCover)
+    formData.append('body', articleBody)
+
+    fetch(`http://localhost:5000/v1/articles/draft`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorageDate.token}`
+      },
+      body: formData
+    }).then(res => {
+      if (res.ok) {
+        swal({
+          title: 'مقاله با موفقیت پیش نویس شد',
+          icon: 'success',
+          buttons: 'اوکی'
+        }).then(() => {
+          getAllArticles()
+        })
+      }
+    })
+  }
 
   return (
     <>
@@ -216,10 +247,15 @@ export default function AdminArticles() {
                 <span class="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-12">
+            <div class="col-2 set-child">
               <div class="bottom-form">
                 <div class="submit-btn">
                   <input type="submit" value="افزودن" className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid} onClick={addNewArticle} />
+                </div>
+              </div>
+              <div class="bottom-form">
+                <div class="submit-btn">
+                  <input type="submit" value="پیش نویس" className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid} onClick={addArticlesDraft} />
                 </div>
               </div>
             </div>
@@ -236,6 +272,7 @@ export default function AdminArticles() {
               <th>لینک</th>
               <th>نویسنده</th>
               <th>تاریخ ثبت</th>
+              <th>وضعیت</th>
               <th>ویرایش</th>
               <th>حذف</th>
 
@@ -249,6 +286,7 @@ export default function AdminArticles() {
                 <td>{article.shortName}</td>
                 <td>{article.creator.name}</td>
                 <td>{article.createdAt.slice(0, 10)}</td>
+                <td>{article.publish?"منتشر شده":"پیش نویس"}</td>
                 <td>
                   <button type="button" class="btn btn-primary edit-btn">
                     ویرایش

@@ -39,7 +39,7 @@ export default function Articles() {
                     <div className="courses-content">
                         <div className="container">
                             <div className="row">
-                                {shownArticles.map((data) => {
+                                {shownArticles.filter(article=>article.publish===1).map((data) => {
                                     return (
                                        <ArticleBox
                                        {...data}
