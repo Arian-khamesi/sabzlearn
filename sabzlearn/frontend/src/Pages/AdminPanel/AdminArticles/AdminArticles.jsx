@@ -6,6 +6,7 @@ import { useForm } from '../../../hooks/useForm'
 import Input from '../../../Components/Form/Input'
 import { minValidator } from '../../../validators/rules'
 import Editor from "../../../Components/Form/Editor"
+import { Link } from 'react-router-dom'
 
 export default function AdminArticles() {
 
@@ -250,7 +251,7 @@ export default function AdminArticles() {
             <div class="col-2 set-child">
               <div class="bottom-form">
                 <div class="submit-btn">
-                  <input type="submit" value="افزودن" className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid} onClick={addNewArticle} />
+                  <input type="submit" value="انتشار" className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid} onClick={addNewArticle} />
                 </div>
               </div>
               <div class="bottom-form">
@@ -286,7 +287,10 @@ export default function AdminArticles() {
                 <td>{article.shortName}</td>
                 <td>{article.creator.name}</td>
                 <td>{article.createdAt.slice(0, 10)}</td>
-                <td>{article.publish?"منتشر شده":"پیش نویس"}</td>
+                <td>{article.publish ? "منتشر شده" : <Link to={`draft/${article.shortName}`}><button type="button" class="btn btn-warning edit-btn">
+                  پیش نویس
+                </button></Link>}
+                </td>
                 <td>
                   <button type="button" class="btn btn-primary edit-btn">
                     ویرایش

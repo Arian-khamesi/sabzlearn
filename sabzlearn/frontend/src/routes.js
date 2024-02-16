@@ -20,6 +20,7 @@ import Session from "./Pages/AdminPanel/Session/Session";
 import SessionInfo from "./Pages/SessionInfo/SessionInfo";
 import Comments from "./Pages/AdminPanel/Comments/Comments";
 import Offs from "./Pages/AdminPanel/Offs/Offs"
+import Draft from "./Pages/AdminPanel/AdminArticles/Draft";
 
 
 const routes = [
@@ -42,6 +43,7 @@ const routes = [
             { path: "courses", element: <AdminCourses /> },
             { path: "menus", element: <Menus /> },
             { path: "articles", element: <AdminArticles /> },
+            { path: "articles/draft/:shortName", element: <Draft /> },
             { path: "category", element: <AdminCategory/> },
             { path: "contact", element: <AdminContact/> },
             { path: "sessions", element: <Session/> },
