@@ -21,6 +21,7 @@ import SessionInfo from "./Pages/SessionInfo/SessionInfo";
 import Comments from "./Pages/AdminPanel/Comments/Comments";
 import Offs from "./Pages/AdminPanel/Offs/Offs"
 import Draft from "./Pages/AdminPanel/AdminArticles/Draft";
+import MainPage from "./Pages/AdminPanel/MainPage/MainPage";
 
 
 const routes = [
@@ -39,6 +40,7 @@ const routes = [
         path: "/panel-admin/*",
         element: <AdminIndex />,
         children: [
+            { path: "", element: <MainPage /> },
             { path: "users", element: <Users /> },
             { path: "courses", element: <AdminCourses /> },
             { path: "menus", element: <Menus /> },
