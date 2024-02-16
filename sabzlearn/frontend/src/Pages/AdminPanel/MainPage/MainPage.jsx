@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import "./MainPage.css"
 import DataTable from '../../../Components/AdminPanel/DataTable/DataTable'
+import PAdminItem from '../../../Components/AdminPanel/PAdminItem'
 
 
 export default function MainPage() {
