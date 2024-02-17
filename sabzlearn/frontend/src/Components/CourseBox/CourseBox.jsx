@@ -5,7 +5,7 @@ import './CourseBox.css'
 import CircleSpinner from '../CircleSpinner/CircleSpinner'
 import { Link } from 'react-router-dom'
 
-export default function CourseBox({ cover, name, creator, registers, price, shortName, isSlider }) {
+export default function CourseBox({ cover, name, creator, registers, price, shortName, isSlider,courseAverageScore }) {
 
   const [isImgLoad, setIsImgLoad] = useState(false)
   // const [hrefimg, sethrefimg] = useState(null)
@@ -37,11 +37,17 @@ export default function CourseBox({ cover, name, creator, registers, price, shor
               <Link to={`/course-info/${shortName}`} className="course-box__teacher-link">{creator}</Link>
             </div>
             <div className="course-box__rating">
-              <img src="/images/svgs/star.svg" alt="rating" className="course-box__star" />
-              <img src="/images/svgs/star_fill.svg" alt="rating" className="course-box__star" />
-              <img src="/images/svgs/star_fill.svg" alt="rating" className="course-box__star" />
-              <img src="/images/svgs/star_fill.svg" alt="rating" className="course-box__star" />
-              <img src="/images/svgs/star_fill.svg" alt="rating" className="course-box__star" />
+              {
+                Array(5-courseAverageScore).fill(0).map(item=>(
+                  <img src="/images/svgs/star.svg" alt="rating" className="course-box__star" />
+                ))
+              }
+              {
+                Array(courseAverageScore).fill(0).map(item=>(
+                  <img src="/images/svgs/star_fill.svg" alt="rating" className="course-box__star" />
+                ))
+              }
+             
             </div>
           </div>
 
