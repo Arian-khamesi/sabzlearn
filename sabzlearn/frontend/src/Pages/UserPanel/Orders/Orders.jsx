@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-
 import "./Orders.css";
+import { Link } from "react-router-dom";
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);
@@ -51,9 +51,9 @@ export default function Orders() {
                  {order.price}
                 </td>
                 <td class="order__table-body-item">
-                  <a class="order__table-body-btn" href="#">
+                  <Link class="order__table-body-btn" to={order._id}>
                     نمایش
-                  </a>
+                  </Link>
                 </td>
               </tr>
             ))}
