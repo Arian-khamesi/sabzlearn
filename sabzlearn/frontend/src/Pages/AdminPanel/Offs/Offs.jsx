@@ -108,7 +108,7 @@ export default function Offs() {
           .then(result => getAllOffsCode())
       }
 
-
+// console.log(allOffs);
     return (
         <>
             <div class="container-fluid" id="home-content">
@@ -189,6 +189,7 @@ export default function Offs() {
                             <th>کد</th>
                             <th>درصد</th>
                             <th>حداکثر استفاده</th>
+                            <th>دفعات استفاده شده</th>
                             <th>سازنده</th>
                             <th>حذف</th>
                         </tr>
@@ -200,6 +201,7 @@ export default function Offs() {
                                 <td>{off.code}</td>
                                 <td>{off.percent}</td>
                                 <td>{off.max}</td>
+                                <td>{off.uses}</td>
                                 <td>{off.creator}</td>
 
 

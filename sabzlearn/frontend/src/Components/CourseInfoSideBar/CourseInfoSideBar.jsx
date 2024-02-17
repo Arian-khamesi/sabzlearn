@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 
 export default function CourseInfoSideBar(props) {
 
+    const localstorageData = JSON.parse(localStorage.getItem("user"))
+
     const registerInCourse = (course) => {
         console.log(course.price);
         if (course.price === 0) {
@@ -16,10 +18,10 @@ export default function CourseInfoSideBar(props) {
                 buttons: ["انصراف", "ثبت نام"]
             })
                 .then(result => {
-                    result && register(course._id,course.price)
+                    result && register(course._id, course.price)
                 })
         }
-        else{
+        else {
             swal({
                 title: `از ثبت نام در دوره ${course.name} اطمینان دارید ؟`,
                 icon: "warning",
@@ -28,34 +30,81 @@ export default function CourseInfoSideBar(props) {
                 .then(result => {
                     result && swal({
                         title: `در صورت داشتن کد تخفیف برای دوره ${course.name} آن را وارد کنید`,
-                        content:"input",
+                        content: "input",
                         buttons: ["ثبت نام بدون کد تخفیف", "اعمال کد تخفیف"]
-                    }).then(result=>{
-                        if(result===null){
-                            register(course._id,course.price)
+                    }).then(result => {
+                        if (result === null) {
+                            register(course._id, course.price)
+                        }
+                        else {
+                            fetch(`http://localhost:5000/v1/offs/${result}`, {
+                                method: "POST",
+                                headers: {
+                                    "Authorization": `Bearer ${localstorageData.token}`,
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    course: course._id
+                                })
+                            })
+                                .then(res => {
+                                    if (res.status === 404) {
+                                        swal({
+                                            title: "کد وارد شده نامعتبر میباشد",
+                                            icon: "error",
+                                            buttons: "بازگشت"
+                                        })
+                                    }
+                                    else if (res.status === 409) {
+                                        swal({
+                                            title: "کد وارد شده قبلا استفاده شده است",
+                                            icon: "error",
+                                            buttons: "بازگشت"
+                                        })
+                                    }
+                                    else {
+                                        return res.json()
+                                    }
+                                })
+                                .then(offCode => {
+                                    fetch(`http://localhost:5000/v1/courses/${course._id}/register`, {
+                                        method: "POST",
+                                        headers: {
+                                            "Authorization": `Bearer ${localstorageData.token}`,
+                                            "Content-Type": "application/json"
+                                        },
+                                        body: JSON.stringify({
+                                            price: Number(course.price - (course.price * Number(offCode.percent) / 100))
+                                        })
+                                    })
+                                        .then((res) => {
+                                            res.json()
+                                            res.ok && swal({ title: "با موفقیت در دوره ثبت نام شدید", icon: "success", buttons: "بازگشت" })
+                                        })
+                                        .then(result => props.getCourseDetails())
+                                })
+
                         }
                     })
                 })
         }
 
-        const register = (courseId,coursePrice) => {
-
-            const localstorageData = JSON.parse(localStorage.getItem("user"))
+        const register = (courseId, coursePrice) => {
             fetch(`http://localhost:5000/v1/courses/${courseId}/register`, {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${localstorageData.token}`,
-                    "Content-Type":"application/json"
+                    "Content-Type": "application/json"
                 },
-                body:JSON.stringify({
-                    price:coursePrice
+                body: JSON.stringify({
+                    price: coursePrice
                 })
             })
                 .then((res) => {
                     res.json()
                     res.ok && swal({ title: "با موفقیت در دوره ثبت نام شدید", icon: "success", buttons: "بازگشت" })
                 })
-                // .then(result => props.getCourseDetails())
+                .then(result => props.getCourseDetails())
         }
 
     }
