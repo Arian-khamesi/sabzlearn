@@ -10,6 +10,8 @@ export default function NavBar() {
 
   const authContext = useContext(AuthContext)
   const [allMenus, setAllMenus] = useState([])
+
+  // console.log(authContext);
   
   useEffect(() => {
     fetch('http://localhost:5000/v1/menus')
@@ -19,7 +21,7 @@ export default function NavBar() {
       })
   }, [])
   
-  
+  // console.log(allMenus);
 
   return (
     <div className="main-header">
@@ -37,7 +39,7 @@ export default function NavBar() {
               {
                 allMenus.map(menu => (
                   <li className="main-header__item">
-                    <Link to={`${menu.href}/1`} className="main-header__link"><span className='main-header__link-span'>
+                    <Link to={`/category-info/${menu.href}/1`} className="main-header__link"><span className='main-header__link-span'>
                       {menu.title}
                       {menu.submenus.length !== 0 && (
                         <>

@@ -21,6 +21,8 @@ export default memo(function TopBar() {
 
     }
 
+    console.log(allTopLinks);
+
 
     return (
         <div className="top-bar">

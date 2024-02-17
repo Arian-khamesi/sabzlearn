@@ -1,10 +1,59 @@
 import React from 'react'
+import swal from 'sweetalert';
+
 
 import './CourseInfoSideBar.css'
 import { Link } from 'react-router-dom';
 
 export default function CourseInfoSideBar(props) {
 
+    const registerInCourse = (course) => {
+        if (course.price === 0) {
+            swal({
+                title: `از ثبت نام در دوره ${course.name} اطمینان دارید ؟`,
+                icon: "warning",
+                buttons: ["انصراف", "ثبت نام"]
+            })
+                .then(result => {
+                    result && register(course._id)
+                })
+        }
+        else{
+            swal({
+                title: `از ثبت نام در دوره ${course.name} اطمینان دارید ؟`,
+                icon: "warning",
+                buttons: ["انصراف", "ثبت نام"]
+            })
+                .then(result => {
+                    result && swal({
+                        title: `در صورت داشتن کد تخفیف برای دوره ${course.name} آن را وارد کنید`,
+                        content:"input",
+                        buttons: ["ثبت نام بدون کد تخفیف", "اعمال کد تخفیف"]
+                    }).then(result=>{
+                        if(result===null){
+                            register(course._id)
+                        }
+                    })
+                })
+        }
+
+        const register = (courseId) => {
+
+            const localstorageData = JSON.parse(localStorage.getItem("user"))
+            fetch(`http://localhost:5000/v1/courses/${courseId}/register`, {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${localstorageData.token}`
+                },
+            })
+                .then((res) => {
+                    res.json()
+                    res.ok && swal({ title: "با موفقیت در دوره ثبت نام شدید", icon: "success", buttons: "بازگشت" })
+                })
+                // .then(result => props.getCourseDetails())
+        }
+
+    }
 
     return (
         <div className="col-4">
@@ -17,7 +66,7 @@ export default function CourseInfoSideBar(props) {
                             دانشجوی دوره هستید
                         </span>) : (
                             <span className="course-info__register-title">
-                                <Link to={"/"} className='register-cors'>ثبت نام در دوره</Link>
+                                <a href='#' className='register-cors' onClick={() => registerInCourse(props.details)}>ثبت نام در دوره</a>
 
                             </span>
                         )}

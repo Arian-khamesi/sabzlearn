@@ -28,7 +28,10 @@ export default function CourseInfo() {
 
 
   useEffect(() => {
+    getCourseDetails()
+  }, [])
 
+  const getCourseDetails = () => {
     fetch(`http://localhost:5000/v1/courses/${courseName}`, {
       method: 'GET',
       headers: {
@@ -47,11 +50,11 @@ export default function CourseInfo() {
 
       })
 
+  }
 
-  }, [])
-
-  console.log(comments)
-  console.log(courseDetails)
+  // console.log(comments)
+  // console.log(courseDetails)
+  ////////////////////////////////////////////////////////////
 
   const submitComment = (newCommentBody, newCommentScore) => {
 
@@ -220,7 +223,7 @@ export default function CourseInfo() {
                                     </span>
                                   </div>
                                   <div className="introduction__accordion-left">
-                                  <i className='fa fa-lock introduction__accordion-time' style={{marginLeft:"7px"}}></i>
+                                    <i className='fa fa-lock introduction__accordion-time' style={{ marginLeft: "7px" }}></i>
                                     <span className="introduction__accordion-time">
                                       {session.time}
                                     </span>
@@ -270,7 +273,7 @@ export default function CourseInfo() {
               </div>
             </div>
 
-            <CourseInfoSideBar details={courseDetails} comments={comments} />
+            <CourseInfoSideBar details={courseDetails} comments={comments} getCourseDetails={getCourseDetails}/>
 
           </div>
         </div>

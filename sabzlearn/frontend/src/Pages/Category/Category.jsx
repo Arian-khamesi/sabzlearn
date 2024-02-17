@@ -15,16 +15,27 @@ export default function Category() {
 
   const [courses, setCourses] = useState([])
   const { categoryName } = useParams()
-  const [shownCourses,setShownCourses]=useState([])
+  const [shownCourses, setShownCourses] = useState([])
+
+  console.log(categoryName);
 
 
   useEffect(() => {
-    fetch(`http://localhost:5000/v1/courses/category/:${categoryName}`)
+    const localStorageData = JSON.parse(localStorage.getItem("user"))
+
+    fetch(`http://localhost:5000/v1/courses/category/:${categoryName}/`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${localStorageData.token}`
+      },
+    })
       .then(res => res.json())
       .then(result => {
         setCourses(result)
       })
   }, [categoryName])
+
+  console.log(courses);
 
 
   return (
