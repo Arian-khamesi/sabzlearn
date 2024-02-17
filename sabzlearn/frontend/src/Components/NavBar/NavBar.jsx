@@ -9,6 +9,7 @@ import AuthContext from '../../context/authContext'
 export default function NavBar() {
 
   const authContext = useContext(AuthContext)
+  console.log(authContext);
   const [allMenus, setAllMenus] = useState([])
 
   // console.log(authContext);
@@ -71,7 +72,7 @@ export default function NavBar() {
             </a>
 
             {
-              authContext.isLoggedIn ? (<Link to="#" className="main-header__profile">
+              authContext.isLoggedIn ? (<Link to="/my-account" className="main-header__profile">
                 <span className="main-header__profile-text">{authContext.userInfos.name}</span>
               </Link>) : (<Link to="http://localhost:3000/login" className="main-header__profile">
                 <span className="main-header__profile-text">ورود / ثبت نام</span>

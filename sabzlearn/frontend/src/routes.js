@@ -22,6 +22,7 @@ import Comments from "./Pages/AdminPanel/Comments/Comments";
 import Offs from "./Pages/AdminPanel/Offs/Offs"
 import Draft from "./Pages/AdminPanel/AdminArticles/Draft";
 import MainPage from "./Pages/AdminPanel/MainPage/MainPage";
+import UserIndex from "./Pages/UserPanel/UserIndex/UserIndex";
 
 
 const routes = [
@@ -46,11 +47,28 @@ const routes = [
             { path: "menus", element: <Menus /> },
             { path: "articles", element: <AdminArticles /> },
             { path: "articles/draft/:shortName", element: <Draft /> },
-            { path: "category", element: <AdminCategory/> },
-            { path: "contact", element: <AdminContact/> },
-            { path: "sessions", element: <Session/> },
-            { path: "comments", element: <Comments/> },
-            { path: "offs", element: <Offs/> },
+            { path: "category", element: <AdminCategory /> },
+            { path: "contact", element: <AdminContact /> },
+            { path: "sessions", element: <Session /> },
+            { path: "comments", element: <Comments /> },
+            { path: "offs", element: <Offs /> },
+        ]
+    },
+    {
+        path: "/my-account/*",
+        element: <UserIndex />,
+        children: [
+            // { path: "", element: <MainPage /> },
+            // { path: "users", element: <Users /> },
+            // { path: "courses", element: <AdminCourses /> },
+            // { path: "menus", element: <Menus /> },
+            // { path: "articles", element: <AdminArticles /> },
+            // { path: "articles/draft/:shortName", element: <Draft /> },
+            // { path: "category", element: <AdminCategory/> },
+            // { path: "contact", element: <AdminContact/> },
+            // { path: "sessions", element: <Session/> },
+            // { path: "comments", element: <Comments/> },
+            // { path: "offs", element: <Offs/> },
         ]
     },
 ]
