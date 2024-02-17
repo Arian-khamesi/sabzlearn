@@ -24,6 +24,7 @@ import Draft from "./Pages/AdminPanel/AdminArticles/Draft";
 import MainPage from "./Pages/AdminPanel/MainPage/MainPage";
 import UserIndex from "./Pages/UserPanel/UserIndex/UserIndex";
 import UserPanelMain from "./Pages/UserPanel/MainPage/UserPanelMain";
+import Orders from "./Pages/UserPanel/Orders/Orders";
 
 
 const routes = [
@@ -60,7 +61,7 @@ const routes = [
         element: <UserIndex />,
         children: [
             { path: "", element: <UserPanelMain /> },
-            // { path: "users", element: <Users /> },
+            { path: "orders", element: <Orders/> },
             // { path: "courses", element: <AdminCourses /> },
             // { path: "menus", element: <Menus /> },
             // { path: "articles", element: <AdminArticles /> },

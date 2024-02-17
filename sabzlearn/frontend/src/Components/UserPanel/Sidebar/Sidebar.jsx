@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import AuthContext from "../../../context/authContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
 
@@ -64,9 +64,9 @@ export default function Sidebar({ name }) {
                         </a>
                     </li>
                     <li class="sidebar__item">
-                        <a class="sidebar__link" href="#">
-                            سفارش
-                        </a>
+                        <Link class="sidebar__link" to="orders">
+                            سفارش ها
+                        </Link>
                     </li>
                     <li class="sidebar__item">
                         <a class="sidebar__link" href="#">
