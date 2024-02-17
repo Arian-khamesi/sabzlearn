@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 export default function CourseInfoSideBar(props) {
 
     const registerInCourse = (course) => {
+        console.log(course.price);
         if (course.price === 0) {
             swal({
                 title: `از ثبت نام در دوره ${course.name} اطمینان دارید ؟`,
@@ -15,7 +16,7 @@ export default function CourseInfoSideBar(props) {
                 buttons: ["انصراف", "ثبت نام"]
             })
                 .then(result => {
-                    result && register(course._id)
+                    result && register(course._id,course.price)
                 })
         }
         else{
@@ -31,20 +32,24 @@ export default function CourseInfoSideBar(props) {
                         buttons: ["ثبت نام بدون کد تخفیف", "اعمال کد تخفیف"]
                     }).then(result=>{
                         if(result===null){
-                            register(course._id)
+                            register(course._id,course.price)
                         }
                     })
                 })
         }
 
-        const register = (courseId) => {
+        const register = (courseId,coursePrice) => {
 
             const localstorageData = JSON.parse(localStorage.getItem("user"))
             fetch(`http://localhost:5000/v1/courses/${courseId}/register`, {
                 method: "POST",
                 headers: {
-                    "Authorization": `Bearer ${localstorageData.token}`
+                    "Authorization": `Bearer ${localstorageData.token}`,
+                    "Content-Type":"application/json"
                 },
+                body:JSON.stringify({
+                    price:coursePrice
+                })
             })
                 .then((res) => {
                     res.json()
