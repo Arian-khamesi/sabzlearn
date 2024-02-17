@@ -1,16 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import swal from 'sweetalert';
 
 
 import './CourseInfoSideBar.css'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export default function CourseInfoSideBar(props) {
 
     const localstorageData = JSON.parse(localStorage.getItem("user"))
-
+    const [relatedCourse,setRelatedCourse]=useState([])
+    
     const registerInCourse = (course) => {
-        console.log(course.price);
+        // console.log(course.price);
         if (course.price === 0) {
             swal({
                 title: `از ثبت نام در دوره ${course.name} اطمینان دارید ؟`,
@@ -109,6 +110,16 @@ export default function CourseInfoSideBar(props) {
 
     }
 
+
+    ////////////////////get related course//////////////////
+const {courseName}=useParams()
+
+    useEffect(()=>{
+        fetch(`http://localhost:5000/v1/courses/related/${courseName}`)
+        .then(res=>res.json())
+        .then(result=>setRelatedCourse(result))
+    },[])
+
     return (
         <div className="col-4">
             <div className="courses-info">
@@ -183,38 +194,18 @@ export default function CourseInfoSideBar(props) {
                 <div className="course-info">
                     <span className="course-info__courses-title">دوره های مرتبط</span>
                     <ul className="course-info__courses-list">
-                        <li className="course-info__courses-list-item">
-                            <a href="#" className="course-info__courses-link">
-                                <img src="/images/courses/js_project.png" alt="Course Cover" className="course-info__courses-img" />
-                                <span className="course-info__courses-text">
-                                    پروژه های تخصصی با جاوا اسکریپت
-                                </span>
-                            </a>
-                        </li>
-                        <li className="course-info__courses-list-item">
-                            <a href="#" className="course-info__courses-link">
-                                <img src="/images/courses/fareelancer.png" alt="Course Cover" className="course-info__courses-img" />
-                                <span className="course-info__courses-text">
-                                    تعیین قیمت پروژه های فریلنسری
-                                </span>
-                            </a>
-                        </li>
-                        <li className="course-info__courses-list-item">
-                            <a href="#" className="course-info__courses-link">
-                                <img src="/images/courses/nodejs.png" alt="Course Cover" className="course-info__courses-img" />
-                                <span className="course-info__courses-text">
-                                    دوره Api نویسی
-                                </span>
-                            </a>
-                        </li>
-                        <li className="course-info__courses-list-item">
-                            <a href="#" className="course-info__courses-link">
-                                <img src="/images/courses/jango.png" alt="Course Cover" className="course-info__courses-img" />
-                                <span className="course-info__courses-text">
-                                    متخصص جنگو
-                                </span>
-                            </a>
-                        </li>
+                        {relatedCourse.length?(
+                            relatedCourse.map(item=>(
+                                <li className="course-info__courses-list-item">
+                                <Link to={`/course-info/${item.shortName}`} className="course-info__courses-link">
+                                    <img src={`/images/courses/${item.cover}`} alt="Course Cover" className="course-info__courses-img" />
+                                    <span className="course-info__courses-text">
+                                        {item.name}
+                                    </span>
+                                </Link>
+                            </li>
+                            ))
+                        ):(<span className="course-info__courses-text">فعلا دوره مرتبطی وجود ندارد</span>)}
                     </ul>
                 </div>
             </div>
