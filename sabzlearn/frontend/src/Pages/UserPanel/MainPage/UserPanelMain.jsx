@@ -48,7 +48,7 @@ export default function UserPanelMain() {
                 <div class="main__links">
                     <div class="row">
                         <IndexBox title="سفارش ها" href="orders" />
-                        <IndexBox title="دوره های خریداری شده" href="courses" />
+                        <IndexBox title="دوره های خریداری شده" href="buyed" />
                         <IndexBox title="کیف پول من" href="money" />
                         <IndexBox title="جزئیات حساب کاربری" href="infos" />
                         <IndexBox title="تیکت های پشتیبانی" href="ticket" />
