@@ -23,6 +23,7 @@ import Offs from "./Pages/AdminPanel/Offs/Offs"
 import Draft from "./Pages/AdminPanel/AdminArticles/Draft";
 import MainPage from "./Pages/AdminPanel/MainPage/MainPage";
 import UserIndex from "./Pages/UserPanel/UserIndex/UserIndex";
+import UserPanelMain from "./Pages/UserPanel/MainPage/UserPanelMain";
 
 
 const routes = [
@@ -58,7 +59,7 @@ const routes = [
         path: "/my-account/*",
         element: <UserIndex />,
         children: [
-            // { path: "", element: <MainPage /> },
+            { path: "", element: <UserPanelMain /> },
             // { path: "users", element: <Users /> },
             // { path: "courses", element: <AdminCourses /> },
             // { path: "menus", element: <Menus /> },
