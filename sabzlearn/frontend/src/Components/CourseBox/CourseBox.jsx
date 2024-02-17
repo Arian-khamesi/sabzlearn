@@ -5,7 +5,7 @@ import './CourseBox.css'
 import CircleSpinner from '../CircleSpinner/CircleSpinner'
 import { Link } from 'react-router-dom'
 
-export default function CourseBox({ cover, name, creator, participants, price, shortName, isSlider }) {
+export default function CourseBox({ cover, name, creator, registers, price, shortName, isSlider }) {
 
   const [isImgLoad, setIsImgLoad] = useState(false)
   // const [hrefimg, sethrefimg] = useState(null)
@@ -48,7 +48,7 @@ export default function CourseBox({ cover, name, creator, participants, price, s
           <div className="course-box__status">
             <div className="course-box__users">
               <i className="fas fa-users course-box__users-icon"></i>
-              <span className="course-box__users-text">{participants}</span>
+              <span className="course-box__users-text">{registers}</span>
             </div>
             <span className="course-box__price">{price ? price.toLocaleString() : "رایگان"}</span>
           </div>

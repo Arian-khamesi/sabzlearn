@@ -189,6 +189,7 @@ export default function Comments() {
               <th>شناسه</th>
               <th>کاربر</th>
               <th>دوره</th>
+              <th>امتیاز</th>
               <th>مشاهده</th>
               <th>پاسخ</th>
               <th>تایید نظر</th>
@@ -203,6 +204,14 @@ export default function Comments() {
                 <td className={comment.answer ? "success-border" : "error-border"}>{index + 1}</td>
                 <td>{comment.creator.name}</td>
                 <td>{comment.course}</td>
+                <td>
+                  {Array(5 - comment.score).fill(0).map(item => (
+                    <img src="/images/svgs/star.svg" alt="score" />
+                  ))}
+                  {Array(comment.score).fill(0).map(item => (
+                    <img src="/images/svgs/star_fill.svg" alt="score" />
+                  ))}
+                </td>
                 <td>
                   <button
                     type="button"
