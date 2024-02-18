@@ -82,6 +82,11 @@ export default function Sidebar() {
             </Link>
           </li>
           <li>
+            <Link to={`tickets`}>
+              <span>تیکت ها</span>
+            </Link>
+          </li>
+          <li>
             <Link to={`contact`}>
               <span>نظرات سایت</span>
             </Link>
