@@ -4,6 +4,7 @@ import swal from "sweetalert";
 
 export default function Tickets() {
   const [tickets, setTickets] = useState([]);
+  const localStorageData = JSON.parse(localStorage.getItem("user"))
 
   useEffect(() => {
     fetch(`http://localhost:5000/v1/tickets`, {
@@ -25,6 +26,31 @@ const showTicketsBody=(msg)=>{
 swal({
     title:msg,
     buttons:"بازگشت"
+})
+}
+
+///////////////////////answer tickets//////////////////////
+const answerTickets=(id)=>{
+swal({
+    title:"لطفا پاسخ این تیکت را وارد نمایید :",
+    content:"input",
+    buttons:"ارسال"
+})
+.then(res=>{
+    const answerTCK={
+        ticketID:id,
+        body:res,
+    }
+    fetch("http://localhost:5000/v1/tickets/answer",{
+        method:"POST",
+        headers:{
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorageData.token}`,
+        },
+        body:JSON.stringify(answerTCK)
+    }).then(res=>{
+      res.ok && swal({title:"پاسخ با موفقیت ارسال شد",icon:"success",buttons:"بازگشت"})
+    })
 })
 }
 
@@ -64,7 +90,7 @@ swal({
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-primary edit-btn">
+                  <button type="button" class="btn btn-primary edit-btn" onClick={()=>answerTickets(ticket._id)}>
                     پاسخ
                   </button>
                 </td>
