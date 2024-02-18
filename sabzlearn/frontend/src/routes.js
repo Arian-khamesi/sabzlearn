@@ -31,6 +31,7 @@ import SendTicket from "./Pages/UserPanel/Tickets/SendTicket/SendTicket";
 import Tickets from "./Pages/UserPanel/Tickets/Tickets/Tickets";
 import TicketAnswer from "./Pages/UserPanel/Tickets/TicketAnswer/TicketAnswer";
 import EditAccount from "./Pages/UserPanel/EditAccount/EditAccount";
+import PAdminPrivate from "./Components/PrivateRoute/PAdminPrivate";
 
 
 const routes = [
@@ -47,7 +48,11 @@ const routes = [
     { path: "/:courseName/:sessionID", element: <SessionInfo /> },
     {
         path: "/panel-admin/*",
-        element: <AdminIndex />,
+        element: (
+            <PAdminPrivate>
+                <AdminIndex />
+            </PAdminPrivate>
+        ),
         children: [
             { path: "", element: <MainPage /> },
             { path: "users", element: <Users /> },
@@ -70,10 +75,10 @@ const routes = [
             { path: "orders", element: <Orders /> },
             { path: "orders/:ordersID", element: <MainOrder /> },
             { path: "buyed", element: <PanelCourses /> },
-            { path: "tickets", element: <Tickets/> },
-            { path: "send-ticket", element: <SendTicket/> },
-            { path: "tickets/answer/:id", element: <TicketAnswer/> },
-            { path: "edit-account", element: <EditAccount/> },
+            { path: "tickets", element: <Tickets /> },
+            { path: "send-ticket", element: <SendTicket /> },
+            { path: "tickets/answer/:id", element: <TicketAnswer /> },
+            { path: "edit-account", element: <EditAccount /> },
         ]
     },
 ]

@@ -66,35 +66,38 @@ export default function Register() {
         };
 
         console.log(newUserInfo);
-        if (newUserInfo.password.value === newUserInfo.confirmPassword.value) {
+        if (newUserInfo.password === newUserInfo.confirmPassword) {
             fetch("http://localhost:5000/v1/auth/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(newUserInfo),
-            }).then(res => res.json())
-                // } else {
-                //     if (res.status === 403) {
-                //         swal({
-                //             title: "دسترسی این شماره به سایت مسدود است",
-                //             icon: "error",
-                //             buttons: "تغییر شماره"
-                //         })
-                //     }
-                //     return false;
-
-
+            })
+                .then((res) => {
+                    console.log(res);
+                    if (res.ok) {
+                        return res.json()
+                    } else {
+                        if (res.status === 403) {
+                            swal({
+                                title: "دسترسی این شماره به سایت مسدود است",
+                                icon: 'error',
+                                buttons: "تغییر شماره"
+                            })
+                        }
+                    }
+                })
                 .then((result) => {
-                    console.log(result)
-                    authContext.login(result.accessToken, result.user)
+                    console.log(result);
+                    authContext.login(result.accessToken, result.user);
                     swal({
                         title: `${formState.inputs.username.value} عزیز با موفقیت در سایت ثبت نام شدید`,
                         icon: "success",
                         buttons: 'ورود به پنل کاربری',
-                        onClose: redirector()
+                        // onClose: redirector()
                     })
-                })
+                });
         }
         else {
             swal({
@@ -106,9 +109,9 @@ export default function Register() {
 
     }
 
-    const redirector = () => {
-        navigate('/');
-    }
+    // const redirector = () => {
+    //     navigate('/');
+    // }
 
     return (
         <>
