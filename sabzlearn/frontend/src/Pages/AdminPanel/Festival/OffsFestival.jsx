@@ -39,7 +39,7 @@ export default function Discounts() {
       <form class="form">
         <div class="col-6">
           <div class="name input">
-            <label class="input-title">عنوان</label>
+            <label class="input-title">میزان تخفیف</label>
             <input
               type="text"
               value={discount}

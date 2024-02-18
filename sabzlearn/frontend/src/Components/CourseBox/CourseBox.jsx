@@ -5,7 +5,7 @@ import './CourseBox.css'
 import CircleSpinner from '../CircleSpinner/CircleSpinner'
 import { Link } from 'react-router-dom'
 
-export default function CourseBox({ cover, name, creator, registers, price, shortName, isSlider,courseAverageScore }) {
+export default function CourseBox({ cover, name, creator, registers, price, shortName, isSlider, courseAverageScore, discount }) {
 
   const [isImgLoad, setIsImgLoad] = useState(false)
   // const [hrefimg, sethrefimg] = useState(null)
@@ -19,7 +19,7 @@ export default function CourseBox({ cover, name, creator, registers, price, shor
   // setTimeout(()=>{
   //   sethrefimg(img)
   // },2000)
-// console.log(name);
+  // console.log(name);
   return (
     <div className={isSlider ? "col-12" : "col-12 col-sm-4"}>
       <div className="course-box">
@@ -38,16 +38,16 @@ export default function CourseBox({ cover, name, creator, registers, price, shor
             </div>
             <div className="course-box__rating">
               {
-                Array(5-courseAverageScore).fill(0).map(item=>(
+                Array(5 - courseAverageScore).fill(0).map(item => (
                   <img src="/images/svgs/star.svg" alt="rating" className="course-box__star" />
                 ))
               }
               {
-                Array(courseAverageScore).fill(0).map(item=>(
+                Array(courseAverageScore).fill(0).map(item => (
                   <img src="/images/svgs/star_fill.svg" alt="rating" className="course-box__star" />
                 ))
               }
-             
+
             </div>
           </div>
 
@@ -56,7 +56,7 @@ export default function CourseBox({ cover, name, creator, registers, price, shor
               <i className="fas fa-users course-box__users-icon"></i>
               <span className="course-box__users-text">{registers}</span>
             </div>
-            <span className="course-box__price">{price ? price.toLocaleString() : "رایگان"}</span>
+            <span className="course-box__price">{(price !== 0 && discount) ? price-(price * discount)/100 : "رایگان"}</span>
           </div>
         </div>
 
@@ -66,7 +66,9 @@ export default function CourseBox({ cover, name, creator, registers, price, shor
             <i className="fas fa-arrow-left course-box__footer-icon"></i>
           </Link>
         </div>
-
+        {(price !== 0 && discount) && (
+          <span class="courses-box__discount">%{discount}</span>
+        )}
       </div>
     </div>
   )
