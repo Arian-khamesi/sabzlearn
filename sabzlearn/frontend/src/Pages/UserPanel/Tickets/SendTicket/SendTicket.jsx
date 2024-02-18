@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import swal from "sweetalert";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 import "./SendTicket.css";
 
@@ -16,6 +17,7 @@ export default function SendTicket() {
     const [priority, setPriority] = useState("");
     const [body, setBody] = useState("");
     const [courseID, setCourseID] = useState("");
+    const navigate=useNavigate()
     ///////////////////////get menu and sub menu tickets//////////////////////
 
     useEffect(() => {
@@ -52,7 +54,7 @@ export default function SendTicket() {
     ///////////////////////////send ticket//////////////////////////////////
 
     const sendTicket = (event) => {
-        console.log(courseID);
+        
         event.preventDefault()
         const newTicketInfos = {
             departmentID,
@@ -62,7 +64,7 @@ export default function SendTicket() {
             body,
             course: courseID.length ? courseID : undefined
         }
-        console.log(newTicketInfos);
+        // console.log(newTicketInfos);
         fetch(`http://localhost:5000/v1/tickets`, {
             method: "POST",
             headers: {
@@ -73,7 +75,7 @@ export default function SendTicket() {
         })
             .then((res) => {
                 res.json()
-                res.ok && swal({ title: "تیکت شما با موفقیت ارسال شد", icon: "success", buttons: "بازگشت" })
+                res.ok && swal({ title: "تیکت شما با موفقیت ارسال شد", icon: "success", buttons: "بازگشت" }).then(result=>navigate("/my-account/tickets"))
             })
     }
 

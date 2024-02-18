@@ -20,7 +20,7 @@ export default function TicketAnswer() {
         setTicketInfo(data);
       });
   }, []);
-console.log(ticketInfo);
+// console.log(ticketInfo);
   return (
     <div class="col-9">
       <div class="ticket">
