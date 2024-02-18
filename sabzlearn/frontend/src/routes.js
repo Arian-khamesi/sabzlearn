@@ -27,6 +27,7 @@ import UserPanelMain from "./Pages/UserPanel/MainPage/UserPanelMain";
 import Orders from "./Pages/UserPanel/Orders/Orders";
 import MainOrder from "./Pages/UserPanel/Orders/MainOrder";
 import PanelCourses from "./Pages/UserPanel/Courses/PanelCourses"
+import SendTicket from "./Pages/UserPanel/Tickets/SendTicket/SendTicket";
 
 
 const routes = [
@@ -66,7 +67,7 @@ const routes = [
             { path: "orders", element: <Orders /> },
             { path: "orders/:ordersID", element: <MainOrder /> },
             { path: "buyed", element: <PanelCourses /> },
-            // { path: "courses", element: <AdminCourses /> },
+            { path: "send-ticket", element: <SendTicket/> },
             // { path: "menus", element: <Menus /> },
             // { path: "articles", element: <AdminArticles /> },
             // { path: "articles/draft/:shortName", element: <Draft /> },
