@@ -97,7 +97,11 @@ export default function Register() {
                 })
         }
         else {
-            alert("رمز عبور با تکرار آن یکسان نیست")
+            swal({
+                title: "رمز عبور با تکرار آن یکسان نیست",
+                icon: "error",
+                buttons: "بازگشت"
+            })
         }
 
     }

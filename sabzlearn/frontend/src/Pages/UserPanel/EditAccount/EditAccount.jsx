@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import AuthContext from "../../../context/authContext";
+import swal from "sweetalert";
 
 import './EditAccount.css'
+import { useNavigate } from "react-router-dom";
 
 export default function EditAccount() {
 
@@ -10,6 +11,11 @@ export default function EditAccount() {
     const [phone, setPhone] = useState('')
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+
+    const localStorageData = JSON.parse(localStorage.getItem("user"))
+    const navigate = useNavigate()
 
     useEffect(() => {
         getUserInfo()
@@ -29,12 +35,47 @@ export default function EditAccount() {
                     setName(userData.name)
                     setPhone(userData.phone)
                     setUsername(userData.username)
-                    setUsername(userData.username)
                     setEmail(userData.email)
 
                 })
         }
         console.log(userInfos);
+    }
+
+    //////////////////////set edits/////////////////////////////////
+
+    const editAccountsInfo = (event) => {
+        event.preventDefault()
+        const editsInfo = {
+            name,
+            username,
+            email,
+            password,
+            phone,
+        }
+        console.log(editsInfo);
+        if (password === confirmPassword) {
+            fetch("http://localhost:5000/v1/users", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorageData.token}`,
+                },
+                body: JSON.stringify(editsInfo)
+            })
+                .then((res) => {
+                    res.json()
+                    res.ok && swal({ title: "تغییرات حساب کاربریتان با موفقیت اعمال شد", icon: "success", buttons: "بازگشت" })
+                })
+                .then(result => navigate("/my-account"))
+        }
+        else {
+            swal({
+                title: "رمز عبور با تکرار آن یکسان نیست",
+                icon: "error",
+                buttons: "بازگشت"
+            })
+        }
     }
 
     return (
@@ -94,22 +135,14 @@ export default function EditAccount() {
                         <div class="row">
                             <div class="col-12">
                                 <label class="edit__label">
-                                    گذرواژه پیشین (در صورتی که قصد تغییر ندارید خالی بگذارید)
-                                </label>
-                                <input
-                                    class="edit__input"
-                                    type="text"
-                                    placeholder="گذرواژه پیشین"
-                                />
-                            </div>
-                            <div class="col-12">
-                                <label class="edit__label">
                                     گذرواژه جدید (در صورتی که قصد تغییر ندارید خالی بگذارید)
                                 </label>
                                 <input
                                     class="edit__input"
                                     type="text"
                                     placeholder="گذرواژه جدید"
+                                    value={password}
+                                    onChange={event => setPassword(event.target.value)}
                                 />
                             </div>
                             <div class="col-12">
@@ -118,11 +151,13 @@ export default function EditAccount() {
                                     class="edit__input"
                                     type="text"
                                     placeholder="تکرار گذرواژه جدید"
+                                    value={confirmPassword}
+                                    onChange={event => setConfirmPassword(event.target.value)}
                                 />
                             </div>
                         </div>
                     </div>
-                    <button class="edit__btn" type="submit">
+                    <button class="edit__btn" type="submit" onClick={editAccountsInfo}>
                         ذخیره تغییرات
                     </button>
                 </form>
