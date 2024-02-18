@@ -30,6 +30,7 @@ import PanelCourses from "./Pages/UserPanel/Courses/PanelCourses"
 import SendTicket from "./Pages/UserPanel/Tickets/SendTicket/SendTicket";
 import Tickets from "./Pages/UserPanel/Tickets/Tickets/Tickets";
 import TicketAnswer from "./Pages/UserPanel/Tickets/TicketAnswer/TicketAnswer";
+import EditAccount from "./Pages/UserPanel/EditAccount/EditAccount";
 
 
 const routes = [
@@ -72,6 +73,7 @@ const routes = [
             { path: "tickets", element: <Tickets/> },
             { path: "send-ticket", element: <SendTicket/> },
             { path: "tickets/answer/:id", element: <TicketAnswer/> },
+            { path: "edit-account", element: <EditAccount/> },
         ]
     },
 ]

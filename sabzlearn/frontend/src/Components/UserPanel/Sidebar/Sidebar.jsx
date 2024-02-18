@@ -59,9 +59,9 @@ export default function Sidebar({ name }) {
                 <span class="sidebar__name">{name}</span>
                 <ul class="sidebar__list">
                     <li class="sidebar__item">
-                        <a class="sidebar__link" href="#">
+                        <Link class="sidebar__link" to="/my-account">
                             پیشخوان
-                        </a>
+                        </Link>
                     </li>
                     <li class="sidebar__item">
                         <Link class="sidebar__link" to="orders">
@@ -74,9 +74,9 @@ export default function Sidebar({ name }) {
                         </a>
                     </li>
                     <li class="sidebar__item">
-                        <a class="sidebar__link" href="#">
+                        <Link class="sidebar__link" to="edit-account">
                             جزئیات حساب کاربری
-                        </a>
+                        </Link>
                     </li>
                     <li class="sidebar__item">
                         <Link class="sidebar__link" to="buyed">
