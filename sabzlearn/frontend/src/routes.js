@@ -33,6 +33,7 @@ import TicketAnswer from "./Pages/UserPanel/Tickets/TicketAnswer/TicketAnswer";
 import EditAccount from "./Pages/UserPanel/EditAccount/EditAccount";
 import PAdminPrivate from "./Components/PrivateRoute/PAdminPrivate";
 import AdminPanelTickets from "./Pages/AdminPanel/Tickets/AdminPanelTickets"
+import OffsFestival from "./Pages/AdminPanel/Festival/OffsFestival"
 
 
 const routes = [
@@ -67,6 +68,7 @@ const routes = [
             { path: "comments", element: <Comments /> },
             { path: "offs", element: <Offs /> },
             { path: "tickets", element: <AdminPanelTickets/> },
+            { path: "offs-festival", element: <OffsFestival/> },
         ]
     },
     {
