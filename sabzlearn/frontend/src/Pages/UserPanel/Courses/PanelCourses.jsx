@@ -107,7 +107,7 @@ export default function PanelCourses() {
         <div class="main">
           <div class="row">
             <div class="col-12">
-              {shownCourses.map((item) => (
+              {shownCourses.length ? shownCourses.map((item) => (
                 <div class="main__box">
                   <div class="main__box-right">
                     <a class="main__box-img-link" href="#">
@@ -135,7 +135,9 @@ export default function PanelCourses() {
                     </div>
                   </div>
                 </div>
-              ))}
+              )) : <div className="alert alert-warning">
+                دوره ای در این دسته بندی یافت نشد
+              </div>}
             </div>
           </div>
         </div>
