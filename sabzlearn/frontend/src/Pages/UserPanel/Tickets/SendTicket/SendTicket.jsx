@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import swal from "sweetalert";
 
 import "./SendTicket.css";
 
@@ -6,8 +7,15 @@ export default function SendTicket() {
     const [departments, setDepartments] = useState([]);
     const [departmentsSubs, setDepartmentsSubs] = useState([]);
     const [courses, setCourses] = useState([]);
-    const [sessionCourse, setSessionCourse] = useState('-1');
-    const [showSelectCourse, setShowSelectCourse] = useState(false);
+    const localStorageData = JSON.parse(localStorage.getItem("user"))
+    ////////////////////////////////////////////////////////////////////
+    const [departmentID, setDepartmentID] = useState("");
+    const [ticketSubId, setTicketSubId] = useState("");
+    const [title, setTitle] = useState("");
+    const [priority, setPriority] = useState("");
+    const [body, setBody] = useState("");
+    const [courseID, setCourseID] = useState("-1");
+    ///////////////////////get menu and sub menu tickets//////////////////////
 
     useEffect(() => {
         getAllCourse()
@@ -25,21 +33,47 @@ export default function SendTicket() {
 
     /////////////////get course/////////////////
     const getAllCourse = () => {
-        fetch("http://localhost:5000/v1/courses")
+        fetch(`http://localhost:5000/v1/users/courses/`, {
+            headers: {
+                Authorization: `Bearer ${JSON.parse(localStorage.getItem("user")).token}`,
+            },
+        })
             .then((res) => res.json())
-            .then((allCourses) => {
-                console.log(allCourses);
-                setCourses(allCourses);
+            .then((data) => {
+                setCourses(data);
             });
     }
-
-    const showCoursesTicket = (subName) => {
-        console.log(subName);
-        if (subName === "پشتیبانی دوره‌ها") {
-            setShowSelectCourse(true)
-        }
-        console.log(showSelectCourse);
+    // console.log(courses);
+    const showCoursesTicket = (subId) => {
+        console.log(subId);
+        setTicketSubId(subId)
     };
+    ///////////////////////////send ticket//////////////////////////////////
+
+    const sendTicket = (event) => {
+        event.preventDefault()
+        const newTicketInfos = {
+            departmentID,
+            departmentSubID: ticketSubId,
+            title,
+            priority,
+            body,
+            course: courseID.length ? courseID : undefined
+        }
+        console.log(newTicketInfos);
+        fetch(`http://localhost:5000/v1/tickets`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorageData.token}`,
+            },
+            body:JSON.stringify(newTicketInfos)
+        })
+            .then((res) => {
+                res.json()
+                res.ok && swal({ title: "تیکت شما با موفقیت ارسال شد", icon: "success", buttons: "بازگشت" })
+            })
+    }
 
     return (
         <div class="col-9">
@@ -56,7 +90,10 @@ export default function SendTicket() {
                             <label class="ticket-form__label">دپارتمان را انتخاب کنید:</label>
                             <select
                                 class="ticket-form__select"
-                                onChange={(event) => getDepartmentsSub(event.target.value)}
+                                onChange={(event) => {
+                                    setDepartmentID(event.target.value)
+                                    getDepartmentsSub(event.target.value)
+                                }}
                             >
                                 <option class="ticket-form__option">
                                     لطفا یک مورد را انتخاب نمایید.
@@ -73,36 +110,35 @@ export default function SendTicket() {
                                     لطفا یک مورد را انتخاب نمایید.
                                 </option>
                                 {departmentsSubs.map((sub) => (
-                                    <option value={sub._id} onClick={() => showCoursesTicket(sub.title)}>{sub.title}</option>
+                                    <option value={sub._id} onClick={() => showCoursesTicket(sub._id)}>{sub.title}</option>
                                 ))}
                             </select>
                         </div>
                         <div class="col-6">
                             <label class="ticket-form__label">عنوان تیکت را وارد کنید:</label>
-                            <input class="ticket-form__input" type="text" />
+                            <input class="ticket-form__input" type="text" onChange={(event) => setTitle(event.target.value)} />
                         </div>
                         <div class="col-6">
-                            <label class="ticket-form__label">دپارتمان را انتخاب کنید:</label>
-                            <select class="ticket-form__select">
+                            <label class="ticket-form__label">سطح اولویت تیکت را تعیین کنید:</label>
+                            <select class="ticket-form__select" onChange={(event) => setPriority(event.target.value)}>
                                 <option class="ticket-form__option">
                                     لطفا یک مورد را انتخاب نمایید.
                                 </option>
-                                <option class="ticket-form__option">پشتیبانی</option>
-                                <option class="ticket-form__option">مشاوره</option>
-                                <option class="ticket-form__option">مالی</option>
-                                <option class="ticket-form__option">ارتباط با مدیریت</option>
+                                <option class="ticket-form__option" value={1}>بالا</option>
+                                <option class="ticket-form__option" value={2}>متوسط</option>
+                                <option class="ticket-form__option" value={3}>کم</option>
                             </select>
                         </div>
-                        {showSelectCourse && (
+                        {ticketSubId === "63b688c5516a30a651e98156" && (
                             <div class="col-6 mt-5">
                                 <div class="price input">
                                     <label class="ticket-form__label" style={{ display: "block" }}>
                                         دوره
                                     </label>
-                                    <select class="select" onChange={event => setSessionCourse(event.target.value)}>
+                                    <select class="select" onChange={event => setCourseID(event.target.value)}>
                                         <option value="-1">دوره مدنظر را انتخاب کنید</option>
                                         {courses.map((course) => (
-                                            <option value={course._id} key={course._id}>{course.name}</option>
+                                            <option value={course._id} key={course._id}>{course.course.name}</option>
                                         ))}
                                     </select>
                                     <span class="error-message text-danger"></span>
@@ -113,7 +149,7 @@ export default function SendTicket() {
                             <label class="ticket-form__label">
                                 محتوای تیکت را وارد نمایید:
                             </label>
-                            <textarea class="ticket-form__textarea"></textarea>
+                            <textarea class="ticket-form__textarea" onChange={(event) => setBody(event.target.value)}></textarea>
                         </div>
                         <div class="col-12">
                             <div class="ticket-form__file">
@@ -127,8 +163,8 @@ export default function SendTicket() {
                             </div>
                         </div>
                         <div class="col-12">
-                            <button class="ticket-form__btn">
-                                <i class="ticket-form__btn-icon fa fa-paper-plane"></i>
+                            <button class="ticket-form__btn" onClick={sendTicket}>
+                                <i class="ticket-form__btn-icon fa fa-paper-plane ms-3"></i>
                                 ارسال تیکت
                             </button>
                         </div>
