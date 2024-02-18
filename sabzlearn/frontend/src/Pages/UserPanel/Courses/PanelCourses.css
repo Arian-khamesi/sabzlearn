@@ -252,10 +252,14 @@
   }
   .courses-header__link {
     font-size: 1.5rem;
+    color: var(--white-color) !important;
+    background-color:#2bce56 !important;
   }
   .courses-header__link-active {
-    color: #2bce56;
+    color: #2bce56 !important;
     font-weight: bold;
+    background-color: var(--white-color) !important;
+    border: 2px solid #2bce56;
   }
   .main__box {
     display: flex;
@@ -297,6 +301,10 @@
   .main__box-completed-text {
     font-weight: bold;
     color: #2bce56;
+  }
+  .main__box-completed-value{
+    font-weight: bold;
+    margin-right: 7px;
   }
   
   /* ============================== Content Main Style ============================== */

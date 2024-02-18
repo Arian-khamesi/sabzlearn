@@ -4,6 +4,7 @@ import "./PanelCourses.css"
 export default function PanelCourses() {
 
   const [courses, setCourses] = useState([]);
+  // const [courseInfo, setCourseInfo] = useState({});
 
   useEffect(() => {
     fetch(`http://localhost:5000/v1/users/courses/`, {
@@ -14,8 +15,10 @@ export default function PanelCourses() {
       .then((res) => res.json())
       .then((data) => {
         setCourses(data);
+        // setCourseInfo(data.course);
       });
   }, []);
+ console.log(courses);
 
   return (
     <div class="col-9">
@@ -46,30 +49,30 @@ export default function PanelCourses() {
         <div class="main">
           <div class="row">
             <div class="col-12">
-              {courses.map((course) => (
+              {courses.map((item) => (
                 <div class="main__box">
                   <div class="main__box-right">
                     <a class="main__box-img-link" href="#">
                       <img
                         class="main__box-img img-fluid"
-                        src="images/courses/js_project.png"
+                        src={`http://localhost:5000/courses/covers/${item.course.cover}`}
                       />
                     </a>
                   </div>
                   <div class="main__box-left">
                     <a href="#" class="main__box-title">
-                      آموزش جاوا اسکریپت
+                      {item.course.name}
                     </a>
                     <div class="main__box-bottom">
                       <div class="main__box-all">
-                        <span class="main__box-all-text">کل دروس:</span>
-                        <span class="main__box-all-value">75</span>
+                        <span class="main__box-all-text">وضعیت :</span>
+                        <span class="main__box-all-value">{item.course.isComplete?"تکمیل شده":"در حال برگزاری"}</span>
                       </div>
                       <div class="main__box-completed">
                         <span class="main__box-completed-text">
-                          دروس تکمیل شده:
+                          قیمت دوره :
                         </span>
-                        <span class="main__box-completed-value">0/75</span>
+                        <span class="main__box-completed-value">{item.course.price?item.course.price:"رایگان"}</span>
                       </div>
                     </div>
                   </div>
