@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import swal from "sweetalert";
+import { Link } from "react-router-dom";
 
 import "./SendTicket.css";
 
@@ -14,7 +15,7 @@ export default function SendTicket() {
     const [title, setTitle] = useState("");
     const [priority, setPriority] = useState("");
     const [body, setBody] = useState("");
-    const [courseID, setCourseID] = useState("-1");
+    const [courseID, setCourseID] = useState("");
     ///////////////////////get menu and sub menu tickets//////////////////////
 
     useEffect(() => {
@@ -51,6 +52,7 @@ export default function SendTicket() {
     ///////////////////////////send ticket//////////////////////////////////
 
     const sendTicket = (event) => {
+        console.log(courseID);
         event.preventDefault()
         const newTicketInfos = {
             departmentID,
@@ -67,7 +69,7 @@ export default function SendTicket() {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${localStorageData.token}`,
             },
-            body:JSON.stringify(newTicketInfos)
+            body: JSON.stringify(newTicketInfos)
         })
             .then((res) => {
                 res.json()
@@ -80,9 +82,9 @@ export default function SendTicket() {
             <div class="ticket">
                 <div class="ticket-header">
                     <span class="ticket-header__title">ارسال تیکت جدید</span>
-                    <a class="ticket-header__link" href="#">
+                    <Link class="ticket-header__link" to="/my-account/tickets">
                         همه تیکت ها
-                    </a>
+                    </Link>
                 </div>
                 <form class="ticket-form" action="#">
                     <div class="row">

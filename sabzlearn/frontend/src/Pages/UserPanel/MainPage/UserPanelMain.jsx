@@ -51,7 +51,7 @@ export default function UserPanelMain() {
                         <IndexBox title="دوره های خریداری شده" href="buyed" />
                         <IndexBox title="کیف پول من" href="money" />
                         <IndexBox title="جزئیات حساب کاربری" href="infos" />
-                        <IndexBox title="تیکت های پشتیبانی" href="send-ticket" />
+                        <IndexBox title="تیکت های پشتیبانی" href="tickets" />
                     </div>
                 </div>
             </div>

@@ -28,6 +28,8 @@ import Orders from "./Pages/UserPanel/Orders/Orders";
 import MainOrder from "./Pages/UserPanel/Orders/MainOrder";
 import PanelCourses from "./Pages/UserPanel/Courses/PanelCourses"
 import SendTicket from "./Pages/UserPanel/Tickets/SendTicket/SendTicket";
+import Tickets from "./Pages/UserPanel/Tickets/Tickets/Tickets";
+import TicketAnswer from "./Pages/UserPanel/Tickets/TicketAnswer/TicketAnswer";
 
 
 const routes = [
@@ -67,15 +69,9 @@ const routes = [
             { path: "orders", element: <Orders /> },
             { path: "orders/:ordersID", element: <MainOrder /> },
             { path: "buyed", element: <PanelCourses /> },
+            { path: "tickets", element: <Tickets/> },
             { path: "send-ticket", element: <SendTicket/> },
-            // { path: "menus", element: <Menus /> },
-            // { path: "articles", element: <AdminArticles /> },
-            // { path: "articles/draft/:shortName", element: <Draft /> },
-            // { path: "category", element: <AdminCategory/> },
-            // { path: "contact", element: <AdminContact/> },
-            // { path: "sessions", element: <Session/> },
-            // { path: "comments", element: <Comments/> },
-            // { path: "offs", element: <Offs/> },
+            { path: "tickets/answer/:id", element: <TicketAnswer/> },
         ]
     },
 ]
