@@ -124,20 +124,17 @@ const {courseName}=useParams()
         <div className="col-4">
             <div className="courses-info">
                 <div className="course-info">
-                    <div className="course-info__register">
-
-                        {props.details.isUserRegisteredToThisCourse ? (<span className="course-info__register-title">
+                        {props.details.isUserRegisteredToThisCourse ? (<div className="course-info__register"><span className="course-info__register-title">
                             <i className="fas fa-graduation-cap course-info__register-icon"></i>
                             دانشجوی دوره هستید
-                        </span>) : (
+                        </span></div>) : (
+                            <div className="course-info__register" onClick={() => registerInCourse(props.details)}>
                             <span className="course-info__register-title">
-                                <a href='#' className='register-cors' onClick={() => registerInCourse(props.details)}>ثبت نام در دوره</a>
+                                <span className='register-cors'>ثبت نام در دوره</span>
 
                             </span>
+                            </div>
                         )}
-
-
-                    </div>
                 </div>
                 <div className="course-info">
                     <div className="course-info__total">
@@ -197,8 +194,8 @@ const {courseName}=useParams()
                         {relatedCourse.length?(
                             relatedCourse.map(item=>(
                                 <li className="course-info__courses-list-item">
-                                <Link to={`/course-info/${item.shortName}`} className="course-info__courses-link">
-                                    <img src={`/images/courses/${item.cover}`} alt="Course Cover" className="course-info__courses-img" />
+                                <Link to={`/course-info/${item.shortName}/1`} className="course-info__courses-link">
+                                    <img src={`http://localhost:5000/courses/covers/${item.cover}`} alt="Course Cover" className="course-info__courses-img" />
                                     <span className="course-info__courses-text">
                                         {item.name}
                                     </span>

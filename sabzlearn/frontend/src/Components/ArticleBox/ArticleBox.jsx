@@ -16,7 +16,10 @@ export default function ArticleBox({ title, description, cover, shortName }) {
       <div className="article-card">
         <div className="article-card__header">
           <Link to={`/article-info/${shortName}`} className="article-card__link-img">
-            <img src={isCoverLoad ? `/images/articles/${cover}` : "/images/shimmer.gif"} className={isCoverLoad ? "article-card__img" : ""} alt="Article Cover" onLoad={coverLoader} />
+            <img src={isCoverLoad ? `http://localhost:5000/courses/covers/${cover}` : "/images/shimmer.gif"}
+              className={isCoverLoad ? "article-card__img" : ""} alt="Article Cover"
+              onLoad={coverLoader}
+              style={{ width: "400px",height:"400px" }} />
           </Link>
         </div>
         <div className="article-card__content">

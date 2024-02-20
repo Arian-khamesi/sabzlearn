@@ -98,14 +98,14 @@ export default function Menus() {
 
   return (
     <>
-      <div class="container">
-        <div class="home-title">
+      <div className="container">
+        <div className="home-title">
           <span>افزودن کاربر جدید</span>
         </div>
-        <form class="form">
-          <div class="col-6">
-            <div class="name input">
-              <label class="input-title">عنوان</label>
+        <form className="form">
+          <div className="col-6">
+            <div className="name input">
+              <label className="input-title">عنوان</label>
               <Input
                 element="input"
                 onInputHandler={onInputHandler}
@@ -115,12 +115,12 @@ export default function Menus() {
                 placeholder="لطفا عنوان را وارد کنید..."
                 validations={[minValidator(5)]}
               />
-              <span class="error-message text-danger"></span>
+              <span className="error-message text-danger"></span>
             </div>
           </div>
-          <div class="col-6">
-            <div class="name input">
-              <label class="input-title">عنوان</label>
+          <div className="col-6">
+            <div className="name input">
+              <label className="input-title">عنوان</label>
               <Input
                 element="input"
                 onInputHandler={onInputHandler}
@@ -130,14 +130,14 @@ export default function Menus() {
                 validations={[minValidator(5)]}
                 placeholder="لطفا عنوان را وارد کنید..."
               />
-              <span class="error-message text-danger"></span>
+              <span className="error-message text-danger"></span>
             </div>
           </div>
-          <div class="col-6">
-            <div class="name input">
-              <label class="input-title">عنوان</label>
+          <div className="col-6">
+            <div className="name input">
+              <label className="input-title">عنوان</label>
               <select
-                class="select"
+                className="select"
                 onChange={(event) => setMenuParent(event.target.value)}
               >
                 <option value="-1">منوی اصلی را انتخاب کنید</option>
@@ -150,12 +150,12 @@ export default function Menus() {
                   </>
                 ))}
               </select>
-              <span class="error-message text-danger"></span>
+              <span className="error-message text-danger"></span>
             </div>
           </div>
-          <div class="col-12">
-            <div class="bottom-form">
-              <div class="submit-btn">
+          <div className="col-12">
+            <div className="bottom-form">
+              <div className="submit-btn">
                 <input type="submit" value="افزودن" onClick={createMenu} className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid} />
               </div>
             </div>
@@ -164,7 +164,7 @@ export default function Menus() {
       </div>
 
       <DataTable title={"منو ها"}>
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th>شناسه</th>
@@ -183,15 +183,15 @@ export default function Menus() {
                 <td>{menu.parent ? "زیر منو" : "منو اصلی"}</td>
                 <td>{menu.title}</td>
                 <td><Link to={menu.href}>{menu.href}</Link></td>
-                <td>{menu.parent ? menu.parent.title : <i class="fa fa-times-circle" aria-hidden="true" style={{ color: "#dc3545" }}></i>
+                <td>{menu.parent ? menu.parent.title : <i className="fa fa-times-circle" aria-hidden="true" style={{ color: "#dc3545" }}></i>
                 }</td>
                 <td>
-                  <button type="button" class="btn btn-danger delete-btn" onClick={() => deleteMenu(menu._id)}>
+                  <button type="button" className="btn btn-danger delete-btn" onClick={() => deleteMenu(menu._id)}>
                     حذف
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-primary edit-btn">
+                  <button type="button" className="btn btn-primary edit-btn">
                     پاسخ
                   </button>
 

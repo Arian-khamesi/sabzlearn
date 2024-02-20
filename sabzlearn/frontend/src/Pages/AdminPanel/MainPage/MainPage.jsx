@@ -28,15 +28,15 @@ export default function MainPage() {
 
     return (
         <>
-            <div class="container-fluid" id="home-content">
-                <div class="container">
-                    <div class="home-content-title">
-                        <span class="welcome">
-                            خوش آمدید,<span class="name">{adminName}</span>
+            <div className="container-fluid" id="home-content">
+                <div className="container">
+                    <div className="home-content-title">
+                        <span className="welcome">
+                            خوش آمدید,<span className="name">{adminName}</span>
                         </span>
                     </div>
-                    <div class="home-content-boxes">
-                        <div class="row">
+                    <div className="home-content-boxes">
+                        <div className="row">
                             {
                                 infos.map(item => (
                                     <PAdminItem {...item} />
@@ -46,10 +46,10 @@ export default function MainPage() {
                         </div>
                     </div>
 
-                    <div class="home-content-latset-users">
+                    <div className="home-content-latset-users">
                         <DataTable title="افراد اخیرا ثبت نام شده">
 
-                            <table class="table">
+                            <table className="table">
                                 <thead>
                                     <tr>
                                         <th>شناسه</th>

@@ -17,6 +17,7 @@
   .landing__subtitle {
     font-size: 1.8rem;
     margin-top: 0.3rem;
+    color: var(--white-color);
   }
   
   .landing__searchbar {

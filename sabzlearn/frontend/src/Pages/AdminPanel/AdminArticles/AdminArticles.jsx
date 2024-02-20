@@ -150,15 +150,15 @@ export default function AdminArticles() {
 
   return (
     <>
-      <div class="container-fluid" id="home-content">
-        <div class="container">
-          <div class="home-title">
+      <div className="container-fluid" id="home-content">
+        <div className="container">
+          <div className="home-title">
             <span>افزودن مقاله جدید</span>
           </div>
-          <form class="form">
-            <div class="col-6">
-              <div class="name input">
-                <label class="input-title" style={{ display: "block" }}>
+          <form className="form">
+            <div className="col-6">
+              <div className="name input">
+                <label className="input-title" style={{ display: "block" }}>
                   عنوان
                 </label>
                 <Input
@@ -168,12 +168,12 @@ export default function AdminArticles() {
                   onInputHandler={onInputHandler}
                   validations={[minValidator(8)]}
                 />
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-6">
-              <div class="name input">
-                <label class="input-title" style={{ display: "block" }}>
+            <div className="col-6">
+              <div className="name input">
+                <label className="input-title" style={{ display: "block" }}>
                   لینک
                 </label>
                 <Input
@@ -183,12 +183,12 @@ export default function AdminArticles() {
                   onInputHandler={onInputHandler}
                   validations={[minValidator(5)]}
                 />
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-12">
-              <div class="name input">
-                <label class="input-title" style={{ display: "block" }}>
+            <div className="col-12">
+              <div className="name input">
+                <label className="input-title" style={{ display: "block" }}>
                   چکیده
                 </label>
                 {/* <textarea style={{ width: "100%", height: "200px" }}></textarea> */}
@@ -201,12 +201,12 @@ export default function AdminArticles() {
                   validations={[minValidator(5)]}
                   className="article-textarea"
                 />
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-12">
-              <div class="name input">
-                <label class="input-title" style={{ display: "block" }}>
+            <div className="col-12">
+              <div className="name input">
+                <label className="input-title" style={{ display: "block" }}>
                   محتوا
                 </label>
                 {/* <textarea style={{ width: "100%", height: "200px" }}></textarea> */}
@@ -215,12 +215,12 @@ export default function AdminArticles() {
                   value={articleBody}
                   setValue={setArticleBody}
                 />
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-6">
-              <div class="name input">
-                <label class="input-title" style={{ display: "block" }}>
+            <div className="col-6">
+              <div className="name input">
+                <label className="input-title" style={{ display: "block" }}>
                   کاور
                 </label>
                 <input
@@ -229,12 +229,12 @@ export default function AdminArticles() {
                     setArticleCover(event.target.files[0]);
                   }}
                 />
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-6">
-              <div class="name input">
-                <label class="input-title" style={{ display: "block" }}>
+            <div className="col-6">
+              <div className="name input">
+                <label className="input-title" style={{ display: "block" }}>
                   دسته بندی
                 </label>
                 <select
@@ -245,17 +245,17 @@ export default function AdminArticles() {
                     <option value={category._id}>{category.title}</option>
                   ))}
                 </select>
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-2 set-child">
-              <div class="bottom-form">
-                <div class="submit-btn">
+            <div className="col-2 set-child">
+              <div className="bottom-form">
+                <div className="submit-btn">
                   <input type="submit" value="انتشار" className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid} onClick={addNewArticle} />
                 </div>
               </div>
-              <div class="bottom-form">
-                <div class="submit-btn">
+              <div className="bottom-form">
+                <div className="submit-btn">
                   <input type="submit" value="پیش نویس" className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid} onClick={addArticlesDraft} />
                 </div>
               </div>
@@ -265,7 +265,7 @@ export default function AdminArticles() {
       </div>
 
       <DataTable title={"مقاله ها"}>
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th>شناسه</th>
@@ -287,17 +287,17 @@ export default function AdminArticles() {
                 <td>{article.shortName}</td>
                 <td>{article.creator.name}</td>
                 <td>{article.createdAt.slice(0, 10)}</td>
-                <td>{article.publish ? "منتشر شده" : <Link to={`draft/${article.shortName}`}><button type="button" class="btn btn-warning edit-btn">
+                <td>{article.publish ? "منتشر شده" : <Link to={`draft/${article.shortName}`}><button type="button" className="btn btn-warning edit-btn">
                   پیش نویس
                 </button></Link>}
                 </td>
                 <td>
-                  <button type="button" class="btn btn-primary edit-btn">
+                  <button type="button" className="btn btn-primary edit-btn">
                     ویرایش
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-danger delete-btn" onClick={() => articleRemover(article._id)}>
+                  <button type="button" className="btn btn-danger delete-btn" onClick={() => articleRemover(article._id)}>
                     حذف
                   </button>
                 </td>

@@ -58,7 +58,7 @@ swal({
   return (
     <>
       <DataTable title="تیکت‌ها">
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th>شناسه</th>
@@ -85,12 +85,12 @@ swal({
                   {ticket.priority === 3 && "کم"}
                 </td>
                 <td>
-                  <button type="button" class="btn btn-primary edit-btn" onClick={()=>showTicketsBody(ticket.body)}>
+                  <button type="button" className="btn btn-primary edit-btn" onClick={()=>showTicketsBody(ticket.body)}>
                     مشاهده
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-primary edit-btn" onClick={()=>answerTickets(ticket._id)}>
+                  <button type="button" className="btn btn-primary edit-btn" onClick={()=>answerTickets(ticket._id)}>
                     پاسخ
                   </button>
                 </td>

@@ -34,7 +34,7 @@ export default memo(function TopBar() {
                             {
                                 getRandomFromArray(allTopLinks, 6).map(link => (
                                     <li className="top-bar__item">
-                                        <Link to={link.href} className="top-bar__link">{link.title}</Link>
+                                        <Link to={`/course-info/${link.href}/1`} className="top-bar__link">{link.title}</Link>
                                     </li>
                                 ))
                             }

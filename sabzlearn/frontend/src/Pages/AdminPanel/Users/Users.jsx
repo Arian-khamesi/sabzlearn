@@ -193,14 +193,14 @@ export default function Users() {
 
   return (
     <>
-      <div class="home-content-edit">
-        <div class="back-btn">
-          <i class="fas fa-arrow-right"></i>
+      <div className="home-content-edit">
+        <div className="back-btn">
+          <i className="fas fa-arrow-right"></i>
         </div>
-        <form class="form">
-          <div class="col-6">
-            <div class="name input">
-              <label class="input-title">نام و نام خانوادگی</label>
+        <form className="form">
+          <div className="col-6">
+            <div className="name input">
+              <label className="input-title">نام و نام خانوادگی</label>
               <Input
                 className="login-form__username-input"
                 type="text"
@@ -215,12 +215,12 @@ export default function Users() {
                 onInputHandler={onInputHandler}
                 placeholder="لطفا نام و نام خانوادگی کاربر را وارد کنید..."
               />
-              <span class="error-message text-danger"></span>
+              <span className="error-message text-danger"></span>
             </div>
           </div>
-          <div class="col-6">
-            <div class="family input">
-              <label class="input-title">نام کاربری</label>
+          <div className="col-6">
+            <div className="family input">
+              <label className="input-title">نام کاربری</label>
               <Input
                 className="login-form__username-input"
                 type="text"
@@ -235,12 +235,12 @@ export default function Users() {
                 onInputHandler={onInputHandler}
                 placeholder="لطفا نام کاربری را وارد کنید..."
               />
-              <span class="error-message text-danger"></span>
+              <span className="error-message text-danger"></span>
             </div>
           </div>
-          <div class="col-6">
-            <div class="email input">
-              <label class="input-title">ایمیل</label>
+          <div className="col-6">
+            <div className="email input">
+              <label className="input-title">ایمیل</label>
               <Input
                 className="login-form__username-input"
                 type="text"
@@ -255,13 +255,13 @@ export default function Users() {
                 onInputHandler={onInputHandler}
                 placeholder="لطفا ایمیل کاربر را وارد کنید..."
               />
-              <span class="error-message text-danger"></span>
+              <span className="error-message text-danger"></span>
             </div>
           </div>
 
-          <div class="col-6">
-            <div class="phone input">
-              <label class="input-title">شماره تلفن</label>
+          <div className="col-6">
+            <div className="phone input">
+              <label className="input-title">شماره تلفن</label>
               <Input
                 className="login-form__username-input"
                 onInputHandler={onInputHandler}
@@ -271,13 +271,13 @@ export default function Users() {
                 validations={[requiredValidator(), minValidator(10), maxValidator(11), phoneValidator()]}
                 placeholder="لطفا شماره تلفن کاربر را وارد کنید..."
               />
-              <span class="error-message text-danger"></span>
+              <span className="error-message text-danger"></span>
             </div>
           </div>
 
-          <div class="col-6">
-            <div class="password input">
-              <label class="input-title">رمز عبور</label>
+          <div className="col-6">
+            <div className="password input">
+              <label className="input-title">رمز عبور</label>
               <Input
                 className="login-form__username-input"
                 type="password"
@@ -292,12 +292,12 @@ export default function Users() {
                 onInputHandler={onInputHandler}
                 placeholder="لطفا رمز عبور کاربر را وارد کنید..."
               />
-              <span class="error-message text-danger"></span>
+              <span className="error-message text-danger"></span>
             </div>
           </div>
-          <div class="col-6">
-            <div class="password input">
-              <label class="input-title">تکرار رمز عبور</label>
+          <div className="col-6">
+            <div className="password input">
+              <label className="input-title">تکرار رمز عبور</label>
               <Input
                 className="login-form__password-input"
                 type="password"
@@ -312,13 +312,13 @@ export default function Users() {
                 onInputHandler={onInputHandler}
                 placeholder="لطفا رمز عبور کاربر را تکرار کنید..."
               />
-              <span class="error-message text-danger"></span>
+              <span className="error-message text-danger"></span>
             </div>
           </div>
 
-          <div class="col-12">
-            <div class="bottom-form">
-              <div class="submit-btn">
+          <div className="col-12">
+            <div className="bottom-form">
+              <div className="submit-btn">
                 <Button className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} type="submit" onClick={registerUserHandler} disabled={!formState.isInputValid}>
                   {/* <i className="login-form__btn-icon fa fa-user-plus"></i> */}
                   <span className="login-form__btn-text">افزودن</span>
@@ -329,7 +329,7 @@ export default function Users() {
         </form>
       </div>
       <DataTable title="کاربران">
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th>شناسه</th>
@@ -352,22 +352,22 @@ export default function Users() {
                 <td>{user.email}</td>
                 <td>{user.role}</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit-btn">
+                  <button type="button" className="btn btn-primary edit-btn">
                     ویرایش
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-primary edit-btn" onClick={() => changeRole(user._id)}>
+                  <button type="button" className="btn btn-primary edit-btn" onClick={() => changeRole(user._id)}>
                     تغییر سطح
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-danger delete-btn" onClick={() => userRemove(user._id)}>
+                  <button type="button" className="btn btn-danger delete-btn" onClick={() => userRemove(user._id)}>
                     حذف
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-secondary delete-btn" onClick={() => userBlock(user._id)}>
+                  <button type="button" className="btn btn-secondary delete-btn" onClick={() => userBlock(user._id)}>
                     مسدود
                   </button>
                 </td>

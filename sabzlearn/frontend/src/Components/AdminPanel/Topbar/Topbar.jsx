@@ -43,25 +43,25 @@ export default function Topbar() {
   }
 
   return (
-    <div class="container-fluid">
-      <div class="container">
-        <div class={showNotifsModal ? "home-header active-modal-notfication" : "home-header"}>
-          <div class="home-right ">
-            <div class="home-searchbar">
-              <input type="text" class="search-bar" placeholder="جستجو..." />
+    <div className="container-fluid">
+      <div className="container">
+        <div className={showNotifsModal ? "home-header active-modal-notfication" : "home-header"}>
+          <div className="home-right ">
+            <div className="home-searchbar">
+              <input type="text" className="search-bar" placeholder="جستجو..." />
             </div>
-            <div class="home-notification">
+            <div className="home-notification">
               <button type="button" onMouseEnter={() => setShowNotifsModal(true)}>
-                <i class="far fa-bell"></i>
+                <i className="far fa-bell"></i>
               </button>
             </div>
-            <div class="home-notification-modal" onMouseEnter={() => setShowNotifsModal(true)} onMouseLeave={() => setShowNotifsModal(false)}>
-              <ul class="home-notification-modal-list">
+            <div className="home-notification-modal" onMouseEnter={() => setShowNotifsModal(true)} onMouseLeave={() => setShowNotifsModal(false)}>
+              <ul className="home-notification-modal-list">
                 {adminNotifs.length ? (
                   adminNotifs.map(notif => (
-                    <li class="home-notification-modal-item" key={notif.id}>
-                      <span class="home-notification-modal-text">پیغام ها</span>
-                      <label class="switch">
+                    <li className="home-notification-modal-item" key={notif.id}>
+                      <span className="home-notification-modal-text">پیغام ها</span>
+                      <label className="switch">
                         <a href="jvascript:void(0)" onClick={() => tickedNotif(notif._id)}>
                           متوجه شدم
                         </a>
@@ -69,25 +69,25 @@ export default function Topbar() {
                     </li>
                   ))
                 ) : (
-                  <li class="home-notification-modal-item">
-                    <span class="home-notification-modal-text">اعلانی برای شما وجود ندارد!</span>
+                  <li className="home-notification-modal-item">
+                    <span className="home-notification-modal-text">اعلانی برای شما وجود ندارد!</span>
                   </li>
                 )}
               </ul>
             </div>
           </div>
-          <div class="home-left">
-            <div class="home-profile">
-              <div class="home-profile-image">
+          <div className="home-left">
+            <div className="home-profile">
+              <div className="home-profile-image">
                 <a href="#" >
                   <img src={adminInfo.profile} alt="profile" />
                 </a>
               </div>
-              <div class="home-profile-name">
+              <div className="home-profile-name">
                 <a href="#">{adminInfo.name}</a>
               </div>
-              <div class="home-profile-icon">
-                <i class="fas fa-angle-down"></i>
+              <div className="home-profile-icon">
+                <i className="fas fa-angle-down"></i>
               </div>
             </div>
           </div>

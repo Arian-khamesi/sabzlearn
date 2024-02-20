@@ -9,7 +9,7 @@ import AuthContext from '../../context/authContext'
 export default function NavBar() {
 
   const authContext = useContext(AuthContext)
-  console.log(authContext);
+  // console.log(authContext);
   const [allMenus, setAllMenus] = useState([])
 
   // console.log(authContext);

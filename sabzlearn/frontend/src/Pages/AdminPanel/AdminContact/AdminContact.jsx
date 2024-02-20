@@ -90,7 +90,7 @@ export default function AdminContact() {
     return (
         <>
             <DataTable title={"نظرات کاربران"}>
-                <table class="table">
+                <table className="table">
                     <thead>
                         <tr>
                             <th>شناسه</th>
@@ -111,19 +111,19 @@ export default function AdminContact() {
                                 <td>{user.phone}</td>
                                 <td>{user.email}</td>
                                 <td>
-                                    <button type="button" class="btn btn-success delete-btn" onClick={() => showMsg(user.body)}>
+                                    <button type="button" className="btn btn-success delete-btn" onClick={() => showMsg(user.body)}>
                                         مشاهده متن پیام
                                     </button>
                                 </td>
                                 <td>{user.createdAt.slice(0, 10)}</td>
                                 <td>
-                                    <button type="button" class="btn btn-danger delete-btn" onClick={() => deleteComment(user._id)}>
+                                    <button type="button" className="btn btn-danger delete-btn" onClick={() => deleteComment(user._id)}>
                                         حذف
                                     </button>
                                 </td>
                                 <td>
-                                    {user.answer ?<i class="fa fa-check-square" aria-hidden="true" style={{color:"#54b464",fontSize:"22px"}}></i>:
-                                        <button type="button" class="btn btn-primary edit-btn" onClick={() => answerMsg(user.email)}>
+                                    {user.answer ?<i className="fa fa-check-square" aria-hidden="true" style={{color:"#54b464",fontSize:"22px"}}></i>:
+                                        <button type="button" className="btn btn-primary edit-btn" onClick={() => answerMsg(user.email)}>
                                             پاسخ
                                         </button>
                                     }

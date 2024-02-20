@@ -111,15 +111,15 @@ export default function Offs() {
 // console.log(allOffs);
     return (
         <>
-            <div class="container-fluid" id="home-content">
-                <div class="container">
-                    <div class="home-title">
+            <div className="container-fluid" id="home-content">
+                <div className="container">
+                    <div className="home-title">
                         <span>افزودن جلسه جدید</span>
                     </div>
-                    <form class="form">
-                        <div class="col-6">
-                            <div class="name input">
-                                <label class="input-title">کد تخفیف</label>
+                    <form className="form">
+                        <div className="col-6">
+                            <div className="name input">
+                                <label className="input-title">کد تخفیف</label>
                                 <Input
                                     element="input"
                                     onInputHandler={onInputHandler}
@@ -128,12 +128,12 @@ export default function Offs() {
                                     validations={[minValidator(5)]}
                                     placeholder="لطفا کد تخفیف را وارد کنید..."
                                 />
-                                <span class="error-message text-danger"></span>
+                                <span className="error-message text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="price input">
-                                <label class="input-title">درصد تخفیف</label>
+                        <div className="col-6">
+                            <div className="price input">
+                                <label className="input-title">درصد تخفیف</label>
                                 <Input
                                     element="input"
                                     onInputHandler={onInputHandler}
@@ -142,26 +142,26 @@ export default function Offs() {
                                     validations={[minValidator(1)]}
                                     placeholder="لطفا درصد تخفیف را وارد کنید..."
                                 />
-                                <span class="error-message text-danger"></span>
+                                <span className="error-message text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="price input">
-                                <label class="input-title" style={{ display: "block" }}>
+                        <div className="col-6">
+                            <div className="price input">
+                                <label className="input-title" style={{ display: "block" }}>
                                     دوره
                                 </label>
-                                <select class="select" onChange={event => setSessionCourse(event.target.value)}>
+                                <select className="select" onChange={event => setSessionCourse(event.target.value)}>
                                     <option value="-1">دوره مدنظر را انتخاب کنید</option>
                                     {courses.map((course) => (
                                         <option value={course._id} key={course._id}>{course.name}</option>
                                     ))}
                                 </select>
-                                <span class="error-message text-danger"></span>
+                                <span className="error-message text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="price input">
-                                <label class="input-title" style={{ display: "block" }}>
+                        <div className="col-6">
+                            <div className="price input">
+                                <label className="input-title" style={{ display: "block" }}>
                                     حداکثر مصرف
                                 </label>
                                 <input className="comments__score-input-text inputScore" type='range' min={1} max={100} placeholder='امتیاز خود را انتخاب کنید' value={newcountsOff} onChange={onchangeCountsOffHandler}>
@@ -170,9 +170,9 @@ export default function Offs() {
                             </div>
                         </div>
 
-                        <div class="col-12">
-                            <div class="bottom-form">
-                                <div class="submit-btn">
+                        <div className="col-12">
+                            <div className="bottom-form">
+                                <div className="submit-btn">
                                     <input type="submit" value="افزودن" onClick={addNewOffs} className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid} />
                                 </div>
                             </div>
@@ -182,7 +182,7 @@ export default function Offs() {
             </div>
 
             <DataTable title="جلسات">
-                <table class="table">
+                <table className="table">
                     <thead>
                         <tr>
                             <th>شناسه</th>
@@ -207,7 +207,7 @@ export default function Offs() {
 
 
                                 <td>
-                                    <button type="button" class="btn btn-danger delete-btn" onClick={() => offersRemover(off._id, off.code)}>
+                                    <button type="button" className="btn btn-danger delete-btn" onClick={() => offersRemover(off._id, off.code)}>
                                         حذف
                                     </button>
                                 </td>

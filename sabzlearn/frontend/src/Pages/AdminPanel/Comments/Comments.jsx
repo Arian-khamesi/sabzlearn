@@ -183,7 +183,7 @@ export default function Comments() {
   return (
     <>
       <DataTable title="کامنت‌ها">
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th>شناسه</th>
@@ -215,24 +215,24 @@ export default function Comments() {
                 <td>
                   <button
                     type="button"
-                    class="btn btn-success edit-btn"
+                    className="btn btn-success edit-btn"
                     onClick={() => showMsg(comment.body)}
                   >
                     مشاهده
                   </button>
                 </td>
                 <td>
-                  {comment.answer ? <i class="fa fa-check-square" aria-hidden="true" style={{ color: "#54b464", fontSize: "22px" }}></i> :
-                    <button type="button" class="btn btn-primary edit-btn" onClick={() => answerMsg(comment._id)}>
+                  {comment.answer ? <i className="fa fa-check-square" aria-hidden="true" style={{ color: "#54b464", fontSize: "22px" }}></i> :
+                    <button type="button" className="btn btn-primary edit-btn" onClick={() => answerMsg(comment._id)}>
                       پاسخ
                     </button>
                   }
                 </td>
                 <td>
-                  {comment.answer ? <button type="button" class="btn btn-danger edit-btn" onClick={() => rejectMsg(comment._id)}>
+                  {comment.answer ? <button type="button" className="btn btn-danger edit-btn" onClick={() => rejectMsg(comment._id)}>
                     رد نظر
                   </button> :
-                    <button type="button" class="btn btn-success edit-btn" onClick={() => acceptMsg(comment._id)}>
+                    <button type="button" className="btn btn-success edit-btn" onClick={() => acceptMsg(comment._id)}>
                       تایید
                     </button>
                   }
@@ -240,7 +240,7 @@ export default function Comments() {
                 <td>
                   <button
                     type="button"
-                    class="btn btn-warning edit-btn"
+                    className="btn btn-warning edit-btn"
                   >
                     ویرایش
                   </button>
@@ -248,7 +248,7 @@ export default function Comments() {
                 <td>
                   <button
                     type="button"
-                    class="btn btn-danger delete-btn"
+                    className="btn btn-danger delete-btn"
                     onClick={() => deleteComment(comment._id)}
                   >
                     حذف
@@ -257,7 +257,7 @@ export default function Comments() {
                 <td>
                   <button
                     type="button"
-                    class="btn btn-secondary delete-btn"
+                    className="btn btn-secondary delete-btn"
                     onClick={() => userBlock(comment.creator._id)}
                   >
                     بن

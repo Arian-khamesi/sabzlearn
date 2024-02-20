@@ -38,7 +38,7 @@ import OffsFestival from "./Pages/AdminPanel/Festival/OffsFestival"
 
 const routes = [
     { path: "/", element: <Index /> },
-    { path: "/course-info/:courseName", element: <CourseInfo /> },
+    { path: "/course-info/:courseName/:page", element: <CourseInfo /> },
     { path: "/category-info/:categoryName/:page", element: <Category /> },
     { path: "/article-info/:articleName", element: <ArticleInfo /> },
     { path: "/contact", element: <Contact /> },

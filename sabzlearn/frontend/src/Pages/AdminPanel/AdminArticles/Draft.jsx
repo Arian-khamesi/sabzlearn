@@ -125,15 +125,15 @@ export default function Draft() {
 
 
     return (
-        <div class="container-fluid" id="home-content">
-            <div class="container">
-                <div class="home-title">
+        <div className="container-fluid" id="home-content">
+            <div className="container">
+                <div className="home-title">
                     <span>افزودن مقاله جدید</span>
                 </div>
-                <form class="form">
-                    <div class="col-6">
-                        <div class="name input">
-                            <label class="input-title" style={{ display: "block" }}>
+                <form className="form">
+                    <div className="col-6">
+                        <div className="name input">
+                            <label className="input-title" style={{ display: "block" }}>
                                 عنوان
                             </label>
                             <Input
@@ -143,12 +143,12 @@ export default function Draft() {
                                 onInputHandler={onInputHandler}
                                 validations={[minValidator(8)]}
                             />
-                            <span class="error-message text-danger"></span>
+                            <span className="error-message text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="name input">
-                            <label class="input-title" style={{ display: "block" }}>
+                    <div className="col-6">
+                        <div className="name input">
+                            <label className="input-title" style={{ display: "block" }}>
                                 لینک
                             </label>
                             <Input
@@ -158,12 +158,12 @@ export default function Draft() {
                                 onInputHandler={onInputHandler}
                                 validations={[minValidator(5)]}
                             />
-                            <span class="error-message text-danger"></span>
+                            <span className="error-message text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <div class="name input">
-                            <label class="input-title" style={{ display: "block" }}>
+                    <div className="col-12">
+                        <div className="name input">
+                            <label className="input-title" style={{ display: "block" }}>
                                 چکیده
                             </label>
                             {/* <textarea style={{ width: "100%", height: "200px" }}></textarea> */}
@@ -176,12 +176,12 @@ export default function Draft() {
                                 validations={[minValidator(5)]}
                                 className="article-textarea"
                             />
-                            <span class="error-message text-danger"></span>
+                            <span className="error-message text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <div class="name input">
-                            <label class="input-title" style={{ display: "block" }}>
+                    <div className="col-12">
+                        <div className="name input">
+                            <label className="input-title" style={{ display: "block" }}>
                                 محتوا
                             </label>
                             {/* <textarea style={{ width: "100%", height: "200px" }}></textarea> */}
@@ -190,12 +190,12 @@ export default function Draft() {
                                 value={articleBody}
                                 setValue={setArticleBody}
                             />
-                            <span class="error-message text-danger"></span>
+                            <span className="error-message text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="name input">
-                            <label class="input-title" style={{ display: "block" }}>
+                    <div className="col-6">
+                        <div className="name input">
+                            <label className="input-title" style={{ display: "block" }}>
                                 کاور
                             </label>
                             <input
@@ -204,12 +204,12 @@ export default function Draft() {
                                     setArticleCover(event.target.files[0]);
                                 }}
                             />
-                            <span class="error-message text-danger"></span>
+                            <span className="error-message text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="name input">
-                            <label class="input-title" style={{ display: "block" }}>
+                    <div className="col-6">
+                        <div className="name input">
+                            <label className="input-title" style={{ display: "block" }}>
                                 دسته بندی
                             </label>
                             <select
@@ -220,17 +220,17 @@ export default function Draft() {
                                     <option value={category._id}>{category.title}</option>
                                 ))}
                             </select>
-                            <span class="error-message text-danger"></span>
+                            <span className="error-message text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-2 set-child">
-                        <div class="bottom-form">
-                            <div class="submit-btn">
+                    <div className="col-2 set-child">
+                        <div className="bottom-form">
+                            <div className="submit-btn">
                                 <input type="submit" value="انتشار" className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid} onClick={addNewArticle} />
                             </div>
                         </div>
-                        <div class="bottom-form">
-                            <div class="submit-btn">
+                        <div className="bottom-form">
+                            <div className="submit-btn">
                                 <input type="submit" value="پیش نویس" className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid} onClick={addArticlesDraft} />
                             </div>
                         </div>

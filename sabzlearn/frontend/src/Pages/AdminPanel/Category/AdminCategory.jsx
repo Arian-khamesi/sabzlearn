@@ -137,15 +137,15 @@ export default function AdminCategory() {
   return (
     <>
 
-      <div class="container-fluid" id="home-content">
-        <div class="container">
-          <div class="home-title">
+      <div className="container-fluid" id="home-content">
+        <div className="container">
+          <div className="home-title">
             <span>افزودن دسته‌بندی جدید</span>
           </div>
-          <form class="form">
-            <div class="col-6">
-              <div class="name input">
-                <label class="input-title">عنوان</label>
+          <form className="form">
+            <div className="col-6">
+              <div className="name input">
+                <label className="input-title">عنوان</label>
                 <Input
                   element="input"
                   onInputHandler={onInputHandler}
@@ -154,12 +154,12 @@ export default function AdminCategory() {
                   placeholder="لطفا عنوان را وارد کنید..."
                   validations={[minValidator(5), maxValidator(20)]}
                 />
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-6">
-              <div class="name input">
-                <label class="input-title">اسم کوتاه</label>
+            <div className="col-6">
+              <div className="name input">
+                <label className="input-title">اسم کوتاه</label>
                 <Input
                   element="input"
                   onInputHandler={onInputHandler}
@@ -168,12 +168,12 @@ export default function AdminCategory() {
                   placeholder="لطفا اسم کوتاه را وارد کنید..."
                   validations={[minValidator(3), maxValidator(20)]}
                 />
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-12">
-              <div class="bottom-form">
-                <div class="submit-btn">
+            <div className="col-12">
+              <div className="bottom-form">
+                <div className="submit-btn">
                   <input
                     className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid}
                     type="submit"
@@ -189,7 +189,7 @@ export default function AdminCategory() {
 
       <DataTable title={"دسته بندی ها"}>
 
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th>شناسه</th>
@@ -207,12 +207,12 @@ export default function AdminCategory() {
                 <td>{category.name}</td>
                 <td>{category.updatedAt.slice(0, 10)}</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit-btn" onClick={() => categoryUpdater(category._id,category.name)}>
+                  <button type="button" className="btn btn-primary edit-btn" onClick={() => categoryUpdater(category._id,category.name)}>
                     ویرایش
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-danger delete-btn" onClick={() => categoryRemover(category._id)}>
+                  <button type="button" className="btn btn-danger delete-btn" onClick={() => categoryRemover(category._id)}>
                     حذف
                   </button>
                 </td>

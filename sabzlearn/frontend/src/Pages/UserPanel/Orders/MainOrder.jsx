@@ -23,29 +23,29 @@ export default function MainOrder() {
     }, [])
 
     return (
-        <div class="col-9">
-            <div class="mainOrder">
+        <div className="col-9">
+            <div className="mainOrder">
                 <span>سفارش # { } در تاریخ { } ثبت شده است و در حال حاضر در  وضعیت { } می باشد</span>
                 <h3>مشخصات سفارش</h3>
-                <table class="mainOrder__table">
-                    <thead class="mainOrder__table-header">
-                        <tr class="mainOrder__table-header-list">
-                            <th class="mainOrder__table-header-item"><span>مجموع</span><span>محصول</span></th>
+                <table className="mainOrder__table">
+                    <thead className="mainOrder__table-header">
+                        <tr className="mainOrder__table-header-list">
+                            <th className="mainOrder__table-header-item"><span>مجموع</span><span>محصول</span></th>
                         </tr>
                     </thead>
-                    <tbody class="mainOrder__table-body">
-                        <tr class="mainOrder__table-body-list">
-                            <td class="mainOrder__table-body-item">
+                    <tbody className="mainOrder__table-body">
+                        <tr className="mainOrder__table-body-list">
+                            <td className="mainOrder__table-body-item">
                                 <span> { }تومان</span><span>{ }</span>
                             </td>
                         </tr>
-                        <tr class="mainOrder__table-body-list">
-                            <td class="mainOrder__table-body-item">
+                        <tr className="mainOrder__table-body-list">
+                            <td className="mainOrder__table-body-item">
                                 <span> { }تومان</span><span>جمع کل سبد خرید :</span>
                             </td>
                         </tr>
-                        <tr class="mainOrder__table-body-list">
-                            <td class="mainOrder__table-body-item">
+                        <tr className="mainOrder__table-body-list">
+                            <td className="mainOrder__table-body-item">
                                 <span> { }تومان</span><span>قیمت نهایی :</span>
                             </td>
                         </tr>

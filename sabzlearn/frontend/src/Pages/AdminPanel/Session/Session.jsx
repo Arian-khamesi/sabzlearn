@@ -107,15 +107,15 @@ export default function Session() {
 
     return (
         <>
-            <div class="container-fluid" id="home-content">
-                <div class="container">
-                    <div class="home-title">
+            <div className="container-fluid" id="home-content">
+                <div className="container">
+                    <div className="home-title">
                         <span>افزودن جلسه جدید</span>
                     </div>
-                    <form class="form">
-                        <div class="col-6">
-                            <div class="name input">
-                                <label class="input-title">عنوان جلسه</label>
+                    <form className="form">
+                        <div className="col-6">
+                            <div className="name input">
+                                <label className="input-title">عنوان جلسه</label>
                                 <Input
                                     element="input"
                                     onInputHandler={onInputHandler}
@@ -124,12 +124,12 @@ export default function Session() {
                                     validations={[minValidator(5)]}
                                     placeholder="لطفا نام جلسه را وارد کنید..."
                                 />
-                                <span class="error-message text-danger"></span>
+                                <span className="error-message text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="price input">
-                                <label class="input-title">مدت زمان جلسه</label>
+                        <div className="col-6">
+                            <div className="price input">
+                                <label className="input-title">مدت زمان جلسه</label>
                                 <Input
                                     element="input"
                                     onInputHandler={onInputHandler}
@@ -138,36 +138,36 @@ export default function Session() {
                                     validations={[minValidator(5)]}
                                     placeholder="لطفا مدت زمان جلسه را وارد کنید..."
                                 />
-                                <span class="error-message text-danger"></span>
+                                <span className="error-message text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="price input">
-                                <label class="input-title" style={{ display: "block" }}>
+                        <div className="col-6">
+                            <div className="price input">
+                                <label className="input-title" style={{ display: "block" }}>
                                     دوره
                                 </label>
-                                <select class="select" onChange={event => setSessionCourse(event.target.value)}>
+                                <select className="select" onChange={event => setSessionCourse(event.target.value)}>
                                     <option value="-1">دوره مدنظر را انتخاب کنید</option>
                                     {courses.map((course) => (
                                         <option value={course._id} key={course._id}>{course.name}</option>
                                     ))}
                                 </select>
-                                <span class="error-message text-danger"></span>
+                                <span className="error-message text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="name input">
-                                <label class="input-title">فایل ویدیو جلسه</label>
+                        <div className="col-6">
+                            <div className="name input">
+                                <label className="input-title">فایل ویدیو جلسه</label>
                                 <input type="file" onChange={event => setSessionVideo(event.target.files[0])} />
-                                <span class="error-message text-danger"></span>
+                                <span className="error-message text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="bottom-form">
-                                <div class="condition">
-                                    <label class="input-title">وضعیت دوره</label>
-                                    <div class="radios">
-                                        <div class="available">
+                        <div className="col-12">
+                            <div className="bottom-form">
+                                <div className="condition">
+                                    <label className="input-title">وضعیت دوره</label>
+                                    <div className="radios">
+                                        <div className="available">
                                             <label>
                                                 <span>غیر رایگان</span>
                                                 <input
@@ -179,7 +179,7 @@ export default function Session() {
                                                 />
                                             </label>
                                         </div>
-                                        <div class="unavailable">
+                                        <div className="unavailable">
                                             <label>
                                                 <span>رایگان</span>
                                                 <input
@@ -194,9 +194,9 @@ export default function Session() {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="bottom-form">
-                                <div class="submit-btn">
+                        <div className="col-12">
+                            <div className="bottom-form">
+                                <div className="submit-btn">
                                     <input type="submit" value="افزودن" onClick={addNewSession} className={`login-form__btn login-panel__btn ${formState.isInputValid ? "success-sub" : "error-sub"}`} disabled={!formState.isInputValid} />
                                 </div>
                             </div>
@@ -206,7 +206,7 @@ export default function Session() {
             </div>
 
             <DataTable title="جلسات">
-                <table class="table">
+                <table className="table">
                     <thead>
                         <tr>
                             <th>شناسه</th>
@@ -229,12 +229,12 @@ export default function Session() {
                                 
                                 {/* <td><Link to={`/course-info/${course.shortName}`}>{course.shortName}</Link></td> */}
                                 <td>
-                                    <button type="button" class="btn btn-primary edit-btn">
+                                    <button type="button" className="btn btn-primary edit-btn">
                                         ویرایش
                                     </button>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-danger delete-btn" onClick={() => sessionRemover(session._id, session.title)}>
+                                    <button type="button" className="btn btn-danger delete-btn" onClick={() => sessionRemover(session._id, session.title)}>
                                         حذف
                                     </button>
                                 </td>

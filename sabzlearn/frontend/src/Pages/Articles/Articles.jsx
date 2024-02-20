@@ -53,8 +53,8 @@ export default function Articles() {
             </section>
 
             <Pagination
-                item={allArticles}
-                itemCount={3}
+                item={allArticles.filter(article=>article.publish===1)}
+                itemCount={2}
                 pathName={'/articles'}
                 setShownCourses={setShownArticles}
             />

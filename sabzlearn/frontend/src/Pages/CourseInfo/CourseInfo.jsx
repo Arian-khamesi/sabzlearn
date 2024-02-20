@@ -18,7 +18,6 @@ export default function CourseInfo() {
 
   const { courseName } = useParams()
 
-
   const [comments, setComments] = useState([])
   const [sessions, setSessions] = useState([])
   const [courseDetails, setCourseDetails] = useState({})
@@ -151,7 +150,7 @@ export default function CourseInfo() {
 
                 {/* Start Introduction  */}
 
-                <div className="introduction">
+                {/* <div className="introduction">
                   <div className="introduction__item">
                     <span className="introduction__title title">
                       آموزش 20 کتابخانه جاوا اسکریپت مخصوص بازار کار
@@ -237,7 +236,7 @@ export default function CourseInfo() {
                     </Accordion>
                   </div>
 
-                </div>
+                </div> */}
 
                 {/* Finish Introduction  */}
 

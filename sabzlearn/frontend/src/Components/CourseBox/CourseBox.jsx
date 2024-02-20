@@ -23,27 +23,27 @@ export default function CourseBox({ cover, name, creator, registers, price, shor
   return (
     <div className={isSlider ? "col-12" : "col-12 col-sm-4"}>
       <div className="course-box">
-        <Link to={`/course-info/${shortName}`}>
-          <img src={`/images/courses/${cover}`}
+        <Link to={`/course-info/${shortName}/1`}>
+          <img src={`http://localhost:5000/courses/covers/${cover}`}
             alt="Course img" className="course-box__img" onLoad={loaderImg} />
           {!isImgLoad && <CircleSpinner />}
         </Link>
         <div className="course-box__main">
-          <Link to={`/course-info/${shortName}`} className="course-box__title">{name}</Link>
+          <Link to={`/course-info/${shortName}/1`} className="course-box__title">{name}</Link>
 
           <div className="course-box__rating-teacher">
             <div className="course-box__teacher">
               <i className="fas fa-chalkboard-teacher course-box__teacher-icon"></i>
-              <Link to={`/course-info/${shortName}`} className="course-box__teacher-link">{creator}</Link>
+              <Link to={`/course-info/${shortName}/1`} className="course-box__teacher-link">{creator}</Link>
             </div>
             <div className="course-box__rating">
               {
-                Array(5 - courseAverageScore).fill(0).map(item => (
+                courseAverageScore && Array(5 - courseAverageScore).fill(0).map(item => (
                   <img src="/images/svgs/star.svg" alt="rating" className="course-box__star" />
                 ))
               }
               {
-                Array(courseAverageScore).fill(0).map(item => (
+                courseAverageScore && Array(courseAverageScore).fill(0).map(item => (
                   <img src="/images/svgs/star_fill.svg" alt="rating" className="course-box__star" />
                 ))
               }
@@ -56,18 +56,18 @@ export default function CourseBox({ cover, name, creator, registers, price, shor
               <i className="fas fa-users course-box__users-icon"></i>
               <span className="course-box__users-text">{registers}</span>
             </div>
-            <span className="course-box__price">{(price !== 0 && discount) ? price-(price * discount)/100 : "رایگان"}</span>
+            <span className="course-box__price">{(price !== 0 && discount) ? price - (price * discount) / 100 : "رایگان"}</span>
           </div>
         </div>
 
         <div className="course-box__footer">
-          <Link to={`/course-info/${shortName}`} className="course-box__footer-link">
+          <Link to={`/course-info/${shortName}/1`} className="course-box__footer-link">
             مشاهده اطلاعات
             <i className="fas fa-arrow-left course-box__footer-icon"></i>
           </Link>
         </div>
         {(price !== 0 && discount) && (
-          <span class="courses-box__discount">%{discount}</span>
+          <span className="courses-box__discount">%{discount}</span>
         )}
       </div>
     </div>
