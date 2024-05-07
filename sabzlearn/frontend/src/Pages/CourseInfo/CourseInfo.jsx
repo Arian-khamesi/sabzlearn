@@ -8,7 +8,7 @@ import BreadCrumb from '../../Components/BreadCrumb/BreadCrumb'
 import CourseMainInfo from '../../Components/CourseMainInfo/CourseMainInfo'
 import CourseDetailsBox from '../../Components/CourseDetailsBox/CourseDetailsBox'
 import CourseInfoSideBar from '../../Components/CourseInfoSideBar/CourseInfoSideBar'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Comments from '../../Components/Comments/Comments'
 
 import Accordion from 'react-bootstrap/Accordion'
@@ -17,6 +17,19 @@ import swal from "sweetalert"
 export default function CourseInfo() {
 
   const { courseName } = useParams()
+  const navigate = useNavigate()
+  const localStorageData = JSON.parse(localStorage.getItem("user"))
+  console.log(localStorageData);
+  if (!localStorageData) {
+    swal({
+      title: "لطفا ابتدا وارد حساب کاربری خود شوید",
+      icon: "warning",
+      buttons: "بازگشت"
+    })
+    // navigate('/login')
+  } else {
+    getCourseDetails()
+  }
 
   const [comments, setComments] = useState([])
   const [sessions, setSessions] = useState([])
@@ -26,9 +39,9 @@ export default function CourseInfo() {
   const [lastUpdate, setLastUpdate] = useState("")
 
 
-  useEffect(() => {
-    getCourseDetails()
-  }, [])
+
+
+
 
   const getCourseDetails = () => {
     fetch(`http://localhost:5000/v1/courses/${courseName}`, {
@@ -272,7 +285,7 @@ export default function CourseInfo() {
               </div>
             </div>
 
-            <CourseInfoSideBar details={courseDetails} comments={comments} getCourseDetails={getCourseDetails}/>
+            <CourseInfoSideBar details={courseDetails} comments={comments} getCourseDetails={getCourseDetails} />
 
           </div>
         </div>

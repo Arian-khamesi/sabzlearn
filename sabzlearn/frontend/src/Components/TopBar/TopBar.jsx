@@ -10,13 +10,14 @@ export default memo(function TopBar() {
 
         fetch('http://localhost:5000/v1/menus/topbar')
             .then(res => res.json())
-            .then(topLinks => setAllTopLinks(topLinks))
+            .then(topLinks => setAllTopLinks([...topLinks]))
+
     }, [])
 
 
-    const getRandomFromArray = (arr, itemCount) => {
+    const getRandomFromArray = (array, itemCount) => {
 
-        const shuffled = [...arr].sort(() => 0.5 - Math.random());
+        const shuffled = [...array].sort(() => 0.5 - Math.random());
         return shuffled.slice(0, itemCount);
 
     }
